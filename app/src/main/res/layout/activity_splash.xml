@@ -8,18 +8,11 @@
 
     <ImageView
         android:id="@+id/img_splash"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/main_box" />
+        android:src="@drawable/login_logo" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/img_splash"
-        android:layout_centerHorizontal="true"
-        android:text="내맘보!"
-        android:textColor="#61bef3"
-        android:textSize="16dp" />
+
 </RelativeLayout>

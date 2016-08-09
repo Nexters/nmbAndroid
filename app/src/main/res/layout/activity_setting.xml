@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.nexters.naemambo.naemambo.SettingActivity">
+
+    <LinearLayout
+        android:id="@+id/layout_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="78.3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="123.3dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/setting_radius_rect"
+                android:gravity="center"
+                android:text="메세지 알림 받기"
+                android:textColor="#31004a"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/toggle_message_on_off"
+                android:layout_width="46.4dp"
+                android:layout_height="26.7dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="23.7dp"
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:id="@+id/btn_opensource"
+                android:layout_width="123.3dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/setting_radius_rect_fill"
+                android:elevation="1.3dp"
+                android:gravity="center"
+                android:text="오픈소스"
+                android:textColor="#31004a"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btn_tutorial"
+                android:layout_width="123.3dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/setting_radius_rect_fill"
+                android:elevation="1.3dp"
+                android:gravity="center"
+                android:text="튜토리얼"
+                android:textColor="#31004a"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btn_developer_designer"
+                android:layout_width="123.3dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/setting_radius_rect_fill"
+                android:gravity="center"
+                android:text="개발자 그리고 디자이너"
+                android:textColor="#31004a"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

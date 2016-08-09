@@ -1,15 +1,13 @@
-package com.nexters.naemambo.naemambo.util;
+package com.nexters.naemambo.naemambo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.nexters.naemambo.naemambo.R;
-
-public class WriteActivity extends AppCompatActivity {
+public class CreditActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write);
+        setContentView(R.layout.activity_credit);
     }
 }

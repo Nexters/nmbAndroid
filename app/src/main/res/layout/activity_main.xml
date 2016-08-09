@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     tools:context="com.nexters.naemambo.naemambo.MainActivity">
 
     <RelativeLayout
@@ -15,8 +16,7 @@
             android:layout_width="153dp"
             android:layout_height="218.7dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="88dp"
-            android:src="@drawable/main_box" />
+            android:layout_marginTop="88dp"/>
 
         <ImageView
             android:layout_width="173.3dp"

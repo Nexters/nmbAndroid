@@ -12,18 +12,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Notile">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Notile" />
         <activity android:name=".util.BaseActivity" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            android:theme="@style/Notile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +31,10 @@
             android:name="io.fabric.ApiKey"
             android:value="84cd339727a86e3c0bc0ad74e069573d33ea03d6" />
 
-        <activity android:name=".util.WriteActivity"></activity>
+        <activity android:name=".MyboxActivity" />
+        <activity android:name=".OpenSourceActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".CreditActivity"></activity>
     </application>
 
 </manifest>

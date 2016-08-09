@@ -4,11 +4,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.R;
+import com.nexters.naemambo.naemambo.listItem.MessageItem;
 
 import org.json.JSONObject;
 
@@ -19,14 +24,20 @@ public class BaseActivity extends AppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private AsyncHttpClient client = new AsyncHttpClient();
     public ActionBar actionBar;
+    TextView action_bar_back_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setActionBar();
-    }
 
+    }
+    protected void setActionBarConfig(String title, int elevation){
+        action_bar_back_title.setText(title);
+        actionBar.setElevation(elevation);
+    }
     public void setActionBar() {
+        ImageView btn_actionbar_back;
         if (getSupportActionBar() != null) {
             actionBar = getSupportActionBar();
             actionBar.setDisplayShowCustomEnabled(true);
@@ -34,6 +45,15 @@ public class BaseActivity extends AppCompatActivity {
             actionBar.setElevation(8);
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             actionBar.setCustomView(R.layout.abs_back_layout);
+            btn_actionbar_back = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_back);
+            action_bar_back_title = (TextView) actionBar.getCustomView().findViewById(R.id.action_bar_back_title);
+
+            btn_actionbar_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
         }
     }
 

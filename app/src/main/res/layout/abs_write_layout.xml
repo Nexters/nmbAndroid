@@ -8,8 +8,7 @@
     <RelativeLayout
         android:id="@+id/layout_abs_back"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingRight="16dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/btn_actionbar_back"
@@ -24,8 +23,18 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textStyle="bold"
             android:textColor="#5d5d5d"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btn_actionbar_write"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="17.3dp"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/icon_list_write" />
     </RelativeLayout>
 </LinearLayout>
