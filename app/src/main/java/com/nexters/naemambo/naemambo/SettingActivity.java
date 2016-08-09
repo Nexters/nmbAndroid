@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -17,17 +15,21 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
+import com.nexters.naemambo.naemambo.util.Const;
+import com.nexters.naemambo.naemambo.util.SPreference;
 
 public class SettingActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     private SwitchCompat toggle_message_on_off;
     private TextView btn_opensource, btn_tutorial, btn_developer_designer;
     private LinearLayout layout_root;
+    private SPreference pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        pref = new SPreference(SettingActivity.this);
         setActionBarConfig("Setting", 8);
         toggle_message_on_off = (SwitchCompat) findViewById(R.id.toggle_message_on_off);
         btn_opensource = (TextView) findViewById(R.id.btn_opensource);
@@ -40,6 +42,7 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
 
 
     }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         layout_root = (LinearLayout) findViewById(R.id.layout_root);
@@ -52,12 +55,17 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
             }
         });
     }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         int id = buttonView.getId();
         switch (id) {
             case R.id.toggle_message_on_off:
-
+                if (isChecked) {
+                    pref.put(Const.MESSAGE_ON_OFF, true);
+                } else {
+                    pref.put(Const.MESSAGE_ON_OFF, false);
+                }
                 break;
         }
     }

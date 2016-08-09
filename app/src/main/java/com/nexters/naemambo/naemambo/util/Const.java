@@ -5,4 +5,5 @@ package com.nexters.naemambo.naemambo.util;
  */
 public class Const {
 
+    public static final String MESSAGE_ON_OFF = "message_on_off";
 }

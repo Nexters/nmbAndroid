@@ -1,5 +1,6 @@
 package com.nexters.naemambo.naemambo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -13,8 +14,6 @@ import com.nexters.naemambo.naemambo.fragment.MySendFragment;
 import com.nexters.naemambo.naemambo.fragment.ReceiveFragment;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 
-import org.w3c.dom.Text;
-
 public class MyboxActivity extends BaseActivity implements View.OnClickListener {
     ImageView btn_actionbar_back, btn_actionbar_write;
     private TextView action_bar_back_title;
@@ -23,7 +22,7 @@ public class MyboxActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write);
+        setContentView(R.layout.activity_my_box);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -47,6 +46,7 @@ public class MyboxActivity extends BaseActivity implements View.OnClickListener 
 
             action_bar_back_title.setText("My Box");
             btn_actionbar_back.setOnClickListener(this);
+            btn_actionbar_write.setOnClickListener(this);
         }
 
     }
@@ -59,6 +59,7 @@ public class MyboxActivity extends BaseActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.btn_actionbar_write:
+                startActivity(new Intent(MyboxActivity.this, WriteActivity.class));
                 break;
         }
     }
