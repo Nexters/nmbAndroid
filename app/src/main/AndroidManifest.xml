@@ -32,9 +32,11 @@
             android:value="84cd339727a86e3c0bc0ad74e069573d33ea03d6" />
 
         <activity android:name=".MyboxActivity" />
-        <activity android:name=".OpenSourceActivity" />
+        <activity
+            android:name=".OpenSourceActivity"
+            android:theme="@style/Notile" />
         <activity android:name=".SettingActivity" />
-        <activity android:name=".CreditActivity"></activity>
+        <activity android:name=".CreditActivity"/>
     </application>
 
 </manifest>

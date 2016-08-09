@@ -23,7 +23,7 @@ import cz.msebera.android.httpclient.entity.StringEntity;
 public class BaseActivity extends AppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private AsyncHttpClient client = new AsyncHttpClient();
-    public ActionBar actionBar;
+    private ActionBar actionBar;
     TextView action_bar_back_title;
 
     @Override
@@ -32,10 +32,12 @@ public class BaseActivity extends AppCompatActivity {
         setActionBar();
 
     }
-    protected void setActionBarConfig(String title, int elevation){
+
+    protected void setActionBarConfig(String title, int elevation) {
         action_bar_back_title.setText(title);
         actionBar.setElevation(elevation);
     }
+
     public void setActionBar() {
         ImageView btn_actionbar_back;
         if (getSupportActionBar() != null) {

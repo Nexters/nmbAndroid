@@ -65,7 +65,7 @@ public class MySendFragment extends BaseFragment {
         mySendListView.setAdapter(adapter);
         addItem(adapter, 0, "테스트제목1", "날 으아으아 하게 만들어줘", "2016.08.01");
         addItem(adapter, 1, "테스트제목2", "내 마음이 보이니 테스트 넥스터즈 전한경 최봉재 임주현 ", "2016.08.02");
-        addItem(adapter, 2, "테스트제목3", "날 으아으아 하게 만들어줘", "2016.08.01");
+        addItem(adapter, 2, "테스트제목3", "너에게 하고싶은 이야기를 여기에 쓴다 내 이야기를 듣고 같이 해결했으면 좋겠어...", "2016.08.01");
         adapter.notifyDataSetChanged();
         return view;
     }

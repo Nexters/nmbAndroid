@@ -18,7 +18,7 @@
             android:src="@drawable/actionbar_back" />
 
         <TextView
-            android:id="@+id/action_bar_back_title"
+            android:id="@+id/action_bar_write_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -33,8 +33,7 @@
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="17.3dp"
             android:layout_marginTop="14dp"
-            android:src="@drawable/icon_list_write" />
+            android:src="@drawable/list_pen" />
     </RelativeLayout>
 </LinearLayout>

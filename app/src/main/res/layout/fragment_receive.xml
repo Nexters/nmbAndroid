@@ -5,12 +5,19 @@
     android:background="#edeff2"
     tools:context="com.nexters.naemambo.naemambo.fragment.ReceiveFragment">
 
-    <ListView
-        android:id="@+id/receive_listview"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="13.3dp"
-        android:divider="#bbbfc4"
-        android:background="#edeff2"
-        android:dividerHeight="0.7dp"/>
+        android:background="#edeff2">
+
+        <ListView
+            android:id="@+id/receive_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#edeff2"
+            android:divider="#bbbfc4"
+            android:dividerHeight="0.7dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>
