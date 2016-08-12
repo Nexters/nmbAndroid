@@ -46,11 +46,11 @@ public class MessageAdapter extends ArrayAdapter<MessageItem> {
         }
         MessageItem item = getItem(position);
         if (item.boxType == 0) {
-            Glide.with(getContext()).load(R.drawable.lock_box).into(holder.msgBox);
+            Glide.with(getContext()).load(R.drawable.list_lock).into(holder.msgBox);
         } else if (item.boxType == 1) {
-            Glide.with(getContext()).load(R.drawable.love_box).into(holder.msgBox);
+            Glide.with(getContext()).load(R.drawable.list_share).into(holder.msgBox);
         } else if (item.boxType == 2) {
-            Glide.with(getContext()).load(R.drawable.share_box).into(holder.msgBox);
+            Glide.with(getContext()).load(R.drawable.list_done).into(holder.msgBox);
         }
         holder.msgContent.setText(item.content);
         holder.msgSubject.setText(item.subject);

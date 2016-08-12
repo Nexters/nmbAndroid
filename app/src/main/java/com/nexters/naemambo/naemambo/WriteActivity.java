@@ -1,15 +1,9 @@
 package com.nexters.naemambo.naemambo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.appeaser.sublimepickerlibrary.SublimePicker;
-import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
-import com.appeaser.sublimepickerlibrary.helpers.SublimeListenerAdapter;
-import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
-import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.URL_Define;
 
