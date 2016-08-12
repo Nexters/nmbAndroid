@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -20,8 +21,9 @@ import cz.msebera.android.httpclient.Header;
 
 public class WriteActivity extends BaseActivity implements View.OnClickListener {
 
-    private ImageView btn_choice_date, btn_add_friends, btn_save_box, btn_direct_send;
+    private ImageView btn_save_box, btn_direct_send;
     private LinearLayout layout_root;
+    private RelativeLayout btn_add_friends, btn_choice_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,11 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
 
     private void initView() {
         layout_root = (LinearLayout) findViewById(R.id.layout_root);
-        btn_add_friends = (ImageView) findViewById(R.id.btn_add_friends);
-        btn_choice_date = (ImageView) findViewById(R.id.btn_choice_date);
+        btn_add_friends = (RelativeLayout) findViewById(R.id.btn_add_friends);
+        btn_choice_date = (RelativeLayout) findViewById(R.id.btn_choice_date);
         btn_direct_send = (ImageView) findViewById(R.id.btn_direct_send);
         btn_save_box = (ImageView) findViewById(R.id.btn_save_box);
+
 
         btn_add_friends.setOnClickListener(this);
         btn_choice_date.setOnClickListener(this);
@@ -88,6 +91,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
             }
         });
     }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 
