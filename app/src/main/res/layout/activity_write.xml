@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
     android:background="#edeff2"
     android:orientation="vertical"
     tools:context="com.nexters.naemambo.naemambo.WriteActivity">
 
     <ScrollView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/layout_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -22,7 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="56.7dp"
                 android:layout_marginBottom="6dp"
-
                 android:layout_marginTop="15.7dp">
 
                 <ImageView

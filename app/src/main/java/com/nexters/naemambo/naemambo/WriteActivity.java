@@ -1,9 +1,16 @@
 package com.nexters.naemambo.naemambo;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.URL_Define;
 
@@ -14,6 +21,7 @@ import cz.msebera.android.httpclient.Header;
 public class WriteActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView btn_choice_date, btn_add_friends, btn_save_box, btn_direct_send;
+    private LinearLayout layout_root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +32,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initView() {
+        layout_root = (LinearLayout) findViewById(R.id.layout_root);
         btn_add_friends = (ImageView) findViewById(R.id.btn_add_friends);
         btn_choice_date = (ImageView) findViewById(R.id.btn_choice_date);
         btn_direct_send = (ImageView) findViewById(R.id.btn_direct_send);
@@ -79,6 +88,16 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
             }
         });
     }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
 
+        Glide.with(this).load(R.drawable.login_background).asBitmap().into(new SimpleTarget<Bitmap>(layout_root.getWidth(), layout_root.getHeight()) {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                Drawable drawable = new BitmapDrawable(resource);
+                layout_root.setBackground(drawable);
+            }
+        });
+    }
 
 }

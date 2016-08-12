@@ -13,6 +13,7 @@ import com.nexters.naemambo.naemambo.adapter.MyPagerAdapter;
 import com.nexters.naemambo.naemambo.fragment.MySendFragment;
 import com.nexters.naemambo.naemambo.fragment.ReceiveFragment;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
+import com.nexters.naemambo.naemambo.util.LayoutUtil;
 
 public class MyboxActivity extends BaseActivity implements View.OnClickListener {
     ImageView btn_actionbar_back, btn_actionbar_write;
@@ -32,6 +33,7 @@ public class MyboxActivity extends BaseActivity implements View.OnClickListener 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        LayoutUtil.applyFontedTab(MyboxActivity.this, viewPager, tabLayout);
 
         if (getSupportActionBar() != null) {
             actionBar = getSupportActionBar();
@@ -63,4 +65,5 @@ public class MyboxActivity extends BaseActivity implements View.OnClickListener 
                 break;
         }
     }
+
 }
