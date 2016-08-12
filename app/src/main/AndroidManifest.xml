@@ -13,13 +13,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Notile" />
+            android:theme="@style/NoTitle" />
         <activity android:name=".util.BaseActivity" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Notile">
+            android:theme="@style/NoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,10 +38,12 @@
         <activity android:name=".MyboxActivity" />
         <activity
             android:name=".OpenSourceActivity"
-            android:theme="@style/Notile" />
+            android:theme="@style/NoTitle" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".CreditActivity" />
-        <activity android:name=".WriteActivity"></activity>
+        <activity android:name=".WriteActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/NoTitle"/>
     </application>
 
 </manifest>

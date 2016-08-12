@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.nexters.naemambo.naemambo.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/login_logo"
+            android:layout_width="76.7dp"
+            android:layout_height="106.3dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="103dp"
+            android:src="@drawable/login_logo" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btn_login"
+            style="@style/FacebookLoginButton"
+            android:layout_width="193.3dp"
+            android:layout_height="46.7dp"
+            android:layout_alignParentBottom="true"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="135.3dp"
+            android:src="@drawable/login_facebook" />
+
+        <ImageView
+            android:id="@+id/btn_facebook"
+            android:src="@drawable/login_facebook"
+            android:layout_width="193.3dp"
+            android:layout_height="62dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="135.3dp" />
+    </RelativeLayout>
+
+
+</LinearLayout>
