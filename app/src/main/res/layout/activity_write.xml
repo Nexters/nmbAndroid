@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#edeff2"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.nexters.naemambo.naemambo.WriteActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16.7dp"
         android:layout_marginRight="16.7dp">
 
@@ -27,7 +28,7 @@
 
                 <RelativeLayout
                     android:id="@+id/btn_add_friends"
-                    android:layout_width="160dp"
+                    android:layout_width="match_parent"
                     android:layout_height="46.7dp"
                     android:layout_marginRight="3.35dp"
                     android:layout_weight="1"
@@ -43,7 +44,7 @@
 
                 <RelativeLayout
                     android:id="@+id/btn_choice_date"
-                    android:layout_width="160dp"
+                    android:layout_width="match_parent"
                     android:layout_height="46.7dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="3.35dp"
@@ -64,14 +65,15 @@
                 android:layout_height="36.7dp"
                 android:layout_marginTop="13.7dp"
                 android:background="#FFFFFF"
+                android:hint="어떤 일이 서운했는지 간략히 제목을 적어보세요"
                 android:paddingLeft="22dp"
                 android:paddingRight="22dp"
-                android:text="test"
                 android:textSize="13sp" />
 
             <EditText
+                android:id="@+id/edit_content"
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="420dp"
                 android:layout_marginTop="8.3dp"
                 android:background="@drawable/write_back"
                 android:gravity="start"
@@ -80,21 +82,8 @@
                 android:paddingLeft="22dp"
                 android:paddingRight="22dp"
                 android:paddingTop="16.7dp"
-                android:textSize="12sp" />
+                android:textSize="24sp" />
 
-            <ImageView
-                android:id="@+id/btn_save_box"
-                android:layout_width="match_parent"
-                android:layout_height="56.7dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/write_bone" />
-
-            <ImageView
-                android:id="@+id/btn_direct_send"
-                android:layout_width="match_parent"
-                android:layout_height="56.7dp"
-                android:src="@drawable/write_btwo" />
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

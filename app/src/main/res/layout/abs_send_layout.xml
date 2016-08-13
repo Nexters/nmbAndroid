@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="0dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_abs_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/btn_actionbar_back"
+            android:layout_width="23.3dp"
+            android:layout_height="21.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/actionbar_back" />
+
+        <TextView
+            android:id="@+id/action_bar_write_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="#5d5d5d"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btn_actionbar_box"
+            android:layout_width="26.7dp"
+            android:layout_height="28.7dp"
+            android:layout_toLeftOf="@+id/btn_actionbar_send"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="19dp"
+            android:src="@drawable/boxicon" />
+
+        <ImageView
+            android:id="@+id/btn_actionbar_send"
+            android:layout_width="26.7dp"
+            android:layout_height="21dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/checkicon" />
+    </RelativeLayout>
+</LinearLayout>

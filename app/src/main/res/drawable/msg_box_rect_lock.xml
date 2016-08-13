@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="#f1f7f8" />
+    <solid android:color="#eeeeee" />
     <stroke
         android:width="0dp"
         android:color="@color/transparent" />

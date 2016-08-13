@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nexters.naemambo.naemambo.R;
 import com.nexters.naemambo.naemambo.listItem.MessageItem;
+import com.nexters.naemambo.naemambo.util.Const;
 
 import java.util.ArrayList;
 
@@ -45,12 +46,23 @@ public class MessageAdapter extends ArrayAdapter<MessageItem> {
             holder = (CustomViewHolder) convertView.getTag();
         }
         MessageItem item = getItem(position);
-        if (item.boxType == 0) {
-            Glide.with(getContext()).load(R.drawable.list_lock).into(holder.msgBox);
-        } else if (item.boxType == 1) {
-            Glide.with(getContext()).load(R.drawable.list_share).into(holder.msgBox);
-        } else if (item.boxType == 2) {
-            Glide.with(getContext()).load(R.drawable.list_done).into(holder.msgBox);
+        switch (item.boxType) {
+            case Const.GENERAL_BOX:
+                Glide.with(getContext()).load(R.drawable.list_g_box).into(holder.msgBox);
+                holder.msgBox.setBackgroundResource(R.drawable.msg_box_rect);
+                break;
+            case Const.LOCK_BOX:
+                Glide.with(getContext()).load(R.drawable.list_lock).into(holder.msgBox);
+                holder.msgBox.setBackgroundResource(R.drawable.msg_box_rect_lock);
+                break;
+            case Const.DONE_BOX:
+                Glide.with(getContext()).load(R.drawable.list_done).into(holder.msgBox);
+                holder.msgBox.setBackgroundResource(R.drawable.msg_box_rect);
+                break;
+            case Const.SHARE_BOX:
+                Glide.with(getContext()).load(R.drawable.list_share).into(holder.msgBox);
+                holder.msgBox.setBackgroundResource(R.drawable.msg_box_rect);
+                break;
         }
         holder.msgContent.setText(item.content);
         holder.msgSubject.setText(item.subject);
