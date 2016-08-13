@@ -29,11 +29,11 @@
 
         <ImageView
             android:id="@+id/btn_actionbar_write"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="28.7dp"
+            android:layout_height="28.7dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="14dp"
-            android:src="@drawable/list_pen" />
+            android:src="@drawable/penicon" />
     </RelativeLayout>
 </LinearLayout>

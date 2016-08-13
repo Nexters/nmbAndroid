@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btn_save_box"
+            android:layout_width="200dp"
+            android:layout_height="46.7dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/radius_rect_topleft_right"
+            android:gravity="center"
+            android:text="내 상자에 담아두기"
+            android:textColor="#c3438f"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_direct_send"
+            android:layout_width="200dp"
+            android:layout_height="46.7dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6.7dp"
+            android:background="@drawable/radius_rect_bottom_left_right"
+            android:gravity="center"
+            android:text="지금 서운한 티내기"
+            android:textColor="#e13867"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

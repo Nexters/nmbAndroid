@@ -5,12 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.nexters.naemambo.naemambo.R;
 import com.nexters.naemambo.naemambo.adapter.MessageAdapter;
 import com.nexters.naemambo.naemambo.listItem.MessageItem;
 import com.nexters.naemambo.naemambo.util.BaseFragment;
+import com.nexters.naemambo.naemambo.util.Const;
 
 
 public class MySendFragment extends BaseFragment {
@@ -67,7 +69,27 @@ public class MySendFragment extends BaseFragment {
         addItem(adapter, 1, "테스트제목2", "내 마음이 보이니 테스트 넥스터즈 전한경 최봉재 임주현 ", "2016.08.02");
         addItem(adapter, 2, "테스트제목3", "너에게 하고싶은 이야기를 여기에 쓴다 내 이야기를 듣고 같이 해결했으면 좋겠어...", "2016.08.01");
         adapter.notifyDataSetChanged();
+        //서버에서 데이터 가져와서 리스트에 넣으세요.
+        mySendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int boxType = adapter.getItem(position).boxType;
+
+                if (boxType == Const.GENERAL_BOX) {
+
+                } else if (boxType == Const.LOCK_BOX) {
+
+                } else if (boxType == Const.DONE_BOX) {
+
+                }
+            }
+        });
+        LoadFromServer();
         return view;
+    }
+
+    private void LoadFromServer() {
+//        getReq();
     }
 
 

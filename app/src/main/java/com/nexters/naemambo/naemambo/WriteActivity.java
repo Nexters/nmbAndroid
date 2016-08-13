@@ -1,13 +1,16 @@
 package com.nexters.naemambo.naemambo;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -21,9 +24,10 @@ import cz.msebera.android.httpclient.Header;
 
 public class WriteActivity extends BaseActivity implements View.OnClickListener {
 
-    private ImageView btn_save_box, btn_direct_send;
+    private TextView btn_save_box, btn_direct_send;
     private LinearLayout layout_root;
     private RelativeLayout btn_add_friends, btn_choice_date;
+    private Dialog dialog_save_or_send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,13 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
         layout_root = (LinearLayout) findViewById(R.id.layout_root);
         btn_add_friends = (RelativeLayout) findViewById(R.id.btn_add_friends);
         btn_choice_date = (RelativeLayout) findViewById(R.id.btn_choice_date);
-        btn_direct_send = (ImageView) findViewById(R.id.btn_direct_send);
-        btn_save_box = (ImageView) findViewById(R.id.btn_save_box);
 
+        //보내기 다이얼로그
+        dialog_save_or_send = new Dialog(WriteActivity.this, R.style.dialogStyle);
+        dialog_save_or_send.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog_save_or_send.setContentView(R.layout.dialog_send_or_save);
+        btn_save_box = (TextView) dialog_save_or_send.findViewById(R.id.btn_save_box);
+        btn_direct_send = (TextView) dialog_save_or_send.findViewById(R.id.btn_direct_send);
 
         btn_add_friends.setOnClickListener(this);
         btn_choice_date.setOnClickListener(this);
