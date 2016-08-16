@@ -1,11 +1,7 @@
 package com.nexters.naemambo.naemambo;
 
-import android.animation.ObjectAnimator;
 import android.app.Dialog;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.View;
@@ -15,9 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.URL_Define;
 
@@ -62,7 +55,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setElevation(8);
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.abs_send_layout);
+            actionBar.setCustomView(R.layout.abs_send_or_save_layout);
             btn_actionbar_box = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_box);
             action_bar_write_title = (TextView) actionBar.getCustomView().findViewById(R.id.action_bar_write_title);
             btn_actionbar_back = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_back);

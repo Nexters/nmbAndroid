@@ -50,7 +50,9 @@
         <activity
             android:name=".TutorialActivity"
             android:theme="@style/NoTitle" />
-
+        <activity android:name=".MyboxDetailShareActivity" />
+        <activity android:name=".MyboxDetailDoneActivity" />
+        <activity android:name=".MyboxDetailGeneralActivity"></activity>
     </application>
 
 </manifest>

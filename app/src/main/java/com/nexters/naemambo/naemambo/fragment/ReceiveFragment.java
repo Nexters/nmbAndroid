@@ -1,15 +1,21 @@
 package com.nexters.naemambo.naemambo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.nexters.naemambo.naemambo.MyboxDetailDoneActivity;
+import com.nexters.naemambo.naemambo.MyboxDetailGeneralActivity;
+import com.nexters.naemambo.naemambo.MyboxDetailShareActivity;
 import com.nexters.naemambo.naemambo.R;
 import com.nexters.naemambo.naemambo.adapter.MessageAdapter;
 import com.nexters.naemambo.naemambo.util.BaseFragment;
+import com.nexters.naemambo.naemambo.util.Const;
 
 public class ReceiveFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
@@ -54,6 +60,22 @@ public class ReceiveFragment extends BaseFragment {
         addItem(adapter, 1, "테스트제목2", "내 마음이 보이니 테스트 넥스터즈 전한경 최봉재 임주현 ", "2016.08.02");
         addItem(adapter, 2, "테스트제목3", "날 으아으아 하게 만들어줘", "2016.08.01");
         adapter.notifyDataSetChanged();
+        receiveFragment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int boxType = adapter.getItem(position).boxType;
+                if (boxType == Const.GENERAL_BOX) {
+                    startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
+                } else if (boxType == Const.LOCK_BOX) {
+                    dialogInit();
+                    dialog_hope_msg_show();
+                } else if (boxType == Const.DONE_BOX) {
+                    startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)));
+                } else if (boxType == Const.SHARE_BOX) {
+                    startActivity(new Intent(getContext(), MyboxDetailShareActivity.class).putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position)));
+                }
+            }
+        });
         return view;
     }
 

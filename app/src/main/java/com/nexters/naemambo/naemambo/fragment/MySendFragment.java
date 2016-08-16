@@ -1,21 +1,26 @@
 package com.nexters.naemambo.naemambo.fragment;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.nexters.naemambo.naemambo.MyboxDetailDoneActivity;
+import com.nexters.naemambo.naemambo.MyboxDetailGeneralActivity;
+import com.nexters.naemambo.naemambo.MyboxDetailShareActivity;
 import com.nexters.naemambo.naemambo.R;
 import com.nexters.naemambo.naemambo.adapter.MessageAdapter;
-import com.nexters.naemambo.naemambo.listItem.MessageItem;
 import com.nexters.naemambo.naemambo.util.BaseFragment;
 import com.nexters.naemambo.naemambo.util.Const;
 
 
-public class MySendFragment extends BaseFragment {
+public class MySendFragment extends BaseFragment  {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -24,6 +29,8 @@ public class MySendFragment extends BaseFragment {
     private String mParam2;
     private MessageAdapter adapter;
     private ListView mySendListView;
+    private Dialog dialog_hope_msg;
+    private TextView btn_hope_msg;
 
     public MySendFragment() {
         // Required empty public constructor
@@ -58,7 +65,7 @@ public class MySendFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_send, container, false);
@@ -74,13 +81,14 @@ public class MySendFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int boxType = adapter.getItem(position).boxType;
-
                 if (boxType == Const.GENERAL_BOX) {
-
+                    startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
                 } else if (boxType == Const.LOCK_BOX) {
-
+                    dialogInit();
                 } else if (boxType == Const.DONE_BOX) {
-
+                    startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)));
+                } else if (boxType == Const.SHARE_BOX) {
+                    startActivity(new Intent(getContext(), MyboxDetailShareActivity.class).putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position)));
                 }
             }
         });
@@ -92,6 +100,7 @@ public class MySendFragment extends BaseFragment {
 //        getReq();
 
     }
+
 
 
 }

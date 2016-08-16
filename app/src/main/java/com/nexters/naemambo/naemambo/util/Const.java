@@ -11,4 +11,7 @@ public class Const {
     public static final int SHARE_BOX = 2;
     public static final int DONE_BOX = 3;
 
+    public static final String BOX_DETAIL_SHARE = "box_detail_share";
+    public static final String BOX_DETAIL_DONE = "box_detail_done";
+    public static final String BOX_DETAIL_GENERAL = "box_detail_general";
 }

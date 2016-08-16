@@ -64,7 +64,9 @@ public class BaseActivity extends AppCompatActivity {
             });
         }
     }
-
+    public void deleteBox(){
+//        deleteJson();
+    }
     public class ConnHttpResponseHandler extends JsonHttpResponseHandler {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject res) {

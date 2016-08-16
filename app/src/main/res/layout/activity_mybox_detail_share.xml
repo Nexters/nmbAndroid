@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pale_grey"
+    tools:context="com.nexters.naemambo.naemambo.MyboxDetailShareActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16.7dp"
+        android:layout_marginRight="16.7dp"
+        android:layout_marginTop="13.7dp">
+
+        <LinearLayout
+            android:id="@+id/layout_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_share_subject"
+                android:layout_width="match_parent"
+                android:layout_height="36.7dp"
+                android:layout_marginTop="13.7dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:hint="어떤 일이 서운했는지 간략히 제목을 적어보세요"
+                android:paddingLeft="22dp"
+                android:paddingRight="22dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_share_content"
+                android:layout_width="match_parent"
+                android:layout_height="410dp"
+                android:layout_marginTop="8.3dp"
+                android:background="@drawable/write_back"
+                android:gravity="start"
+                android:paddingBottom="16.7dp"
+                android:paddingLeft="22dp"
+                android:paddingRight="22dp"
+                android:paddingTop="16.7dp"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="53.3dp"
+                android:layout_marginTop="13dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/darkish_pink"
+                android:background="@drawable/radius_rect_e13867_fill_white"
+                android:text="우리 문제를 해결했어요!"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
