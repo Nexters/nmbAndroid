@@ -1,5 +1,6 @@
 package com.nexters.naemambo.naemambo;
 
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,6 +21,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.URL_Define;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -111,10 +113,22 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
      */
     private void sendContent(boolean isDirect) {
         JSONObject object = new JSONObject();
+        try {
+            //object.put(key,vlaue);
+
+
+
+
+
+            object.put("content",edit_content.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         postReq(URL_Define.BASE_URL, object, new ConnHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
+
             }
 
             @Override
@@ -127,5 +141,6 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
                 super.onFailure(statusCode, headers, responseString, t);
             }
         });
+
     }
 }

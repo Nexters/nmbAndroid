@@ -46,6 +46,9 @@
         <activity android:name=".WriteActivity" />
         <activity android:name=".LoginActivity"
             android:theme="@style/NoTitle"/>
+        <activity android:name=".TutorialActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
     </application>
 
 </manifest>

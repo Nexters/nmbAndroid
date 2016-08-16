@@ -90,6 +90,7 @@ public class MySendFragment extends BaseFragment {
 
     private void LoadFromServer() {
 //        getReq();
+
     }
 
 

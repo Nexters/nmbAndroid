@@ -39,6 +39,7 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
         toggle_message_on_off.setOnCheckedChangeListener(this);
         btn_opensource.setOnClickListener(this);
         btn_developer_designer.setOnClickListener(this);
+        btn_tutorial.setOnClickListener(this);
 
 
     }
@@ -79,6 +80,9 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
                 break;
             case R.id.btn_developer_designer:
                 startActivity(new Intent(SettingActivity.this, CreditActivity.class));
+                break;//
+            case R.id.btn_tutorial:
+                startActivity(new Intent(SettingActivity.this, TutorialActivity.class));
                 break;
         }
     }
