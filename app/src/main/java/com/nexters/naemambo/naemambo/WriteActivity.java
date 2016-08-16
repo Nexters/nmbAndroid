@@ -13,15 +13,19 @@ import android.widget.TextView;
 
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.URL_Define;
+import com.wdullaer.materialdatetimepicker.date.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 import cz.msebera.android.httpclient.Header;
 
-public class WriteActivity extends BaseActivity implements View.OnClickListener {
+public class WriteActivity extends BaseActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
 
-    private TextView btn_save_box, btn_direct_send, action_bar_write_title;
+    private TextView btn_save_box, btn_direct_send, action_bar_write_title,
+            dateTextView;//임시 TextView
     private LinearLayout layout_root;
     private RelativeLayout btn_add_friends, btn_choice_date;
     private Dialog dialog_save_or_send;
@@ -48,6 +52,8 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
         dialog_save_or_send.setContentView(R.layout.dialog_send_or_save);
         btn_save_box = (TextView) dialog_save_or_send.findViewById(R.id.btn_save_box);
         btn_direct_send = (TextView) dialog_save_or_send.findViewById(R.id.btn_direct_send);
+        //임시 텍스트 For PickerDATE
+        dateTextView=(TextView)findViewById(R.id.date_text);
 
         if (getSupportActionBar() != null) {
             actionBar = getSupportActionBar();
@@ -71,6 +77,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
         btn_actionbar_box.setOnClickListener(this);
     }
 
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -83,6 +90,15 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.btn_choice_date:
                 //날짜선택 화면
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        WriteActivity.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+
+                dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
             case R.id.btn_direct_send:
                 //서버에 바로전송 하면서 바로 상대방에게도
@@ -136,4 +152,37 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener 
         });
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
+
+        if(dpd != null) dpd.setOnDateSetListener(this);
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        //String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        String month=Integer.toString(++monthOfYear),
+                day=Integer.toString(dayOfMonth);
+
+        if(monthOfYear<10)
+        {
+            month="0"+monthOfYear;
+        }
+        if(dayOfMonth<10)
+        {
+            day="0"+dayOfMonth;
+        }
+        String date=year+"-"
+                +month+"-"
+                +day;
+
+        dateTextView.setText(date);
+    }
+
+
+
 }
