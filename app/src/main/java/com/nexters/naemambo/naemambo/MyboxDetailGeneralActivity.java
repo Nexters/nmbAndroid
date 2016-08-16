@@ -80,8 +80,6 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
             case R.id.btn_actionbar_back:
                 finish();
                 break;
-            case R.id.btn_actionbar_modify:
-                break;
             case R.id.btn_actionbar_delete:
                 deleteDialog.show();
                 break;
