@@ -50,7 +50,6 @@ public class MyboxActivity extends BaseActivity implements View.OnClickListener 
             btn_actionbar_back.setOnClickListener(this);
             btn_actionbar_write.setOnClickListener(this);
         }
-
     }
 
     @Override

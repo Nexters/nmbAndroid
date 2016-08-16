@@ -3,6 +3,8 @@ package com.nexters.naemambo.naemambo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
+import com.nexters.naemambo.naemambo.adapter.MyPagerAdapter;
+import com.nexters.naemambo.naemambo.fragment.IntroOneFragment;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 
 /**
@@ -10,21 +12,19 @@ import com.nexters.naemambo.naemambo.util.BaseActivity;
  */
 public class TutorialActivity extends BaseActivity {
 
-
-    ViewPager pager;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial_main);
 
-        pager= (ViewPager)findViewById(R.id.pager);
-
-
-        CustomAdapter adapter= new CustomAdapter(getLayoutInflater());
-
-
-        pager.setAdapter(adapter);
+        viewPager = (ViewPager) findViewById(R.id.tutorial_pager);
+        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new IntroOneFragment());
+        adapter.addFragment(new IntroOneFragment());
+        adapter.addFragment(new IntroOneFragment());
+        viewPager.setAdapter(adapter);
 
     }
 

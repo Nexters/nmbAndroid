@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nexters.naemambo.naemambo.fragment.IntroOneFragment">
+
+    <ImageView
+        android:id="@+id/tutorial_intro_01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/btn_tutorial_next"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="22dp"
+        android:layout_alignParentBottom="true"
+        android:background="#4e57bc"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:text="다음" />
+</RelativeLayout>
