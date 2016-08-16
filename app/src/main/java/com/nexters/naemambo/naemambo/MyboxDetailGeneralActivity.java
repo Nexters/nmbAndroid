@@ -41,7 +41,6 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
             actionBar.setCustomView(R.layout.abs_direct_send_layout);
             btn_actionbar_back = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_back);
             action_bar_write_title = (TextView) actionBar.getCustomView().findViewById(R.id.action_bar_write_title);
-            btn_actionbar_modify = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_modify);
             btn_actionbar_delete = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_delete);
 
             action_bar_write_title.setText("전한경의 메세지");

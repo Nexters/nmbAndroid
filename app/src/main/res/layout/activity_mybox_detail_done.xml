@@ -26,7 +26,6 @@
                 android:layout_marginTop="13.7dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:hint="어떤 일이 서운했는지 간략히 제목을 적어보세요"
                 android:paddingLeft="22dp"
                 android:paddingRight="22dp"
                 android:textSize="13sp" />

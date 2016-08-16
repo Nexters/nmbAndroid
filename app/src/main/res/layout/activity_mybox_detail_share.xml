@@ -45,6 +45,7 @@
                 android:textSize="24sp" />
 
             <TextView
+                android:id="@+id/btn_complete"
                 android:layout_width="match_parent"
                 android:layout_height="53.3dp"
                 android:layout_marginTop="13dp"
