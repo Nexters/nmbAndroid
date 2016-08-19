@@ -8,17 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.Glide;
+import com.nexters.naemambo.naemambo.listItem.FriendListItem;
 
 import java.util.ArrayList;
 
 /**
  * Created by jjgod on 2016-08-02.
  */
-public class CustomAdapter extends ArrayAdapter<ListItem> {
+public class CustomAdapter extends ArrayAdapter<FriendListItem> {
     private Context mContext = null;
-    private ArrayList<ListItem> mListData = null;
+    private ArrayList<FriendListItem> mListData = null;
     private LayoutInflater inflater = null;
 
     public CustomAdapter(Context context, int resource) {
@@ -33,7 +33,7 @@ public class CustomAdapter extends ArrayAdapter<ListItem> {
         CustomViewHolder holder = null;
         if (convertView == null) {
             holder = new CustomViewHolder();
-            convertView = inflater.inflate(R.layout.message_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.friend_list_item, parent, false);
             holder.profile_img = (ImageView) convertView.findViewById(R.id.profile_img);
             holder.id = (TextView) convertView.findViewById(R.id.id);
             holder.name = (TextView) convertView.findViewById(R.id.name);
@@ -41,7 +41,7 @@ public class CustomAdapter extends ArrayAdapter<ListItem> {
         } else {
             holder = (CustomViewHolder) convertView.getTag();
         }
-        ListItem item = getItem(position);
+        FriendListItem item = getItem(position);
 
         Glide.with(getContext()).load(item.getProfile_url()).into(holder.profile_img);
         holder.profile_img.setBackgroundResource(R.drawable.msg_box_rect);
@@ -54,7 +54,7 @@ public class CustomAdapter extends ArrayAdapter<ListItem> {
     }
 
     @Override
-    public int getPosition(ListItem item) {
+    public int getPosition(FriendListItem item) {
         return super.getPosition(item);
     }
 

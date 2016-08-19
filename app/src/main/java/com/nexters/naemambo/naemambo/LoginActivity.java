@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btn_facebook.setOnClickListener(this);
         loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions("user_friends");
         loginButton.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -92,6 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                         //로그인성공하면 메인으로
                                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        finish();// 로그아웃창안뜨게할라구여
                                     }
                                 });
                         Bundle parameters = new Bundle();

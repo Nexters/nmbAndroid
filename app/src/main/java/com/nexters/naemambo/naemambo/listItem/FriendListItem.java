@@ -5,14 +5,14 @@ import java.io.Serializable;
 /**
  * Created by Jeon on 2016-08-17.
  */
-public class ListItem implements Serializable {
+public class FriendListItem implements Serializable {
 
     private String id;
     private String name;
     private String profile_url;
-    public ListItem(){}
+    public FriendListItem(){}
 
-    public ListItem(String id, String name, String profile_url) {
+    public FriendListItem(String id, String name, String profile_url) {
         this.id = id;
         this.name = name;
         this.profile_url=profile_url;
@@ -45,7 +45,7 @@ public class ListItem implements Serializable {
 
     @Override
     public String toString() {
-        return "ListItem{" +
+        return "FriendListItem{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", profile_url='" + profile_url + '\'' +

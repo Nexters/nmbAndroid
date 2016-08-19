@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="horizontal">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="93.3dp">
+
+        <ImageView
+            android:id="@+id/profile_img"
+            android:layout_width="68.3dp"
+            android:layout_height="68.3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12.3dp"
+            android:layout_marginRight="20dp"
+
+            android:padding="11.7dp" />
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16.7dp"
+            android:layout_toRightOf="@+id/profile_img"
+            android:text="테스트"
+            android:textColor="#474a4f"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id"
+            android:layout_marginTop="14.7dp"
+            android:layout_toRightOf="@+id/profile_img"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="내용테스트테스트"
+            android:textColor="#33db0d"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
 </LinearLayout>

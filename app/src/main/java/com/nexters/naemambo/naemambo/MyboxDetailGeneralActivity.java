@@ -17,7 +17,7 @@ import com.nexters.naemambo.naemambo.util.BaseActivity;
 public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnClickListener {
 
     private ActionBar actionBar;
-    private ImageView btn_actionbar_back, btn_actionbar_modify, btn_actionbar_delete;
+    private ImageView btn_actionbar_back, btn_actionbar_delete;
     private TextView action_bar_write_title, text_share_subject, text_share_content, btn_delete_yes, btn_delete_no;
     private Dialog deleteDialog;
 
@@ -45,7 +45,6 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
 
             action_bar_write_title.setText("전한경의 메세지");
             btn_actionbar_back.setOnClickListener(this);
-            btn_actionbar_modify.setOnClickListener(this);
             btn_actionbar_delete.setOnClickListener(this);
         }
 
