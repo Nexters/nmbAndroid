@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void reqLoginId(String loginId) {
         RequestParams params = new RequestParams();
         params.put("id", loginId);
-        params.put("passwd", loginId);
+        params.put("pw", loginId);
         postReq(URL_Define.LOGIN, params, new ConnHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
@@ -196,7 +196,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
-                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+                Log.e(TAG, "reqSignUp onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
                 try {
                     if (res.getString("result").equals("success")) {
                         Log.e(TAG, "onSuccess: result + success result + success result + success");
@@ -210,13 +210,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
                 super.onFailure(statusCode, headers, t, res);
-                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
+                Log.e(TAG, "reqSignUp onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
                 super.onFailure(statusCode, headers, responseString, t);
-                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
+                Log.e(TAG, "reqSignUp onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
             }
         });
     }

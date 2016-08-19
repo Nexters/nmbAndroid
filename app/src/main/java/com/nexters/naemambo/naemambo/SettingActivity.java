@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -62,6 +63,7 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
         int id = buttonView.getId();
         switch (id) {
             case R.id.toggle_message_on_off:
+                Toast.makeText(SettingActivity.this, R.string.please_wait, Toast.LENGTH_SHORT).show();
                 if (isChecked) {
                     pref.put(Const.MESSAGE_ON_OFF, true);
                 } else {
