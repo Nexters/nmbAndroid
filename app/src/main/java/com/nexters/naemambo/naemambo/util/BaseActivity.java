@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -139,5 +140,10 @@ public class BaseActivity extends AppCompatActivity {
         StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
         client.put(getApplicationContext(), url, entity, "application/json", responseHandler);
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LoginManager.getInstance().logOut();
 
+    }
 }

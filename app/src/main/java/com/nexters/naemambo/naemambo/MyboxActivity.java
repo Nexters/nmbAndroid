@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nexters.naemambo.naemambo.adapter.MyPagerAdapter;
-import com.nexters.naemambo.naemambo.fragment.MySendFragment;
-import com.nexters.naemambo.naemambo.fragment.ReceiveFragment;
+import com.nexters.naemambo.naemambo.fragment.MySentListFragment;
+import com.nexters.naemambo.naemambo.fragment.SharedListFragment;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.LayoutUtil;
 
@@ -27,8 +27,8 @@ public class MyboxActivity extends BaseActivity implements View.OnClickListener 
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ReceiveFragment(), "받은 메세지");
-        adapter.addFragment(new MySendFragment(), "내가 쓴 메세지");
+        adapter.addFragment(new SharedListFragment(), "받은 메세지");
+        adapter.addFragment(new MySentListFragment(), "내가 쓴 메세지");
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);

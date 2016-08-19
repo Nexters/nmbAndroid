@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#edeff2"
-    tools:context="com.nexters.naemambo.naemambo.fragment.MySendFragment">
+    tools:context=".fragment.MySentListFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
