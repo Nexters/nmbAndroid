@@ -134,7 +134,6 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         Log.e(TAG, "sendContent: 11111111111111111111111111111" );
         JSONObject object = new JSONObject();
         try {
-            object.put("date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             if (isDirect) object.put("status", 1);
             else object.put("status", 0);
             object.put("userid", pref.getString(Const.USER_ID, ""));

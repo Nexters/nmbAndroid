@@ -26,13 +26,18 @@ import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.loopj.android.http.RequestParams;
+import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.Const;
 import com.nexters.naemambo.naemambo.util.SPreference;
+import com.nexters.naemambo.naemambo.util.URL_Define;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+import cz.msebera.android.httpclient.Header;
+
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = LoginActivity.class.getSimpleName();
     private CallbackManager callbackManager;
     String id = "";
@@ -85,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             //email = (String) response.getJSONObject().get("email");//이메일
                                             pref.put(Const.USER_ID, id);
                                             pref.put(Const.USER_NAME, name);
+                                            reqLoginId(id);//페북로그인 성공하면 서버로 전송 고고
                                         } catch (JSONException e) {
                                             // TODO Auto-generated catch block
                                             e.printStackTrace();
@@ -95,9 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                         // new joinTask().execute(); //자신의 서버에서 로그인 처리를 해줍니다
 
-                                        //로그인성공하면 메인으로
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                        finish();// 로그아웃창안뜨게할라구여
+
                                     }
                                 });
                         Bundle parameters = new Bundle();
@@ -119,6 +123,102 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // App code
                     }
                 });
+    }
+
+    /**
+     * 로그인 시도 가입여부 판단
+     * 성공하면 메인으로
+     *
+     * @param loginId
+     */
+    private void reqLoginId(String loginId) {
+        RequestParams params = new RequestParams();
+        params.put("id", loginId);
+        params.put("passwd", loginId);
+        postReq(URL_Define.LOGIN, params, new ConnHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                super.onSuccess(statusCode, headers, res);
+                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+                if (statusCode == 200) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                } else {
+                    try {
+                        if (statusCode == 401 || res.getString("message").equals("Unauthorized")) {
+                            reqSignUp(id);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
+                super.onFailure(statusCode, headers, t, res);
+                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
+                /**
+                 * 가입이 안되어 있으면 가입 후 로그인 처리
+                 */
+                try {
+                    if (statusCode == 401 || res.getString("message").equals("Unauthorized")) {
+                        reqSignUp(id);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
+                super.onFailure(statusCode, headers, responseString, t);
+                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
+                if (statusCode == 401) {
+                    reqSignUp(id);
+                }
+            }
+        });
+    }
+
+    /**
+     * 회원가입처리
+     * 가입 성공하면 다시 로그인 시도
+     *
+     * @param signUpId 유저페이스북 아이디(숫자 고유값)
+     */
+    private void reqSignUp(String signUpId) {
+        RequestParams params = new RequestParams();
+        params.put("userid", signUpId);
+        params.put("passwd", signUpId);
+        params.put("type", 0);
+        postReq(URL_Define.SIGNUP, params, new ConnHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                super.onSuccess(statusCode, headers, res);
+                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+                try {
+                    if (res.getString("result").equals("success")) {
+                        Log.e(TAG, "onSuccess: result + success result + success result + success");
+                        reqLoginId(id);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
+                super.onFailure(statusCode, headers, t, res);
+                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
+                super.onFailure(statusCode, headers, responseString, t);
+                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
+            }
+        });
     }
 
     @Override
