@@ -14,4 +14,6 @@ public class Const {
     public static final String BOX_DETAIL_SHARE = "box_detail_share";
     public static final String BOX_DETAIL_DONE = "box_detail_done";
     public static final String BOX_DETAIL_GENERAL = "box_detail_general";
+    public static final String USER_ID = "user_id";
+    public static final String USER_NAME = "user_name";
 }

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,17 +13,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nexters.naemambo.naemambo.util.BaseActivity;
+import com.nexters.naemambo.naemambo.util.Const;
+import com.nexters.naemambo.naemambo.util.SPreference;
 import com.nexters.naemambo.naemambo.util.URL_Define;
 import com.wdullaer.materialdatetimepicker.date.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
-public class WriteActivity extends BaseActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
+public class WriteActivity extends BaseActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private TextView btn_save_box, btn_direct_send, action_bar_write_title,
             dateTextView;//임시 TextView
@@ -32,6 +37,8 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     private EditText edit_content;
     private ActionBar actionBar;
     private ImageView btn_actionbar_box, btn_actionbar_send, btn_actionbar_back;
+    private SPreference pref;
+    private static final String TAG = WriteActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     }
 
     private void initView() {
+        pref = new SPreference(WriteActivity.this);
         layout_root = (LinearLayout) findViewById(R.id.layout_root);
         btn_add_friends = (RelativeLayout) findViewById(R.id.btn_add_friends);
         btn_choice_date = (RelativeLayout) findViewById(R.id.btn_choice_date);
@@ -53,7 +61,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         btn_save_box = (TextView) dialog_save_or_send.findViewById(R.id.btn_save_box);
         btn_direct_send = (TextView) dialog_save_or_send.findViewById(R.id.btn_direct_send);
         //임시 텍스트 For PickerDATE
-        dateTextView=(TextView)findViewById(R.id.date_text);
+        dateTextView = (TextView) findViewById(R.id.date_text);
 
         if (getSupportActionBar() != null) {
             actionBar = getSupportActionBar();
@@ -103,10 +111,12 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
             case R.id.btn_direct_send:
                 //서버에 바로전송 하면서 바로 상대방에게도
                 sendContent(true);
+                dialog_save_or_send.dismiss();
                 break;
             case R.id.btn_save_box:
                 //서버에 저장만..
                 sendContent(false);
+                dialog_save_or_send.dismiss();
                 break;
             case R.id.btn_actionbar_send:
                 dialog_save_or_send.show();
@@ -121,33 +131,34 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
      * 서운한마음 쓴 내용 서버로 전송
      */
     private void sendContent(boolean isDirect) {
+        Log.e(TAG, "sendContent: 11111111111111111111111111111" );
         JSONObject object = new JSONObject();
         try {
-            //object.put(key,vlaue);
-
-
-
-
-
-            object.put("content",edit_content.getText().toString());
+            object.put("date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            if (isDirect) object.put("status", 1);
+            else object.put("status", 0);
+            object.put("userid", pref.getString(Const.USER_ID, ""));
+            object.put("content", edit_content.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        postReq(URL_Define.BASE_URL, object, new ConnHttpResponseHandler() {
+        postReq(URL_Define.WRITE, object, new ConnHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
-
+                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
                 super.onFailure(statusCode, headers, t, res);
+                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
                 super.onFailure(statusCode, headers, responseString, t);
+                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
             }
         });
 
@@ -159,30 +170,27 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
 
         DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
 
-        if(dpd != null) dpd.setOnDateSetListener(this);
+        if (dpd != null) dpd.setOnDateSetListener(this);
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         //String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        String month=Integer.toString(++monthOfYear),
-                day=Integer.toString(dayOfMonth);
+        String month = Integer.toString(++monthOfYear),
+                day = Integer.toString(dayOfMonth);
 
-        if(monthOfYear<10)
-        {
-            month="0"+monthOfYear;
+        if (monthOfYear < 10) {
+            month = "0" + monthOfYear;
         }
-        if(dayOfMonth<10)
-        {
-            day="0"+dayOfMonth;
+        if (dayOfMonth < 10) {
+            day = "0" + dayOfMonth;
         }
-        String date=year+"-"
-                +month+"-"
-                +day;
+        String date = year + "-"
+                + month + "-"
+                + day;
 
         dateTextView.setText(date);
     }
-
 
 
 }

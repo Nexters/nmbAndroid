@@ -6,5 +6,5 @@ package com.nexters.naemambo.naemambo.util;
 public class URL_Define {
     public static final String BASE_URL = "http://ec2-52-78-10-41.ap-northeast-2.compute.amazonaws.com/";
     public static final String TEST_URL = BASE_URL + "mind/api/test/error.do";
-    public static final String tetwsfdfsd = BASE_URL + "SDfdsfdsfs";
+    public static final String WRITE = BASE_URL + "box/";
 }

@@ -60,23 +60,25 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="13.7dp"
+                android:hint="서운했던 날짜를 선택해보세요."
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="36.7dp"
-                android:layout_marginTop="13.7dp"
+                android:layout_marginTop="8.3dp"
                 android:background="#FFFFFF"
                 android:hint="어떤 일이 서운했는지 간략히 제목을 적어보세요"
                 android:paddingLeft="22dp"
                 android:paddingRight="22dp"
                 android:textSize="13sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="날짜 표시"
-                android:id="@+id/date_text"
-                android:layout_gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/edit_content"

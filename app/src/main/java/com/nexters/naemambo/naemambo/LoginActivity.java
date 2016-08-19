@@ -26,6 +26,8 @@ import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.nexters.naemambo.naemambo.util.Const;
+import com.nexters.naemambo.naemambo.util.SPreference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,12 +41,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Context mContext;
     private LoginButton loginButton;
     private RelativeLayout layout_root;
+    private SPreference pref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getApplicationContext();
-
+        pref = new SPreference(LoginActivity.this);
 
         //facebook tracking
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -80,7 +83,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             id = (String) response.getJSONObject().get("id");//페이스북 아이디값
                                             name = (String) response.getJSONObject().get("name");//페이스북 이름
                                             //email = (String) response.getJSONObject().get("email");//이메일
-
+                                            pref.put(Const.USER_ID, id);
+                                            pref.put(Const.USER_NAME, name);
                                         } catch (JSONException e) {
                                             // TODO Auto-generated catch block
                                             e.printStackTrace();
@@ -137,6 +141,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 
