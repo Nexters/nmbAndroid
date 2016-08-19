@@ -139,7 +139,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
-                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+                Log.e(TAG, "reqLoginId onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
                 if (statusCode == 200) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
@@ -157,13 +157,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
                 super.onFailure(statusCode, headers, t, res);
-                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
+                Log.e(TAG, "reqLoginId onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
                 /**
                  * 가입이 안되어 있으면 가입 후 로그인 처리
                  */
                 try {
                     if (statusCode == 401 || res.getString("message").equals("Unauthorized")) {
                         reqSignUp(id);
+                    }else if (statusCode == 200) {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -173,9 +176,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
                 super.onFailure(statusCode, headers, responseString, t);
-                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
+                Log.e(TAG, "reqLoginId onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
                 if (statusCode == 401) {
                     reqSignUp(id);
+                }else if (statusCode == 200) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 }
             }
         });
