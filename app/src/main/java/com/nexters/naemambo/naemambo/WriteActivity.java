@@ -158,17 +158,19 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         }
         Log.e(TAG, "sendContent: " + object.toString());
         postReq(URL_Define.WRITE, object, new ConnHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
+                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+
                 try {
-                    if (statusCode == 200 || res.getString("result").equals("success")) {
+                    if (statusCode == 200 && res.getString("result").equals("success")) {
                         finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
             }
 
             @Override
