@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.nexters.naemambo.naemambo.adapter.MyPagerAdapter;
+import com.nexters.naemambo.naemambo.fragment.IntroFiveFragment;
+import com.nexters.naemambo.naemambo.fragment.IntroFourFragment;
 import com.nexters.naemambo.naemambo.fragment.IntroOneFragment;
+import com.nexters.naemambo.naemambo.fragment.IntroThreeFragment;
+import com.nexters.naemambo.naemambo.fragment.IntroTwoFragment;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 
 /**
@@ -22,8 +26,10 @@ public class TutorialActivity extends BaseActivity {
         viewPager = (ViewPager) findViewById(R.id.tutorial_pager);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new IntroOneFragment());
-        adapter.addFragment(new IntroOneFragment());
-        adapter.addFragment(new IntroOneFragment());
+        adapter.addFragment(new IntroTwoFragment());
+        adapter.addFragment(new IntroThreeFragment());
+        adapter.addFragment(new IntroFourFragment());
+        adapter.addFragment(new IntroFiveFragment());
         viewPager.setAdapter(adapter);
 
     }

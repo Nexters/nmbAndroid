@@ -15,6 +15,7 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
+import com.nexters.naemambo.naemambo.util.Const;
 import com.nexters.naemambo.naemambo.util.URL_Define;
 
 import io.fabric.sdk.android.Fabric;
@@ -110,7 +111,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                     Log.e(TAG, "facebook res tostring" + response.toString());
 
                                     JSONArray rawName = response.getJSONObject().getJSONArray("data");
-                                    intent.putExtra("jsondata", rawName.toString());
+                                    intent.putExtra(Const.FRIENDS_LIST, rawName.toString());
                                     startActivity(intent);
 
                                 } catch (Exception e) {

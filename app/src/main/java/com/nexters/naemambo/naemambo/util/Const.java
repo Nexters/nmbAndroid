@@ -16,4 +16,7 @@ public class Const {
     public static final String BOX_DETAIL_GENERAL = "box_detail_general";
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "user_name";
+    public static final String FRIENDS_LIST = "jsondata";
+    public static final int INTENT_FRIENDS_LIST_CODE = 200;
+
 }

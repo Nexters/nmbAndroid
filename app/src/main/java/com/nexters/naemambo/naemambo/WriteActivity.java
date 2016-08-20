@@ -1,6 +1,7 @@
 package com.nexters.naemambo.naemambo;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -21,9 +22,7 @@ import com.wdullaer.materialdatetimepicker.date.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -36,7 +35,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     private Dialog dialog_save_or_send;
     private EditText edit_content;
     private ActionBar actionBar;
-    private ImageView btn_actionbar_box, btn_actionbar_send, btn_actionbar_back;
+    private ImageView btn_actionbar_goto_list, btn_actionbar_send, btn_actionbar_back;
     private SPreference pref;
     private static final String TAG = WriteActivity.class.getSimpleName();
 
@@ -70,7 +69,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
             actionBar.setElevation(8);
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             actionBar.setCustomView(R.layout.abs_send_or_save_layout);
-            btn_actionbar_box = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_box);
+            btn_actionbar_goto_list = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_goto_list);
             action_bar_write_title = (TextView) actionBar.getCustomView().findViewById(R.id.action_bar_write_title);
             btn_actionbar_back = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_back);
             btn_actionbar_send = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_send);
@@ -82,7 +81,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         btn_direct_send.setOnClickListener(this);
         btn_save_box.setOnClickListener(this);
         btn_actionbar_send.setOnClickListener(this);
-        btn_actionbar_box.setOnClickListener(this);
+        btn_actionbar_goto_list.setOnClickListener(this);
     }
 
 
@@ -95,6 +94,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
                 break;
             case R.id.btn_add_friends:
                 //친구목록 선택으로...
+                startActivityForResult(new Intent(WriteActivity.this, FriendListActivity.class), Const.INTENT_FRIENDS_LIST_CODE);
                 break;
             case R.id.btn_choice_date:
                 //날짜선택 화면
@@ -121,9 +121,21 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
             case R.id.btn_actionbar_send:
                 dialog_save_or_send.show();
                 break;
-            case R.id.btn_actionbar_box:
+            case R.id.btn_actionbar_goto_list:
+                startActivity(new Intent(WriteActivity.this, MyboxActivity.class));
                 break;
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e(TAG, "onActivityResult: " + data.getData().toString());
+        if (requestCode == RESULT_OK) {
+            if (resultCode == Const.INTENT_FRIENDS_LIST_CODE) {
+
+            }
         }
     }
 
@@ -131,32 +143,51 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
      * 서운한마음 쓴 내용 서버로 전송
      */
     private void sendContent(boolean isDirect) {
-        Log.e(TAG, "sendContent: 11111111111111111111111111111" );
+        Log.e(TAG, "sendContent: 11111111111111111111111111111");
         JSONObject object = new JSONObject();
         try {
-            if (isDirect) object.put("status", 1);
-            else object.put("status", 0);
-            object.put("userid", pref.getString(Const.USER_ID, ""));
+            if (isDirect) {//친구한테 바로 보낼때
+                object.put("status", 1);
+//                            object.put("shuserid",)//친구 아이디 넣어야행
+            } else {//서버에만 저장할때
+                object.put("status", 0);
+            }
             object.put("content", edit_content.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e(TAG, "sendContent: " + object.toString());
         postReq(URL_Define.WRITE, object, new ConnHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
+                try {
+                    if (statusCode == 200 || res.getString("result").equals("success")) {
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
                 super.onFailure(statusCode, headers, t, res);
+                try {
+                    if (statusCode == 200 || res.getString("result").equals("success")) {
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
                 super.onFailure(statusCode, headers, responseString, t);
+
                 Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
             }
         });

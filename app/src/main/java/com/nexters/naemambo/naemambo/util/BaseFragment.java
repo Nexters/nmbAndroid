@@ -35,6 +35,14 @@ public class BaseFragment extends Fragment {
     private Dialog dialog_hope_msg;
     private TextView btn_hope_msg;
 
+    /**
+     * 메세지 리스트 아이템
+     * @param adapter
+     * @param boxType
+     * @param subject
+     * @param content
+     * @param date
+     */
     public void addItem(ArrayAdapter<MessageItem> adapter, int boxType, String subject, String content, String date) {
         MessageItem item = new MessageItem();
         item.boxType = boxType;

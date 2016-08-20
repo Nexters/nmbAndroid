@@ -28,7 +28,8 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/btn_actionbar_goto_list"
+            android:id="@+id/btn_actionbar_got"
+            android:visibility="gone"
             android:layout_width="26.7dp"
             android:layout_height="28.7dp"
             android:layout_toLeftOf="@+id/btn_actionbar_send"
@@ -38,7 +39,7 @@
             android:src="@drawable/boxicon" />
 
         <ImageView
-            android:id="@+id/btn_actionbar_send"
+            android:id="@+id/btn_actionbar_select"
             android:layout_width="26.7dp"
             android:layout_height="21dp"
             android:layout_alignParentEnd="true"
