@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_subject"
+                android:id="@+id/text_done_subject"
                 android:layout_width="match_parent"
                 android:layout_height="36.7dp"
                 android:layout_marginTop="13.7dp"
@@ -31,7 +31,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/text_subject"
+                android:id="@+id/text_done_content"
                 android:layout_width="match_parent"
                 android:layout_height="410dp"
                 android:layout_marginTop="8.3dp"
