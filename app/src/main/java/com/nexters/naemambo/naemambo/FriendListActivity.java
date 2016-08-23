@@ -3,17 +3,23 @@ package com.nexters.naemambo.naemambo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.nexters.naemambo.naemambo.listItem.FriendListItem;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -22,6 +28,11 @@ public class FriendListActivity extends BaseActivity {
     private ActionBar actionBar;
     private TextView action_bar_write_title;
     private ImageView btn_actionbar_back, btn_actionbar_select;
+    JSONArray friendslist;
+    ArrayList<String> friends = new ArrayList<>();
+    ArrayList<String> friendsid = new ArrayList<>();
+    ArrayList<String> profile_url = new ArrayList<>();
+    private CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,44 +50,40 @@ public class FriendListActivity extends BaseActivity {
             btn_actionbar_back = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_back);
             btn_actionbar_select = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_select);
         }
-
-        Intent intent = getIntent();
-        String jsondata = intent.getStringExtra(Const.FRIENDS_LIST);
-
-        JSONArray friendslist;
-        ArrayList<String> friends = new ArrayList<>();
-        ArrayList<String> friendsid = new ArrayList<String>();
-        ArrayList<String> profile_url = new ArrayList<String>();
-
-        try {
-
-            friendslist = new JSONArray(jsondata);
-            for (int l = 0; l < friendslist.length(); l++) {
-                friends.add(friendslist.getJSONObject(l).getString("name"));
-                friendsid.add(friendslist.getJSONObject(l).getString("id"));
-                profile_url.add("https://graph.facebook.com/" + friendslist.getJSONObject(l).getString("id") + "/picture?type=large");
-
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        CustomAdapter adapter = new CustomAdapter(this, R.layout.message_list_item);
+        adapter = new CustomAdapter(this, R.layout.message_list_item);
         ListView listView = (ListView) findViewById(R.id.listView);
         if (listView != null) {
             listView.setAdapter(adapter);
         }
 
-
-        addItem(adapter, friendsid, friends, profile_url);
-
-
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/me/friends",
+                null,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    public void onCompleted(GraphResponse response) {
+                        try {
+                            Log.e(TAG, "facebook res tostring" + response.toString());
+                            friendslist = response.getJSONObject().getJSONArray("data");
+                            for (int i = 0; i < friendslist.length(); i++) {
+                                JSONObject resJson = friendslist.getJSONObject(i);
+                                Log.e(TAG, "onCompleted: resJson  : " + resJson.toString());
+                                friends.add(resJson.getString("name"));
+                                friendsid.add(resJson.getString("id"));
+                                profile_url.add("https://graph.facebook.com/" + resJson.getString("id") + "/picture?type=large");
+                            }
+                            addItem(friendsid, friends, profile_url);
+                            adapter.notifyDataSetChanged();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        ).executeAsync();
     }
 
-    public void addItem(ArrayAdapter<FriendListItem> adapter, ArrayList<String> friendsid, ArrayList<String> friends, ArrayList<String> profile_url) {
-
+    private void addItem(ArrayList<String> friendsid, ArrayList<String> friends, ArrayList<String> profile_url) {
         FriendListItem item;
         for (int i = 0; i < friends.size(); i++) {
             item = new FriendListItem();
@@ -85,8 +92,6 @@ public class FriendListActivity extends BaseActivity {
             item.setProfile_url(profile_url.get(i));
             adapter.add(item);
         }
-
-
     }
 
 

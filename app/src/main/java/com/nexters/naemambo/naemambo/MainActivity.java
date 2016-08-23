@@ -99,27 +99,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(MainActivity.this, WriteActivity.class));
                 break;
             case R.id.btn_user:
-                new GraphRequest(
-                        AccessToken.getCurrentAccessToken(),
-                        "/me/friends",
-                        null,
-                        HttpMethod.GET,
-                        new GraphRequest.Callback() {
-                            public void onCompleted(GraphResponse response) {
-                                Intent intent = new Intent(MainActivity.this, FriendListActivity.class);
-                                try {
-                                    Log.e(TAG, "facebook res tostring" + response.toString());
+                startActivity(new Intent(MainActivity.this, FriendListActivity.class));
 
-                                    JSONArray rawName = response.getJSONObject().getJSONArray("data");
-                                    intent.putExtra(Const.FRIENDS_LIST, rawName.toString());
-                                    startActivity(intent);
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                ).executeAsync();
                 break;
 
         }

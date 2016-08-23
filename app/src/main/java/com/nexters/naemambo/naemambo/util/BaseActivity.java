@@ -147,7 +147,5 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (AccessToken.getCurrentAccessToken() != null)
-            LoginManager.getInstance().logOut();
     }
 }

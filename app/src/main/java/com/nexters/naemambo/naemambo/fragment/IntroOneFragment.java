@@ -16,8 +16,6 @@ import com.nexters.naemambo.naemambo.R;
 public class IntroOneFragment extends Fragment {
 
 
-    private ViewPager viewPager;
-
     public IntroOneFragment() {
 
     }

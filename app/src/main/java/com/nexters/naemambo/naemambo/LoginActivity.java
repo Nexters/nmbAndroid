@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -24,6 +25,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.loopj.android.http.RequestParams;
@@ -59,7 +61,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_login);
 
-
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.btn_login);
         ImageView btn_facebook = (ImageView) findViewById(R.id.btn_facebook);
@@ -68,6 +69,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         btn_facebook.setOnClickListener(this);
         loginButton.setReadPermissions("email");
         loginButton.setReadPermissions("user_friends");
+
+        if (AccessToken.getCurrentAccessToken() != null) {
+            Log.e(TAG, "onCreate: already login, getCurrentAccessToken is Alive. logout after login");
+            LoginManager.getInstance().logOut();
+            facebookLogin();
+        } else {
+            Log.e(TAG, "onCreate: normal login");
+            facebookLogin();
+        }
+    }
+
+    private void facebookLogin() {
         loginButton.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -119,10 +132,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onError(FacebookException exception) {
                         exception.printStackTrace();
-                        Toast.makeText(LoginActivity.this, "에러가 발생하였습니다", Toast.LENGTH_SHORT).show();
-                        // App code
                     }
                 });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     /**
@@ -164,7 +181,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 try {
                     if (statusCode == 401 || res.getString("message").equals("Unauthorized")) {
                         reqSignUp(id);
-                    }else if (statusCode == 200) {
+                    } else if (statusCode == 200) {
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
                     }
@@ -176,10 +193,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
                 super.onFailure(statusCode, headers, responseString, t);
-                Log.e(TAG, "reqLoginId onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
+                Log.e(TAG, "reqLoginId onFailure() called with: " + "statusCode = [" + statusCode + "], t = [" + t + "]");
                 if (statusCode == 401) {
                     reqSignUp(id);
-                }else if (statusCode == 200) {
+                } else if (statusCode == 200) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
@@ -222,7 +239,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
                 super.onFailure(statusCode, headers, responseString, t);
-                Log.e(TAG, "reqSignUp onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
+                Log.e(TAG, "reqSignUp onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "],  t = [" + t + "]");
             }
         });
     }
