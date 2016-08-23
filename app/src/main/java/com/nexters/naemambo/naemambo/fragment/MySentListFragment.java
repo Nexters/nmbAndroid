@@ -3,6 +3,7 @@ package com.nexters.naemambo.naemambo.fragment;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 
 
-public class MySentListFragment extends BaseFragment {
+public class MySentListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private MessageAdapter adapter;
     private ListView mySendListView;
@@ -50,6 +51,7 @@ public class MySentListFragment extends BaseFragment {
     private static final String TAG = MySentListFragment.class.getSimpleName();
     private SimpleDateFormat sdfCurrent;
     private TextView txt_empty_box;
+    private SwipeRefreshLayout swiperefresh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
@@ -59,6 +61,8 @@ public class MySentListFragment extends BaseFragment {
         adapter = new MessageAdapter(getContext(), R.layout.message_list_item);
         mySendListView = (ListView) view.findViewById(R.id.my_send_listview);
         mySendListView.setAdapter(adapter);
+        swiperefresh= (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        swiperefresh.setOnRefreshListener(this);
         LoadFromServer(pageIndex);
 
         txt_empty_box = (TextView) view.findViewById(R.id.txt_empty_box);
@@ -177,4 +181,11 @@ public class MySentListFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onRefresh() {
+        adapter.clear();
+        pageIndex=1;
+        LoadFromServer(pageIndex);
+        swiperefresh.setRefreshing(false);
+    }
 }

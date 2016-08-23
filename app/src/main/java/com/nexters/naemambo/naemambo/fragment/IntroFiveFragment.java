@@ -43,7 +43,7 @@ public class IntroFiveFragment extends BaseFragment {
         btn_tutorial_last.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pref.getBool(Const.IS_TUTORIAL,false)){//튜토리얼 처음일때만
+                if(!pref.getBool(Const.IS_TUTORIAL,false)){//튜토리얼 처음일때만
                     startActivity(new Intent(getContext(), LoginActivity.class));
                     pref.put(Const.IS_TUTORIAL, false);
                     getActivity().finish();

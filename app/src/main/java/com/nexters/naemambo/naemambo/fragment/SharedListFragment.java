@@ -2,6 +2,7 @@ package com.nexters.naemambo.naemambo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,7 @@ import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
-public class SharedListFragment extends BaseFragment {
+public class SharedListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private MessageAdapter adapter;
     private ListView receiveList;
@@ -41,6 +42,7 @@ public class SharedListFragment extends BaseFragment {
     private static final String TAG = SharedListFragment.class.getSimpleName();
     private SimpleDateFormat sdfCurrent;
     private TextView txt_empty_box;
+    private SwipeRefreshLayout swiperefresh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +51,9 @@ public class SharedListFragment extends BaseFragment {
         adapter = new MessageAdapter(getContext(), R.layout.message_list_item);
         receiveList = (ListView) view.findViewById(R.id.receive_listview);
         receiveList.setAdapter(adapter);
+
+        swiperefresh= (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        swiperefresh.setOnRefreshListener(this);
 
         txt_empty_box = (TextView) view.findViewById(R.id.txt_empty_box);
         sdfCurrent = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -142,5 +147,15 @@ public class SharedListFragment extends BaseFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        adapter.clear();
+        pageIndex=1;
+        Log.i("onRefresh","log");
+        LoadFromServer(pageIndex);
+        swiperefresh.setRefreshing(false);
+
     }
 }
