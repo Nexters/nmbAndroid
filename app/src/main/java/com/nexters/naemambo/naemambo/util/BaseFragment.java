@@ -58,12 +58,13 @@ public class BaseFragment extends Fragment {
      * @param content
      * @param date
      */
-    public void addItem(ArrayAdapter<MessageItem> adapter, int boxType, String subject, String content, String date) {
+    public void addItem(ArrayAdapter<MessageItem> adapter, int boxType, String subject, String content, String date,String shuserid) {
         MessageItem item = new MessageItem();
         item.boxType = boxType;
         item.content = content;
         item.date = date;
         item.subject = subject;
+        item.shuserid = shuserid;
         adapter.add(item);
     }
 

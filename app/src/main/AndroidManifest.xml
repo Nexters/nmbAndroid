@@ -52,8 +52,9 @@
             android:theme="@style/NoTitle" />
         <activity android:name=".MyboxDetailShareActivity" />
         <activity android:name=".MyboxDetailDoneActivity" />
-        <activity android:name=".MyboxDetailGeneralActivity"></activity>
-        <activity android:name=".FriendListActivity"></activity>
+        <activity android:name=".MyboxDetailGeneralActivity" />
+        <activity android:name=".FriendListActivity" />
+        <activity android:name=".MySentLockBoxDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -17,8 +17,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="73.3dp"
-                android:layout_marginLeft="19.7dp"
-                android:layout_marginRight="19.7dp"
                 android:background="#FFFFFF"
                 android:textSize="12sp"
                 android:gravity="center"

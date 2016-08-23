@@ -12,7 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.loopj.android.http.RequestParams;
+import com.nexters.naemambo.naemambo.MySentLockBoxDetailActivity;
 import com.nexters.naemambo.naemambo.MyboxDetailDoneActivity;
 import com.nexters.naemambo.naemambo.MyboxDetailGeneralActivity;
 import com.nexters.naemambo.naemambo.MyboxDetailShareActivity;
@@ -63,7 +68,7 @@ public class MySentListFragment extends BaseFragment {
 //        addItem(adapter, 0, "테스트제목1", "날 으아으아 하게 만들어줘", "2016.08.01");
 //        addItem(adapter, 1, "테스트제목2", "내 마음이 보이니 테스트 넥스터즈 전한경 최봉재 임주현 ", "2016.08.02");
 //        addItem(adapter, 2, "테스트제목3", "너에게 하고싶은 이야기를 여기에 쓴다 내 이야기를 듣고 같이 해결했으면 좋겠어...", "2016.08.01");
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
         //서버에서 데이터 가져와서 리스트에 넣으세요.
         mySendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,7 +77,7 @@ public class MySentListFragment extends BaseFragment {
                 if (boxType == Const.GENERAL_BOX) {
                     startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
                 } else if (boxType == Const.LOCK_BOX) {
-                    dialogInit();
+                    startActivity(new Intent(getContext(), MySentLockBoxDetailActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
                 } else if (boxType == Const.DONE_BOX) {
                     startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)));
                 } else if (boxType == Const.SHARE_BOX) {
@@ -125,6 +130,26 @@ public class MySentListFragment extends BaseFragment {
 
     }
 
+    /**
+     * 서버 수정해야해...... 이름을 getView에서 요청하다니...
+     * @param json
+     * @throws JSONException
+     */
+    private void facebookNameReq(JSONObject json) throws JSONException {
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/" + json.getString("shuserid"),
+                null,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    public void onCompleted(GraphResponse response) {
+                        Log.e(TAG, "onCompleted: " + response.toString());
+                        JSONObject resJson = response.getJSONObject();
+
+                    }
+                }
+        ).executeAsync();
+    }
     private void setListView(JSONObject res) {
         Log.e(TAG, "setListView: ");
         try {
@@ -137,11 +162,13 @@ public class MySentListFragment extends BaseFragment {
             }
             for (int i = 0; i < array.length(); i++) {
                 JSONObject resJson = (JSONObject) array.get(i);
+                facebookNameReq(resJson);
                 addItem(adapter
                         , resJson.getInt("status")
                         , resJson.getString("title")
                         , resJson.getString("content")
-                        , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date")))));
+                        , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
+                        , resJson.getString("shuserid"));
             }
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {

@@ -126,7 +126,7 @@ public class SharedListFragment extends BaseFragment {
             if (array.length() < 10) {
                 hasNextItem = false;
             }
-            if(array.length()>0){
+            if (array.length() > 0) {
                 txt_empty_box.setVisibility(View.GONE);
             }
             for (int i = 0; i < array.length(); i++) {
@@ -135,7 +135,8 @@ public class SharedListFragment extends BaseFragment {
                         , resJson.getInt("status")
                         , resJson.getString("title")
                         , resJson.getString("content")
-                        , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date")))));
+                        , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
+                        , resJson.getString("shuserid"));
             }
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -21,7 +22,9 @@ import com.nexters.naemambo.naemambo.util.URL_Define;
 import io.fabric.sdk.android.Fabric;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -29,6 +32,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ImageView img_main_box, btn_setting, btn_user, btn_write;
+    private TextView txt_box_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         initView();
+        LoadFromServer();
         //2. 결국은 메인에서 intent로 넘겨서 FriendListActivity 왔더니 되가지고 버튼누르면 메인엑티비티에있는 값들 리스트에서 불러오게 했습니다.ㅠㅠㅠ
     }
 
@@ -50,7 +55,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_setting = (ImageView) findViewById(R.id.btn_setting);
         btn_user = (ImageView) findViewById(R.id.btn_user);
         btn_write = (ImageView) findViewById(R.id.btn_write);
-
+        txt_box_count = (TextView) findViewById(R.id.txt_box_count);
         Glide.with(MainActivity.this)
                 .load(R.drawable.main_mybox)
                 .asGif()
@@ -65,12 +70,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LoadFromServer();
+    }
+
     private void LoadFromServer() {
-        getReq(URL_Define.TEST_URL, new RequestParams(), new ConnHttpResponseHandler() {
+        getReq(URL_Define.BOX_COUNT, new RequestParams(), new ConnHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
                 Log.e(TAG, "onSuccess: res.toString : " + res.toString());
+                try {
+                    txt_box_count.setText(res.getJSONArray("resData").getJSONObject(0).getString("count"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
