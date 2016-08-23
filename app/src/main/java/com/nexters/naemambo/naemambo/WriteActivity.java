@@ -161,7 +161,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
             params.put("title", edit_title.getText().toString());
         }
         params.put("content", edit_content.getText().toString());
-
+        params.put("target", dateTextView.getText().toString());
         Log.e(TAG, "sendContent: " + params.toString());
         postReq(URL_Define.WRITE, params, new ConnHttpResponseHandler() {
 

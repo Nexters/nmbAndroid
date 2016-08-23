@@ -187,7 +187,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Log.e(TAG, "onFailure:33333333333333333 ");
                 HashMap<String, String> map = new HashMap<>();
                 for (Header header : headers) {
-                    Log.e(TAG, "onFailure: key " + header.getName() + " / value : " + header.getValue());
+//                    Log.e(TAG, "onFailure: key " + header.getName() + " / value : " + header.getValue());
                     map.put(header.getName(), header.getValue());
                 }
                 pref.put(Const.JSESSIONID, map.get("Set-Cookie").split(";")[0]);

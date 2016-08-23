@@ -23,8 +23,8 @@
                 android:layout_marginTop="73.7dp" />
 
             <ImageView
-                android:layout_width="69dp"
-                android:layout_height="28.3dp"
+                android:layout_width="80dp"
+                android:layout_height="32.3dp"
                 android:layout_below="@+id/credit_logo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
@@ -37,7 +37,7 @@
                 android:layout_below="@+id/credit_logo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="93dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="65dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="0.2dp"
                         android:text="Hankyoung Jeon"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                         android:layout_alignParentRight="true"
                         android:text="Director"
                         android:textColor="#d17dae"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="0.2dp"
                         android:text="Bongjae Choi"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                         android:layout_alignParentRight="true"
                         android:text="Developer"
                         android:textColor="#d17dae"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="0.2dp"
                         android:text="Juhyun Im"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
                         android:layout_alignParentRight="true"
                         android:text="Developer"
                         android:textColor="#d17dae"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="0.2dp"
                         android:text="Youngmu Lee"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                         android:layout_alignParentRight="true"
                         android:text="Designer"
                         android:textColor="#d17dae"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="0.2dp"
                         android:text="Eunbyul Go"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
                         android:layout_alignParentRight="true"
                         android:text="Designer"
                         android:textColor="#d17dae"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -157,7 +157,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="ⓒ 2016 Naemambo / Nexters "
                 android:textColor="#20052d"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
