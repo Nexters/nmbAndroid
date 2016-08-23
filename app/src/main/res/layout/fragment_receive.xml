@@ -5,20 +5,34 @@
     android:background="#edeff2"
     tools:context=".fragment.SharedListFragment">
 
-    <ListView
-        android:id="@+id/receive_listview"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="13.3dp"
-        android:background="#edeff2"
-        android:divider="#bbbfc4"
-        android:dividerHeight="0.7dp" />
-    <TextView
-        android:id="@+id/txt_empty_box"
-        android:layout_width="wrap_content"
-        android:text="아직 박스가 존재하지 않아요"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:layout_height="wrap_content" />
+        android:background="#edeff2">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:id="@+id/receive_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="13.3dp"
+                android:background="#edeff2"
+                android:divider="#bbbfc4"
+                android:dividerHeight="0.7dp" />
+
+            <TextView
+                android:id="@+id/txt_empty_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="200dp"
+                android:text="아직 박스가 존재하지 않아요"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

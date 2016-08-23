@@ -74,6 +74,11 @@ public class MessageAdapter extends ArrayAdapter<MessageItem> {
                     }
                 }
         ).executeAsync();
+
+        holder.msgContent.setText(item.content);
+        holder.msgDate.setText(item.date);
+
+
         switch (item.boxType) {
             case Const.GENERAL_BOX:
                 Glide.with(getContext()).load(R.drawable.list_g_box).into(holder.msgBox);
@@ -92,11 +97,7 @@ public class MessageAdapter extends ArrayAdapter<MessageItem> {
                 Glide.with(getContext()).load(R.drawable.list_share).into(holder.msgBox);
                 holder.msgBox.setBackgroundResource(R.drawable.msg_box_rect);
                 break;
-            default:
-                holder.msgContent.setText(item.content);
-                break;
         }
-        holder.msgDate.setText(item.date);
         return convertView;
     }
 
