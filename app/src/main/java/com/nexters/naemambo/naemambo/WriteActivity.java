@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.Const;
 import com.nexters.naemambo.naemambo.util.SPreference;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.util.Calendar;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.util.TextUtils;
 
 public class WriteActivity extends BaseActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -33,7 +35,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     private LinearLayout layout_root;
     private RelativeLayout btn_add_friends, btn_choice_date;
     private Dialog dialog_save_or_send;
-    private EditText edit_content;
+    private EditText edit_content, edit_title;
     private ActionBar actionBar;
     private ImageView btn_actionbar_goto_list, btn_actionbar_send, btn_actionbar_back;
     private SPreference pref;
@@ -51,6 +53,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         layout_root = (LinearLayout) findViewById(R.id.layout_root);
         btn_add_friends = (RelativeLayout) findViewById(R.id.btn_add_friends);
         btn_choice_date = (RelativeLayout) findViewById(R.id.btn_choice_date);
+        edit_title = (EditText) findViewById(R.id.edit_title);
         edit_content = (EditText) findViewById(R.id.edit_content);
 
         //보내기 다이얼로그
@@ -131,7 +134,10 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e(TAG, "onActivityResult: " + data.getData().toString());
+        if (data != null) {
+            Log.d(TAG, "onActivityResult() called with: " + "requestCode = [" + requestCode + "], resultCode = [" + resultCode + "], data = [" + data + "]");
+            Log.e(TAG, "onActivityResult: " + data.getData().toString());
+        }
         if (requestCode == RESULT_OK) {
             if (resultCode == Const.INTENT_FRIENDS_LIST_CODE) {
 
@@ -141,23 +147,23 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
 
     /**
      * 서운한마음 쓴 내용 서버로 전송
+     * 자바 코드 양 너무많아...
      */
     private void sendContent(boolean isDirect) {
-        Log.e(TAG, "sendContent: 11111111111111111111111111111");
-        JSONObject object = new JSONObject();
-        try {
-            if (isDirect) {//친구한테 바로 보낼때
-                object.put("status", 1);
-//                            object.put("shuserid",)//친구 아이디 넣어야행
-            } else {//서버에만 저장할때
-                object.put("status", 0);
-            }
-            object.put("content", edit_content.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
+        RequestParams params = new RequestParams();
+        if (isDirect) {//친구한테 바로 보낼때
+            params.put("status", 1);
+//                            params.put("shuserid",)//친구 아이디 넣어야행
+        } else {//서버에만 저장할때
+            params.put("status", 0);
         }
-        Log.e(TAG, "sendContent: " + object.toString());
-        postReq(URL_Define.WRITE, object, new ConnHttpResponseHandler() {
+        if (!TextUtils.isEmpty(edit_title.getText().toString())) {
+            params.put("title", edit_title.getText().toString());
+        }
+        params.put("content", edit_content.getText().toString());
+
+        Log.e(TAG, "sendContent: " + params.toString());
+        postReq(URL_Define.WRITE, params, new ConnHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {

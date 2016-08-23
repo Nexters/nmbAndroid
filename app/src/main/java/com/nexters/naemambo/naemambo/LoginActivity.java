@@ -37,6 +37,8 @@ import com.nexters.naemambo.naemambo.util.URL_Define;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import cz.msebera.android.httpclient.Header;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -92,12 +94,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     public void onCompleted(
                                             JSONObject object,
                                             GraphResponse response) {
-                                        // 로그아웃버튼으로 변경!
-
                                         try {
-                                            //String id1=object.getString("id");
-                                            //String email1=object.getString("email");
-                                            Log.e(TAG, "facebook res tostring" + response.toString());
+                                            Log.e(TAG, "facebook res tostring : " + response.toString());
                                             id = (String) response.getJSONObject().get("id");//페이스북 아이디값
                                             name = (String) response.getJSONObject().get("name");//페이스북 이름
                                             //email = (String) response.getJSONObject().get("email");//이메일
@@ -149,32 +147,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
      * @param loginId
      */
     private void reqLoginId(String loginId) {
-        RequestParams params = new RequestParams();
+        final RequestParams params = new RequestParams();
         params.put("id", loginId);
         params.put("pw", loginId);
         postReq(URL_Define.LOGIN, params, new ConnHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+            public void onSuccess(int statusCode, Header[] headers, String res) {
                 super.onSuccess(statusCode, headers, res);
-                Log.e(TAG, "reqLoginId onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+                Log.d(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+                Log.e(TAG, "onSuccess11111111111111111111: statusCode : " + statusCode);
                 if (statusCode == 200) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
-                } else {
-                    try {
-                        if (statusCode == 401 || res.getString("message").equals("Unauthorized")) {
-                            reqSignUp(id);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
                 super.onFailure(statusCode, headers, t, res);
-                Log.e(TAG, "reqLoginId onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
+                Log.e(TAG, "onFailure: 222222222222222222222222222222");
                 /**
                  * 가입이 안되어 있으면 가입 후 로그인 처리
                  */
@@ -193,7 +184,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
                 super.onFailure(statusCode, headers, responseString, t);
-                Log.e(TAG, "reqLoginId onFailure() called with: " + "statusCode = [" + statusCode + "], t = [" + t + "]");
+                Log.e(TAG, "onFailure:33333333333333333 ");
+                HashMap<String, String> map = new HashMap<>();
+                for (Header header : headers) {
+                    Log.e(TAG, "onFailure: key " + header.getName() + " / value : " + header.getValue());
+                    map.put(header.getName(), header.getValue());
+                }
+                pref.put(Const.JSESSIONID, map.get("Set-Cookie").split(";")[0]);
+                Log.e(TAG, "onFailure: JSESSIONID JSESSIONID : " + pref.getString(Const.JSESSIONID, ""));
+
                 if (statusCode == 401) {
                     reqSignUp(id);
                 } else if (statusCode == 200) {

@@ -71,6 +71,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
+                android:id="@+id/edit_title"
                 android:layout_width="match_parent"
                 android:layout_height="36.7dp"
                 android:layout_marginTop="8.3dp"

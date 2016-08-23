@@ -14,13 +14,17 @@ import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.cookie.Cookie;
 import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.util.TextUtils;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BaseActivity extends AppCompatActivity {
@@ -28,12 +32,14 @@ public class BaseActivity extends AppCompatActivity {
     private AsyncHttpClient client = new AsyncHttpClient();
     private ActionBar actionBar;
     TextView action_bar_back_title;
+    private SPreference pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setActionBar();
+        pref = new SPreference(BaseActivity.this);
     }
 
     @Override
@@ -74,73 +80,110 @@ public class BaseActivity extends AppCompatActivity {
     public class ConnHttpResponseHandler extends JsonHttpResponseHandler {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
-            Log.d("Handler", "onSuccess /code : " + statusCode + "/headers : " + headers + "//res : " + res);
+            Log.e(TAG, "onSuccess: 11111111111111111111111111111111111");
+            if (res != null && !TextUtils.isEmpty(res.toString())) {
+                Log.d("Handler", "onSuccess /code : " + statusCode + "/headers : " + headers + "//res : " + res);
+            }
+        }
+
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String responseString) {
+            super.onSuccess(statusCode, headers, responseString);
+            Log.e(TAG, "onSuccess: 22222222222222222222222222222222");
         }
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
-
-            if (res != null) {
-                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
+            Log.e(TAG, "onFailure: 3333333333333333333333333");
+            if (res != null && !TextUtils.isEmpty(res.toString())) {
+                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
             }
             t.printStackTrace();
         }
 
         @Override
         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
-
-            if (responseString != null) {
-                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
-            }
-            t.printStackTrace();
+            Log.e(TAG, "onFailure: 44444444444444444444444444");
+            super.onFailure(statusCode, headers, responseString, t);
         }
 
     }
 
     public void getReq(String url, RequestParams params, ConnHttpResponseHandler responseHandler) {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
+        Log.e(TAG, "getReq: Seesion did  " + sessionId);
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
         client.setURLEncodingEnabled(true);
+        if (!TextUtils.isEmpty(sessionId)) {
+            client.addHeader("cookie", sessionId);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.get(url, params, responseHandler);
     }
 
     public void postReq(String url, RequestParams params, ConnHttpResponseHandler responseHandler) {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
+        Log.e(TAG, "getReq: Seesion did  " + sessionId);
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
         client.setURLEncodingEnabled(true);
+        if (!TextUtils.isEmpty(sessionId)) {
+            client.addHeader("cookie", sessionId);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.post(url, params, responseHandler);
     }
 
     public void postReq(String url, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
+        Log.e(TAG, "getReq: Seesion did  " + sessionId);
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
         StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
+        if (!TextUtils.isEmpty(pref.getString(Const.JSESSIONID, ""))) {
+            client.addHeader("cookie", pref.getString(Const.JSESSIONID, ""));
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.post(getApplicationContext(), url, entity, "application/json", responseHandler);
     }
 
-    public void deleteJson(String url, String token, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+    public void deleteJson(String url, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+        String string = pref.getString(Const.JSESSIONID, "");
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
-        client.addHeader("Authorization", token);
         StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
+        if (!TextUtils.isEmpty(string)) {
+            client.addHeader("cookie", string);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.delete(getApplicationContext(), url, entity, "application/json", responseHandler);
     }
 
-    public void putRequest(String url, String token, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+    public void putRequest(String url, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
-        client.addHeader("Authorization", token);
         StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
+        if (!TextUtils.isEmpty(sessionId)) {
+            client.addHeader("cookie", sessionId);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.put(getApplicationContext(), url, entity, "application/json", responseHandler);
     }
 
