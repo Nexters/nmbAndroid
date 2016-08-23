@@ -27,7 +27,7 @@ public class SPreference {
         SharedPreferences.Editor editor = pref.edit();
 
         editor.remove(key);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -48,7 +48,7 @@ public class SPreference {
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public void put(String key, Set<String> value) {
@@ -56,7 +56,7 @@ public class SPreference {
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putStringSet(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public void put(String key, float value) {
@@ -65,7 +65,7 @@ public class SPreference {
         SharedPreferences.Editor editor = pref.edit();
 //        Log.e(TAG, "put float key : " + key + " / put float value : " + value);
         editor.putFloat(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public void put(String key, boolean value) {
@@ -74,7 +74,7 @@ public class SPreference {
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putBoolean(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public void put(String key, int dftValue) {
@@ -83,7 +83,7 @@ public class SPreference {
         SharedPreferences.Editor editor = pref.edit();
 //        Log.e(TAG, "put int key : " + key + " / put int value : " + pref.getInt(key, dftValue));
         editor.putInt(key, dftValue);
-        editor.commit();
+        editor.apply();
     }
 
     public float getFloat(String key, float dftValue) {
@@ -144,6 +144,6 @@ public class SPreference {
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 }

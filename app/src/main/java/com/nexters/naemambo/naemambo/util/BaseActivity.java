@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -65,9 +66,11 @@ public class BaseActivity extends AppCompatActivity {
             });
         }
     }
-    public void deleteBox(){
+
+    public void deleteBox() {
 //        deleteJson();
     }
+
     public class ConnHttpResponseHandler extends JsonHttpResponseHandler {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
@@ -140,10 +143,11 @@ public class BaseActivity extends AppCompatActivity {
         StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
         client.put(getApplicationContext(), url, entity, "application/json", responseHandler);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LoginManager.getInstance().logOut();
-
+        if (AccessToken.getCurrentAccessToken() != null)
+            LoginManager.getInstance().logOut();
     }
 }

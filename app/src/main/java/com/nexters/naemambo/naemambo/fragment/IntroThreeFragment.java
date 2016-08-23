@@ -26,11 +26,11 @@ public class IntroThreeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_intro_two, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_intro_one, container, false);
 
-        ImageView tutorial_intro = (ImageView) rootView.findViewById(R.id.tutorial_intro);
+        ImageView tutorial_intro = (ImageView) rootView.findViewById(R.id.img_tutorial);
 
-        Glide.with(getContext()).load(R.drawable.tutorial_04).into(tutorial_intro);
+        Glide.with(getContext()).load(R.drawable.tutorial_03).into(tutorial_intro);
 
         return rootView;
     }

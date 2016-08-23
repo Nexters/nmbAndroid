@@ -24,7 +24,7 @@ public class CreditActivity extends BaseActivity {
         ImageView logo = (ImageView) findViewById(R.id.credit_logo);
         layout_root = (LinearLayout) findViewById(R.id.layout_root);
 
-        Glide.with(CreditActivity.this).load(R.drawable.login_logo).into(logo);
+        Glide.with(CreditActivity.this).load(R.drawable.dampul).into(logo);
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

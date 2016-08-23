@@ -17,7 +17,15 @@
             android:layout_height="106.3dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="103dp"
-            android:src="@drawable/login_logo" />
+            android:src="@drawable/dampul" />
+
+        <ImageView
+            android:layout_width="69dp"
+            android:layout_height="28.3dp"
+            android:layout_below="@+id/login_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/dampul_text" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/btn_login"
@@ -25,19 +33,19 @@
             android:layout_width="193.3dp"
             android:layout_height="46.7dp"
             android:layout_alignParentBottom="true"
-            android:visibility="invisible"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="135.3dp"
-            android:src="@drawable/login_facebook" />
+            android:src="@drawable/login_facebook"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/btn_facebook"
-            android:src="@drawable/login_facebook"
             android:layout_width="193.3dp"
             android:layout_height="62dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="135.3dp" />
+            android:layout_marginBottom="135.3dp"
+            android:src="@drawable/login_facebook" />
     </RelativeLayout>
 
 
