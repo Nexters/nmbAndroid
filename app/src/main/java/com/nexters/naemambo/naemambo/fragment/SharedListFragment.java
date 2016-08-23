@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.MyboxDetailDoneActivity;
@@ -24,6 +25,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import cz.msebera.android.httpclient.Header;
 
 public class SharedListFragment extends BaseFragment {
@@ -32,8 +37,10 @@ public class SharedListFragment extends BaseFragment {
     private ListView receiveList;
     private boolean hasNextItem = true;
     private boolean lastItemVisibleFlag = false;
-    int pageIndex = 0;
+    int pageIndex = 1;
     private static final String TAG = SharedListFragment.class.getSimpleName();
+    private SimpleDateFormat sdfCurrent;
+    private TextView txt_empty_box;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,11 +49,12 @@ public class SharedListFragment extends BaseFragment {
         adapter = new MessageAdapter(getContext(), R.layout.message_list_item);
         receiveList = (ListView) view.findViewById(R.id.receive_listview);
         receiveList.setAdapter(adapter);
-        LoadFromServer(0);
-        addItem(adapter, 0, "테스트제목1", "날 으아으아 하게 만들어줘", "2016.08.01");
-        addItem(adapter, 1, "테스트제목2", "내 마음이 보이니 테스트 넥스터즈 전한경 최봉재 임주현 ", "2016.08.02");
-        addItem(adapter, 2, "테스트제목3", "날 으아으아 하게 만들어줘", "2016.08.01");
-        adapter.notifyDataSetChanged();
+
+        txt_empty_box = (TextView) view.findViewById(R.id.txt_empty_box);
+        sdfCurrent = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+
+        LoadFromServer(pageIndex);
         receiveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -111,11 +119,15 @@ public class SharedListFragment extends BaseFragment {
     }
 
     private void setListView(JSONObject res) {
-        Log.e(TAG, "setListView: ");
+        Log.e(TAG, "setListView()");
+
         try {
             JSONArray array = res.getJSONArray("resData").getJSONObject(0).getJSONObject("list").getJSONArray("content");
             if (array.length() < 10) {
                 hasNextItem = false;
+            }
+            if(array.length()>0){
+                txt_empty_box.setVisibility(View.GONE);
             }
             for (int i = 0; i < array.length(); i++) {
                 JSONObject resJson = (JSONObject) array.get(i);
@@ -123,8 +135,9 @@ public class SharedListFragment extends BaseFragment {
                         , resJson.getInt("status")
                         , resJson.getString("title")
                         , resJson.getString("content")
-                        , resJson.getString("date"));
+                        , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date")))));
             }
+            adapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }

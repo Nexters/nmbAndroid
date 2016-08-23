@@ -1,23 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#edeff2"
     tools:context=".fragment.MySentListFragment">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefresh"
+    <ListView
+        android:id="@+id/my_send_listview"
         android:layout_width="match_parent"
-        android:layout_marginTop="13.3dp"
+        android:layout_height="match_parent"
         android:background="#edeff2"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/my_send_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#edeff2"
-            android:divider="#bbbfc4"
-            android:dividerHeight="0.7dp" />
-    </android.support.v4.widget.SwipeRefreshLayout>
-</FrameLayout>
+        android:divider="#bbbfc4"
+        android:layout_marginTop="13.3dp"
+        android:dividerHeight="0.7dp" />
+    <TextView
+        android:id="@+id/txt_empty_box"
+        android:layout_width="wrap_content"
+        android:text="아직 박스가 존재하지 않아요"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

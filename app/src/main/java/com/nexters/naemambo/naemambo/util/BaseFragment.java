@@ -1,13 +1,18 @@
 package com.nexters.naemambo.naemambo.util;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -15,6 +20,7 @@ import android.widget.TextView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.nexters.naemambo.naemambo.LoginActivity;
 import com.nexters.naemambo.naemambo.MyboxDetailDoneActivity;
 import com.nexters.naemambo.naemambo.MyboxDetailGeneralActivity;
 import com.nexters.naemambo.naemambo.MyboxDetailShareActivity;
@@ -25,6 +31,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.util.TextUtils;
 
 /**
  * Created by jjgod on 2016-08-02.
@@ -34,9 +41,17 @@ public class BaseFragment extends Fragment {
     private AsyncHttpClient client = new AsyncHttpClient();
     private Dialog dialog_hope_msg;
     private TextView btn_hope_msg;
+    private SPreference pref;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        pref = new SPreference(context);
+    }
 
     /**
      * 메세지 리스트 아이템
+     *
      * @param adapter
      * @param boxType
      * @param subject
@@ -53,49 +68,80 @@ public class BaseFragment extends Fragment {
     }
 
     public void getReq(String url, RequestParams params, ConnHttpResponseHandler responseHandler) {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
+        Log.e(TAG, "getReq: Seesion did  " + sessionId);
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
         client.setURLEncodingEnabled(true);
+        if (!TextUtils.isEmpty(sessionId)) {
+            client.addHeader("cookie", sessionId);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.get(url, params, responseHandler);
     }
 
     public void postReq(String url, RequestParams params, ConnHttpResponseHandler responseHandler) {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
+        Log.e(TAG, "getReq: Seesion did  " + sessionId);
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
         client.setURLEncodingEnabled(true);
+        if (!TextUtils.isEmpty(sessionId)) {
+            client.addHeader("cookie", sessionId);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.post(url, params, responseHandler);
     }
 
     public void postReq(String url, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
+        Log.e(TAG, "getReq: Seesion did  " + sessionId);
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
         StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
+        if (!TextUtils.isEmpty(sessionId)) {
+            client.addHeader("cookie", sessionId);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.post(getContext(), url, entity, "application/json", responseHandler);
     }
 
-    public void deleteJson(String url, String token, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+    public void deleteJson(String url, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+        String string = pref.getString(Const.JSESSIONID, "");
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
-        client.addHeader("Authorization", token);
         StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
+        if (!TextUtils.isEmpty(string)) {
+            client.addHeader("cookie", string);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.delete(getContext(), url, entity, "application/json", responseHandler);
     }
 
-    public void putRequest(String url, String token, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+    public void putRequest(String url, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
         client.setLoggingEnabled(true);
-        client.addHeader("Authorization", token);
         StringEntity entity = new StringEntity(jsonObject.toString(), "UTF-8");
+        if (!TextUtils.isEmpty(sessionId)) {
+            client.addHeader("cookie", sessionId);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
         client.put(getContext(), url, entity, "application/json", responseHandler);
     }
 
@@ -133,26 +179,55 @@ public class BaseFragment extends Fragment {
         }
     }
 
+    private void sessionExpire(String sessionId) {
+        if (TextUtils.isEmpty(sessionId)) {
+            new AlertDialog.Builder(getContext())
+                    .setMessage("세션이 만료 되었습니다. 로그인 화면으로 이동합니다.")
+                    .setCancelable(false)
+                    .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(getContext(), LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED));
+                        }
+                    });
+        }
+    }
+
     public class ConnHttpResponseHandler extends JsonHttpResponseHandler {
+        String sessionId = pref.getString(Const.JSESSIONID, "");
+
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
-            if (res != null) {
-                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+            Log.e(TAG, "onSuccess: 11111111111111111111111111111111111");
+            if (res != null && !TextUtils.isEmpty(res.toString())) {
+                Log.d("Handler", "onSuccess /code : " + statusCode + "/headers : " + headers + "//res : " + res);
             }
+            sessionExpire(sessionId);
+        }
+
+
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String responseString) {
+            super.onSuccess(statusCode, headers, responseString);
+            Log.e(TAG, "onSuccess: 22222222222222222222222222222222");
+            sessionExpire(sessionId);
         }
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
-            if (res != null) {
+            Log.e(TAG, "onFailure: 3333333333333333333333333");
+            if (res != null && !TextUtils.isEmpty(res.toString())) {
                 Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
             }
+            sessionExpire(sessionId);
         }
 
         @Override
         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
-            if (responseString != null) {
-                Log.e(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], Throwable = [" + t + "]");
-            }
+            Log.e(TAG, "onFailure: 44444444444444444444444444");
+            super.onFailure(statusCode, headers, responseString, t);
+            sessionExpire(sessionId);
         }
+
     }
 }

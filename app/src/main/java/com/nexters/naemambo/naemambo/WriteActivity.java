@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
@@ -40,6 +41,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     private ImageView btn_actionbar_goto_list, btn_actionbar_send, btn_actionbar_back;
     private SPreference pref;
     private static final String TAG = WriteActivity.class.getSimpleName();
+    String targetDate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,9 +161,15 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         }
         if (!TextUtils.isEmpty(edit_title.getText().toString())) {
             params.put("title", edit_title.getText().toString());
+        } else if (targetDate.isEmpty()) {
+            Toast.makeText(WriteActivity.this, "서운했던 날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }else if(edit_content.getText().toString().isEmpty()){
+            Toast.makeText(WriteActivity.this, "무엇이 서운했나요? 내용을 적어주세요.", Toast.LENGTH_SHORT).show();
+            return;
         }
         params.put("content", edit_content.getText().toString());
-        params.put("target", dateTextView.getText().toString());
+        params.put("target", targetDate);
         Log.e(TAG, "sendContent: " + params.toString());
         postReq(URL_Define.WRITE, params, new ConnHttpResponseHandler() {
 
@@ -223,6 +231,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         if (dayOfMonth < 10) {
             day = "0" + dayOfMonth;
         }
+        targetDate = year + month + day;
         String date = year + "-"
                 + month + "-"
                 + day;

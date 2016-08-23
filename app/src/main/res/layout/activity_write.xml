@@ -67,7 +67,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:layout_marginTop="13.7dp"
-                android:hint="서운했던 날짜를 선택해보세요."
+                android:hint="서운했던 날짜를 선택해주세요."
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText

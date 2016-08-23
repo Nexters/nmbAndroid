@@ -2,6 +2,7 @@ package com.nexters.naemambo.naemambo.util;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -18,6 +19,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
+import com.nexters.naemambo.naemambo.LoginActivity;
 import com.nexters.naemambo.naemambo.R;
 
 import org.json.JSONArray;
@@ -86,7 +88,7 @@ public class BaseActivity extends AppCompatActivity {
                     .setPositiveButton("네", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            startActivity(new Intent(BaseActivity.this, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED));
                         }
                     });
         }
