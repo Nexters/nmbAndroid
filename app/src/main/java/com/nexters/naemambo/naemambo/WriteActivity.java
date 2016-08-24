@@ -180,6 +180,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
 
                 try {
                     if (statusCode == 200 && res.getString("result").equals("success")) {
+                        startActivity(new Intent(WriteActivity.this, MyboxActivity.class));
                         finish();
                     }
                 } catch (JSONException e) {
@@ -192,6 +193,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
                 super.onFailure(statusCode, headers, t, res);
                 try {
                     if (statusCode == 200 || res.getString("result").equals("success")) {
+                        startActivity(new Intent(WriteActivity.this, MyboxActivity.class));
                         finish();
                     }
                 } catch (JSONException e) {
