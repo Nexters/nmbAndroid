@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
+import com.nexters.naemambo.naemambo.listItem.FriendListItem;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 import com.nexters.naemambo.naemambo.util.Const;
 import com.nexters.naemambo.naemambo.util.SPreference;
@@ -140,16 +141,15 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
             Log.d(TAG, "onActivityResult() called with: " + "requestCode = [" + requestCode + "], resultCode = [" + resultCode + "], data = [" + data + "]");
             Log.e(TAG, "onActivityResult: " + data.getData().toString());
         }
-        if (requestCode == RESULT_OK) {
-            if (resultCode == Const.INTENT_FRIENDS_LIST_CODE) {
-
+        if (resultCode == RESULT_OK) {
+            if(requestCode == Const.INTENT_FRIENDS_LIST_CODE){
+                FriendListItem item = (FriendListItem) data.getSerializableExtra(Const.FRIENDS_DATA);
             }
         }
     }
 
     /**
      * 서운한마음 쓴 내용 서버로 전송
-     * 자바 코드 양 너무많아...
      */
     private void sendContent(boolean isDirect) {
         RequestParams params = new RequestParams();

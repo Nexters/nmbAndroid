@@ -1,5 +1,6 @@
 package com.nexters.naemambo.naemambo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -16,6 +18,7 @@ import com.facebook.HttpMethod;
 import com.nexters.naemambo.naemambo.adapter.FriendsAdapter;
 import com.nexters.naemambo.naemambo.listItem.FriendListItem;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
+import com.nexters.naemambo.naemambo.util.Const;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,11 +31,13 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
     JSONArray friendslist;
     private FriendsAdapter adapter;
     private ListView listView;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
+        intent = new Intent();
 
         if (getSupportActionBar() != null) {
             actionBar = getSupportActionBar();
@@ -45,11 +50,11 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
             btn_actionbar_back = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_back);
             btn_actionbar_select = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_select);
         }
-        adapter = new FriendsAdapter(this, R.layout.friend_list_item);
         listView = (ListView) findViewById(R.id.friends_listview);
         txt_count_friends = (TextView) findViewById(R.id.txt_count_friends);
-
+        adapter = new FriendsAdapter(FriendListActivity.this, R.layout.friend_list_item,true);
         listView.setAdapter(adapter);
+
         action_bar_write_title.setText("친구 목록");
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
@@ -72,6 +77,7 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
                                 adapter.add(item);
                             }
                             adapter.notifyDataSetChanged();
+
                             Log.e(TAG, "onCompleted: count : " + adapter.getCount());
                             txt_count_friends.setText(adapter.getCount() + "");
                         } catch (Exception e) {
@@ -86,9 +92,11 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FriendListItem item = adapter.getItem(position);
-                boolean isChecked = ((ListView) view).isItemChecked(position);
-                Log.e(TAG, "onItemClick: isChecked : " + isChecked);
-
+                Log.e(TAG, "onItemClick: 1111111111111111111111111111111111111");
+                item.setChecked(true);
+                Log.e(TAG, "onItemClick: item : " + item.isChecked());
+                adapter.notifyDataSetChanged();
+                intent.putExtra(Const.FRIENDS_DATA, item);
             }
         });
     }
@@ -108,8 +116,21 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
     }
 
     private void selectFriends() {
+        Log.e(TAG, "selectFriends: 111111111111111" );
+        if (adapter.getCheckCount() == 0) {
+            Toast.makeText(FriendListActivity.this, "친구를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (adapter.getCheckCount() > 1) {
+            Toast.makeText(FriendListActivity.this, "친구를 한명만 선택해주세요.", Toast.LENGTH_SHORT).show();
+            for (int i = 0; i < adapter.getCount(); i++) {
+                adapter.getItem(i).setChecked(false);
+            }
+            adapter.notifyDataSetChanged();
+            return;
+        } else {
+            setResult(RESULT_OK,intent);
+        }
 
-        adapter.setAllChecked(false);
     }
 
 }

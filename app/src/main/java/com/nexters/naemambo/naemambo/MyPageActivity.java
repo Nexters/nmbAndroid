@@ -29,8 +29,8 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class MyPageActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = MyPageActivity.class.getSimpleName();
     private ActionBar actionBar;
-    private TextView action_bar_write_title, txt_count_friends,txt_myprofile_name;
-    private ImageView btn_actionbar_back, btn_actionbar_select,img_myprofile;
+    private TextView action_bar_write_title, txt_count_friends, txt_myprofile_name;
+    private ImageView btn_actionbar_back, btn_actionbar_select, img_myprofile;
     JSONArray friendslist;
     private FriendsAdapter adapter;
     private ListView listView;
@@ -53,19 +53,16 @@ public class MyPageActivity extends BaseActivity implements View.OnClickListener
             btn_actionbar_back = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_back);
             //btn_actionbar_select = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_select);
         }
-        adapter = new FriendsAdapter(this, R.layout.friend_list_item);
+        adapter = new FriendsAdapter(this, R.layout.friend_list_item,false);
         listView = (ListView) findViewById(R.id.friends_listview);
         txt_count_friends = (TextView) findViewById(R.id.txt_count_friends);
-        txt_myprofile_name=(TextView) findViewById(R.id.txt_myprofile_name);
-        img_myprofile=(ImageView)findViewById(R.id.img_profile_img);
+        txt_myprofile_name = (TextView) findViewById(R.id.txt_myprofile_name);
+        img_myprofile = (ImageView) findViewById(R.id.img_myprofile);
 
-        sPreference=new SPreference(MyPageActivity.this);
+        sPreference = new SPreference(MyPageActivity.this);
 
-        txt_myprofile_name.setText(sPreference.getString(Const.USER_NAME,""));
-        Glide.with(MyPageActivity.this).load(sPreference.getString(Const.USER_URL,"")).bitmapTransform(new CropCircleTransformation(MyPageActivity.this)).into(img_myprofile);
-
-
-
+        txt_myprofile_name.setText(sPreference.getString(Const.USER_NAME, ""));
+        Glide.with(MyPageActivity.this).load(sPreference.getString(Const.USER_URL, "")).bitmapTransform(new CropCircleTransformation(MyPageActivity.this)).into(img_myprofile);
 
 
         listView.setAdapter(adapter);
@@ -119,16 +116,7 @@ public class MyPageActivity extends BaseActivity implements View.OnClickListener
             case R.id.btn_actionbar_back:
                 finish();
                 break;
-            /*case R.id.btn_actionbar_select:
-                //seelcel
-                selectFriends();
-                break;*/
         }
     }
-
-    /*private void selectFriends() {
-
-        adapter.setAllChecked(false);
-    }*/
 
 }
