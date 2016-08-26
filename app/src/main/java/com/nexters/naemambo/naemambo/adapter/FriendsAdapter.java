@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nexters.naemambo.naemambo.R;
 import com.nexters.naemambo.naemambo.listItem.FriendListItem;
+import com.nexters.naemambo.naemambo.util.SPreference;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
     private Context mContext = null;
     private LayoutInflater inflater = null;
-    private boolean[] isCheckedConfrim;
+    private SPreference pref;
 
     public FriendsAdapter(Context context, int resource) {
         super(context, resource);
@@ -51,11 +52,18 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
 
         Glide.with(getContext()).load(item.getImg_profile_img()).bitmapTransform(new CropCircleTransformation(mContext)).into(holder.img_profile_img);
         holder.txt_friends_name.setText(item.getTxt_friends_name());
-        holder.chk_friends.setChecked(((ListView) parent).isItemChecked(position));
-        holder.chk_friends.setClickable(false);
-        holder.chk_friends.setFocusable(false);
-        holder.chk_friends.setChecked(isCheckedConfrim[position]);
-
+        holder.chk_friends.setChecked(((ListView)parent).isItemChecked(position));
+        holder.chk_friends.setChecked(item.isChecked());
+//        holder.chk_friends.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//
+//                } else {
+//
+//                }
+//            }
+//        });
         return convertView;
     }
 
@@ -68,29 +76,11 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
         public ImageView img_profile_img;
         public TextView txt_friends_name;
         public CheckBox chk_friends;
-
     }
-    // CheckBox를 모두 선택하는 메서드
-    public void setAllChecked(boolean isChecked) {
-        int tempSize = isCheckedConfrim.length;
-        for(int i=0 ; i<tempSize ; i++){
-            isCheckedConfrim[i] = isChecked;
-        }
-    }
-
-    public void setChecked(int position) {
-        isCheckedConfrim[position] = !isCheckedConfrim[position];
-    }
-
-    public ArrayList<Integer> getChecked(){
-        int tempSize = isCheckedConfrim.length;
-        ArrayList<Integer> mArrayList = new ArrayList<>();
-        for(int b=0 ; b<tempSize ; b++){
-            if(isCheckedConfrim[b]){
-                mArrayList.add(b);
-            }
-        }
-        return mArrayList;
-    }
+//    public int getCheckCount(){
+//        for (int i = 0; i < getCount(); i++) {
+//
+//        }
+//    }
 
 }

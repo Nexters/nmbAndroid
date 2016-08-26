@@ -6,6 +6,11 @@ import java.io.Serializable;
  * Created by Jeon on 2016-08-17.
  */
 public class FriendListItem implements Serializable {
+    private String img_profile_img;
+    private String txt_friends_name;
+    private String friend_id;
+    private boolean isChecked;
+
     public String getImg_profile_img() {
         return img_profile_img;
     }
@@ -31,7 +36,11 @@ public class FriendListItem implements Serializable {
     }
 
 
-    private String img_profile_img;
-    private String txt_friends_name;
-    private String friend_id;
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 }
