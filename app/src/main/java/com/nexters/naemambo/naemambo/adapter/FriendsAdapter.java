@@ -76,7 +76,7 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
         if (chkVisibility) {
             holder.chk_friends.setVisibility(View.VISIBLE);
         } else {
-            holder.chk_friends.setVisibility(View.GONE);
+            holder.chk_friends.setVisibility(View.INVISIBLE);
         }
         return convertView;
     }

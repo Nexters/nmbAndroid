@@ -18,4 +18,5 @@ public class MessageItem implements Serializable {
     public String content;
     public String date;
     public String shuserid;
+    public String name;
 }

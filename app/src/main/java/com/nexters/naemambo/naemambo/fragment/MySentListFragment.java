@@ -175,7 +175,8 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
                         , resJson.getString("title")
                         , resJson.getString("content")
                         , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
-                        , resJson.getString("shuserid"));
+                        , resJson.getString("shuserid")
+                        , resJson.isNull("label") ? "" : resJson.getString("label"));
             }
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {

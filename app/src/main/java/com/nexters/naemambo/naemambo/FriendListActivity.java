@@ -32,6 +32,7 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
     private FriendsAdapter adapter;
     private ListView listView;
     Intent intent;
+    boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
         }
         listView = (ListView) findViewById(R.id.friends_listview);
         txt_count_friends = (TextView) findViewById(R.id.txt_count_friends);
-        adapter = new FriendsAdapter(FriendListActivity.this, R.layout.friend_list_item,true);
+        adapter = new FriendsAdapter(FriendListActivity.this, R.layout.friend_list_item, true);
         listView.setAdapter(adapter);
 
         action_bar_write_title.setText("친구 목록");
@@ -88,12 +89,21 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
         ).executeAsync();
 
         btn_actionbar_back.setOnClickListener(this);
+        btn_actionbar_select.setOnClickListener(this);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FriendListItem item = adapter.getItem(position);
                 Log.e(TAG, "onItemClick: 1111111111111111111111111111111111111");
-                item.setChecked(true);
+                if (flag) {
+                    item.setChecked(true);
+                    flag = false;
+                } else {
+                    item.setChecked(false);
+                    flag = true;
+
+                }
                 Log.e(TAG, "onItemClick: item : " + item.isChecked());
                 adapter.notifyDataSetChanged();
                 intent.putExtra(Const.FRIENDS_DATA, item);
@@ -116,11 +126,13 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
     }
 
     private void selectFriends() {
-        Log.e(TAG, "selectFriends: 111111111111111" );
+        Log.e(TAG, "selectFriends: 111111111111111");
+        Log.e(TAG, "selectFriends: adapter.getCheckCount() : " + adapter.getCheckCount());
+
         if (adapter.getCheckCount() == 0) {
             Toast.makeText(FriendListActivity.this, "친구를 선택해주세요.", Toast.LENGTH_SHORT).show();
             return;
-        } else if (adapter.getCheckCount() > 1) {
+        } else if (adapter.getCheckCount() > 3) {
             Toast.makeText(FriendListActivity.this, "친구를 한명만 선택해주세요.", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < adapter.getCount(); i++) {
                 adapter.getItem(i).setChecked(false);
@@ -128,7 +140,9 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
             adapter.notifyDataSetChanged();
             return;
         } else {
-            setResult(RESULT_OK,intent);
+            Log.e(TAG, "selectFriends: ok111111111111111" );
+            setResult(RESULT_OK, intent);
+            finish();
         }
 
     }

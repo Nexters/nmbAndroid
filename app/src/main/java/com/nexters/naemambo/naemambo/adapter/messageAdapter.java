@@ -57,23 +57,8 @@ public class MessageAdapter extends ArrayAdapter<MessageItem> {
             holder = (CustomViewHolder) convertView.getTag();
         }
         MessageItem item = getItem(position);
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/" + item.shuserid,
-                null,
-                HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
-                        Log.e(TAG, "onCompleted: " + response.toString());
-                        JSONObject resJson = response.getJSONObject();
-                        try {
-                            holder.msgSubject.setText(resJson.isNull("name") ? "" : "With " + resJson.getString("name"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-        ).executeAsync();
+        holder.msgSubject.setText(item.name);
+
 
         holder.msgContent.setText(item.content);
         holder.msgDate.setText(item.date);

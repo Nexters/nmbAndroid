@@ -52,7 +52,7 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
         receiveList = (ListView) view.findViewById(R.id.receive_listview);
         receiveList.setAdapter(adapter);
 
-        swiperefresh= (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        swiperefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         swiperefresh.setOnRefreshListener(this);
 
         txt_empty_box = (TextView) view.findViewById(R.id.txt_empty_box);
@@ -141,7 +141,9 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                         , resJson.getString("title")
                         , resJson.getString("content")
                         , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
-                        , resJson.getString("shuserid"));
+                        , resJson.getString("shuserid")
+                        , resJson.isNull("label") ? "" : resJson.getString("label"));
+
             }
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {
@@ -152,8 +154,8 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
     @Override
     public void onRefresh() {
         adapter.clear();
-        pageIndex=1;
-        Log.i("onRefresh","log");
+        pageIndex = 1;
+        Log.i("onRefresh", "log");
         LoadFromServer(pageIndex);
         swiperefresh.setRefreshing(false);
 

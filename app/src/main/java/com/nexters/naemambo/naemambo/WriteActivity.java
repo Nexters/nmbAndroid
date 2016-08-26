@@ -43,6 +43,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     private SPreference pref;
     private static final String TAG = WriteActivity.class.getSimpleName();
     String targetDate = "";
+    private FriendListItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,11 +140,10 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             Log.d(TAG, "onActivityResult() called with: " + "requestCode = [" + requestCode + "], resultCode = [" + resultCode + "], data = [" + data + "]");
-            Log.e(TAG, "onActivityResult: " + data.getData().toString());
         }
         if (resultCode == RESULT_OK) {
-            if(requestCode == Const.INTENT_FRIENDS_LIST_CODE){
-                FriendListItem item = (FriendListItem) data.getSerializableExtra(Const.FRIENDS_DATA);
+            if (requestCode == Const.INTENT_FRIENDS_LIST_CODE) {
+                item = (FriendListItem) data.getSerializableExtra(Const.FRIENDS_DATA);
             }
         }
     }
@@ -155,8 +155,14 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         RequestParams params = new RequestParams();
         if (isDirect) {//친구한테 바로 보낼때
             params.put("status", 1);
-//                            params.put("shuserid",)//친구 아이디 넣어야행
-//            params.put("label",);//친구이름
+            if (TextUtils.isEmpty(item.getFriend_id()) || TextUtils.isEmpty(item.getTxt_friends_name())) {
+                Toast.makeText(WriteActivity.this, "친구를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                return;
+            }else{
+                params.put("shuserid", item.getFriend_id());//친구 아이디 넣어야행
+                params.put("label", item.getTxt_friends_name());//친구이름
+            }
+
         } else {//서버에만 저장할때
             params.put("status", 0);
         }
