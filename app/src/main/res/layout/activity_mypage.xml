@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.nexters.naemambo.naemambo.FriendListActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="118.7dp"
+        android:orientation="vertical"
+        android:background="@drawable/background_setting">
+        <ImageView
+            android:layout_width="47.3dp"
+            android:layout_height="47.3dp"
+            android:layout_marginTop="15.3dp"
+            android:src="@drawable/dampul"
+            android:id="@+id/img_myprofile"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="34.3dp"
+            android:id="@+id/txt_myprofile_name"
+            android:text="and"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="39.7dp"
+        android:orientation="horizontal"
+        android:background="#eef0f3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19.7dp"
+            android:layout_marginTop="14dp"
+            android:text="소통 가능한 친구목록"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txt_count_friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11.3dp"
+            android:layout_marginTop="14dp"
+            android:text="0"
+            android:textColor="@color/darkish_pink"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/friends_listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+
+</LinearLayout>

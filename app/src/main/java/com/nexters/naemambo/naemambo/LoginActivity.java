@@ -101,6 +101,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             //email = (String) response.getJSONObject().get("email");//이메일
                                             pref.put(Const.USER_ID, id);
                                             pref.put(Const.USER_NAME, name);
+                                            pref.put(Const.USER_URL,"https://graph.facebook.com/"+id+"/picture?type=large");
                                             reqLoginId(id);//페북로그인 성공하면 서버로 전송 고고
                                         } catch (JSONException e) {
                                             // TODO Auto-generated catch block

@@ -17,6 +17,7 @@ public class Const {
     public static final String BOX_DETAIL_GENERAL = "box_detail_general";
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "user_name";
+    public static final String USER_URL ="user_url";
     public static final String FRIENDS_LIST = "jsondata";
 
     public static final String IS_TUTORIAL = "is_tutorial";

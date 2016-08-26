@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(MainActivity.this, WriteActivity.class));
                 break;
             case R.id.btn_user:
-                startActivity(new Intent(MainActivity.this, FriendListActivity.class));
+                startActivity(new Intent(MainActivity.this, MyPageActivity.class));
 
                 break;
 
