@@ -1,10 +1,10 @@
 package com.nexters.naemambo.naemambo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,26 +13,21 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.nexters.naemambo.naemambo.adapter.FriendsAdapter;
 import com.nexters.naemambo.naemambo.listItem.FriendListItem;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
-import com.nexters.naemambo.naemambo.util.Const;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-public class FriendListActivity extends BaseActivity {
+public class FriendListActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = FriendListActivity.class.getSimpleName();
     private ActionBar actionBar;
-    private TextView action_bar_write_title;
+    private TextView action_bar_write_title, txt_count_friends;
     private ImageView btn_actionbar_back, btn_actionbar_select;
     JSONArray friendslist;
-    ArrayList<String> friends = new ArrayList<>();
-    ArrayList<String> friendsid = new ArrayList<>();
-    ArrayList<String> profile_url = new ArrayList<>();
-    private CustomAdapter adapter;
+    private FriendsAdapter adapter;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +45,12 @@ public class FriendListActivity extends BaseActivity {
             btn_actionbar_back = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_back);
             btn_actionbar_select = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_select);
         }
-        adapter = new CustomAdapter(this, R.layout.message_list_item);
-        ListView listView = (ListView) findViewById(R.id.listView);
-        if (listView != null) {
-            listView.setAdapter(adapter);
-        }
+        adapter = new FriendsAdapter(this, R.layout.friend_list_item);
+        listView = (ListView) findViewById(R.id.friends_listview);
+        txt_count_friends = (TextView) findViewById(R.id.txt_count_friends);
 
+        listView.setAdapter(adapter);
+        action_bar_write_title.setText("친구 목록");
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 "/me/friends",
@@ -66,33 +61,55 @@ public class FriendListActivity extends BaseActivity {
                         try {
                             Log.e(TAG, "facebook res tostring" + response.toString());
                             friendslist = response.getJSONObject().getJSONArray("data");
+                            FriendListItem item;
                             for (int i = 0; i < friendslist.length(); i++) {
                                 JSONObject resJson = friendslist.getJSONObject(i);
                                 Log.e(TAG, "onCompleted: resJson  : " + resJson.toString());
-                                friends.add(resJson.getString("name"));
-                                friendsid.add(resJson.getString("id"));
-                                profile_url.add("https://graph.facebook.com/" + resJson.getString("id") + "/picture?type=large");
+                                item = new FriendListItem();
+                                item.setFriend_id(resJson.getString("id"));
+                                item.setTxt_friends_name(resJson.getString("name"));
+                                item.setImg_profile_img("https://graph.facebook.com/" + resJson.getString("id") + "/picture?type=large");
+                                adapter.add(item);
                             }
-                            addItem(friendsid, friends, profile_url);
                             adapter.notifyDataSetChanged();
+                            Log.e(TAG, "onCompleted: count : " + adapter.getCount());
+                            txt_count_friends.setText(adapter.getCount() + "");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
         ).executeAsync();
+
+        btn_actionbar_back.setOnClickListener(this);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FriendListItem item = adapter.getItem(position);
+                boolean isChecked = ((ListView) view).isItemChecked(position);
+                Log.e(TAG, "onItemClick: isChecked : " + isChecked);
+
+            }
+        });
     }
 
-    private void addItem(ArrayList<String> friendsid, ArrayList<String> friends, ArrayList<String> profile_url) {
-        FriendListItem item;
-        for (int i = 0; i < friends.size(); i++) {
-            item = new FriendListItem();
-            item.setId(friendsid.get(i));
-            item.setName(friends.get(i));
-            item.setProfile_url(profile_url.get(i));
-            adapter.add(item);
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.btn_actionbar_back:
+                finish();
+                break;
+            case R.id.btn_actionbar_select:
+                //seelcel
+                selectFriends();
+                break;
         }
     }
 
+    private void selectFriends() {
+
+        adapter.setAllChecked(false);
+    }
 
 }

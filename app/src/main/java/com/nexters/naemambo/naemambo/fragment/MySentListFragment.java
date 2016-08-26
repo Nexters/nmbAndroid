@@ -60,8 +60,8 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
         View view = inflater.inflate(R.layout.fragment_my_send, container, false);
         adapter = new MessageAdapter(getContext(), R.layout.message_list_item);
         mySendListView = (ListView) view.findViewById(R.id.my_send_listview);
+        swiperefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         mySendListView.setAdapter(adapter);
-        swiperefresh= (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         swiperefresh.setOnRefreshListener(this);
         LoadFromServer(pageIndex);
 
@@ -136,11 +136,12 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
 
     /**
      * 서버 수정해야해...... 이름을 getView에서 요청하다니...
+     *
      * @param json
      * @throws JSONException
      */
     private void facebookNameReq(JSONObject json) throws JSONException {
-        new GraphRequest(
+        GraphRequest request = new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 "/" + json.getString("shuserid"),
                 null,
@@ -148,12 +149,14 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
                 new GraphRequest.Callback() {
                     public void onCompleted(GraphResponse response) {
                         Log.e(TAG, "onCompleted: " + response.toString());
-                        JSONObject resJson = response.getJSONObject();
 
                     }
                 }
-        ).executeAsync();
+        );
+        request.setGraphPath("/" + json.getString("shuserid"));
+        request.executeAsync();
     }
+
     private void setListView(JSONObject res) {
         Log.e(TAG, "setListView: ");
         try {
@@ -184,7 +187,7 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
     @Override
     public void onRefresh() {
         adapter.clear();
-        pageIndex=1;
+        pageIndex = 1;
         LoadFromServer(pageIndex);
         swiperefresh.setRefreshing(false);
     }

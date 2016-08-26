@@ -7,42 +7,35 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="93.3dp">
+        android:layout_height="56.7dp">
 
         <ImageView
-            android:id="@+id/profile_img"
-            android:layout_width="68.3dp"
-            android:layout_height="68.3dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="12.3dp"
-            android:layout_marginRight="20dp"
-
-            android:padding="11.7dp" />
+            android:id="@+id/img_profile_img"
+            android:layout_width="36.7dp"
+            android:layout_height="36.7dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ballon"
+            android:layout_marginTop="10dp" />
 
         <TextView
-            android:id="@+id/id"
+            android:id="@+id/txt_friends_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16.7dp"
-            android:layout_toRightOf="@+id/profile_img"
-            android:text="테스트"
+            android:layout_toRightOf="@+id/img_profile_img"
+            android:layout_centerVertical="true"
+            android:text="이름이"
             android:textColor="#474a4f"
             android:textSize="16sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/id"
-            android:layout_marginTop="14.7dp"
-            android:layout_toRightOf="@+id/profile_img"
-            android:ellipsize="end"
-            android:lines="2"
-            android:text="내용테스트테스트"
-            android:textColor="#33db0d"
-            android:textSize="12sp" />
-
-
+        <CheckBox
+            android:id="@+id/chk_friends"
+            android:layout_width="23.7dp"
+            android:button="@null"
+            android:background="@drawable/selector_friends_chk"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="22dp"
+            android:layout_height="23.7dp" />
     </RelativeLayout>
 </LinearLayout>

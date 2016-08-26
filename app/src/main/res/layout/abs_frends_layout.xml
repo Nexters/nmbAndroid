@@ -29,14 +29,23 @@
 
         <ImageView
             android:id="@+id/btn_actionbar_got"
-            android:visibility="gone"
             android:layout_width="26.7dp"
             android:layout_height="28.7dp"
-            android:layout_toLeftOf="@+id/btn_actionbar_send"
             android:layout_centerVertical="true"
-            android:layout_marginTop="14dp"
             android:layout_marginRight="19dp"
-            android:src="@drawable/boxicon" />
+            android:layout_marginTop="14dp"
+            android:layout_toLeftOf="@+id/btn_actionbar_send"
+            android:src="@drawable/boxicon"
+            android:visibility="gone" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btn_actionbar_search"-->
+            <!--android:layout_width="26.7dp"-->
+            <!--android:layout_height="21dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="21.7dp"-->
+            <!--android:layout_toStartOf="@+id/btn_actionbar_select"-->
+            <!--android:src="@drawable/" />-->
 
         <ImageView
             android:id="@+id/btn_actionbar_select"
@@ -44,7 +53,6 @@
             android:layout_height="21dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="14dp"
             android:src="@drawable/checkicon" />
     </RelativeLayout>
 </LinearLayout>

@@ -156,6 +156,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         if (isDirect) {//친구한테 바로 보낼때
             params.put("status", 1);
 //                            params.put("shuserid",)//친구 아이디 넣어야행
+//            params.put("label",);//친구이름
         } else {//서버에만 저장할때
             params.put("status", 0);
         }
@@ -164,7 +165,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         } else if (targetDate.isEmpty()) {
             Toast.makeText(WriteActivity.this, "서운했던 날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
             return;
-        }else if(edit_content.getText().toString().isEmpty()){
+        } else if (edit_content.getText().toString().isEmpty()) {
             Toast.makeText(WriteActivity.this, "무엇이 서운했나요? 내용을 적어주세요.", Toast.LENGTH_SHORT).show();
             return;
         }

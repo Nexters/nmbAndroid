@@ -6,49 +6,32 @@ import java.io.Serializable;
  * Created by Jeon on 2016-08-17.
  */
 public class FriendListItem implements Serializable {
-
-    private String id;
-    private String name;
-    private String profile_url;
-    public FriendListItem(){}
-
-    public FriendListItem(String id, String name, String profile_url) {
-        this.id = id;
-        this.name = name;
-        this.profile_url=profile_url;
+    public String getImg_profile_img() {
+        return img_profile_img;
     }
 
-    public String getId() {
-        return id;
+    public void setImg_profile_img(String img_profile_img) {
+        this.img_profile_img = img_profile_img;
     }
 
-    public String getName() {
-        return name;
+    public String getTxt_friends_name() {
+        return txt_friends_name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTxt_friends_name(String txt_friends_name) {
+        this.txt_friends_name = txt_friends_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getFriend_id() {
+        return friend_id;
+    }
+
+    public void setFriend_id(String friend_id) {
+        this.friend_id = friend_id;
     }
 
 
-    public String getProfile_url() {
-        return profile_url;
-    }
-
-    public void setProfile_url(String profile_url) {
-        this.profile_url = profile_url;
-    }
-
-    @Override
-    public String toString() {
-        return "FriendListItem{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", profile_url='" + profile_url + '\'' +
-                '}';
-    }
+    private String img_profile_img;
+    private String txt_friends_name;
+    private String friend_id;
 }
