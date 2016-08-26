@@ -42,15 +42,16 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true;
     }
+    //compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+    compile project(':library')
     compile 'com.code-troopers.betterpickers:library:3.0.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'org.projectlombok:lombok:1.12.2'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
-    //compile 'com.wdullaer:materialdatetimepicker:2.5.0'
-    compile project(':library')
 }
