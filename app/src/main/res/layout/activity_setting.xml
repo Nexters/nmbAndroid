@@ -77,6 +77,18 @@
                 android:textColor="#31004a"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+            <TextView
+                android:id="@+id/btn_privacy_content"
+                android:layout_width="123.3dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/setting_radius_rect_fill"
+                android:gravity="center"
+                android:text="개인정보 취급방침"
+                android:textColor="#31004a"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

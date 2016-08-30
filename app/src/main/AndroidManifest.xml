@@ -56,6 +56,8 @@
         <activity android:name=".FriendListActivity" />
         <activity android:name=".MySentLockBoxDetailActivity"></activity>
         <activity android:name=".MyPageActivity"></activity>
+        <activity android:name=".PrivacyActivity"
+                  android:theme="@style/NoTitle"></activity>
     </application>
 
 </manifest>

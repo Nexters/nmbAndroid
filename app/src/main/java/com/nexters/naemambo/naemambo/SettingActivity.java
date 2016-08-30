@@ -22,7 +22,7 @@ import com.nexters.naemambo.naemambo.util.SPreference;
 public class SettingActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     private SwitchCompat toggle_message_on_off;
-    private TextView btn_opensource, btn_tutorial, btn_developer_designer;
+    private TextView btn_opensource, btn_tutorial, btn_developer_designer, btn_privacy_content;
     private LinearLayout layout_root;
     private SPreference pref;
 
@@ -36,11 +36,14 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
         btn_opensource = (TextView) findViewById(R.id.btn_opensource);
         btn_tutorial = (TextView) findViewById(R.id.btn_tutorial);
         btn_developer_designer = (TextView) findViewById(R.id.btn_developer_designer);
+        btn_privacy_content=(TextView)findViewById(R.id.btn_privacy_content);
+
 
         toggle_message_on_off.setOnCheckedChangeListener(this);
         btn_opensource.setOnClickListener(this);
         btn_developer_designer.setOnClickListener(this);
         btn_tutorial.setOnClickListener(this);
+        btn_privacy_content.setOnClickListener(this);
 
 
     }
@@ -85,6 +88,9 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
                 break;//
             case R.id.btn_tutorial:
                 startActivity(new Intent(SettingActivity.this, TutorialActivity.class));
+                break;
+            case R.id.btn_privacy_content:
+                startActivity(new Intent(SettingActivity.this, PrivacyActivity.class));
                 break;
         }
     }
