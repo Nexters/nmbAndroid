@@ -75,8 +75,7 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                 if (boxType == Const.GENERAL_BOX) {
 
                     startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class)
-                            .putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position))
-                            .putExtra(Const.SEND_BY_ME, false));
+                            .putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
 
                 } else if (boxType == Const.LOCK_BOX) {
                     //잠금박스 같이보기 요청했을때 서버에 status(2) 변경 요청
@@ -92,13 +91,11 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                 } else if (boxType == Const.DONE_BOX) {
 
                     startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class)
-                            .putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position))
-                            .putExtra(Const.SEND_BY_ME, false));
+                            .putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)));
                 } else if (boxType == Const.SHARE_BOX) {
 
                     startActivity(new Intent(getContext(), MyboxDetailShareActivity.class)
-                            .putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position))
-                            .putExtra(Const.SEND_BY_ME, false));
+                            .putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position)));
                 }
             }
         });
@@ -154,12 +151,12 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
     @Override
     public void onResume() {
         super.onResume();
-        swiperefresh.post(new Runnable() {
-            @Override
-            public void run() {
-                swiperefresh.setRefreshing(true);
-            }
-        });
+        Log.e(TAG, "onResume:111111111111111111111111111111111111111111111111111111111111111111");
+        swiperefresh.setRefreshing(true);
+        adapter.clear();
+        pageIndex = 1;
+        LoadFromServer(pageIndex);
+        swiperefresh.setRefreshing(false);
     }
 
     private void setListView(JSONObject res) {
@@ -182,7 +179,8 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                         , resJson.getString("content")
                         , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
                         , resJson.getString("shuserid")
-                        , resJson.isNull("label") ? "" : resJson.getString("label"));
+                        , resJson.isNull("label") ? "" : resJson.getString("label")
+                        , resJson.getString("target"));
 
             }
             adapter.notifyDataSetChanged();
@@ -193,11 +191,12 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
 
     @Override
     public void onRefresh() {
+        Log.e(TAG, "onRefresh: onRefreshonRefreshonRefresh onRefresh" );
         adapter.clear();
         pageIndex = 1;
-        Log.i("onRefresh", "log");
         LoadFromServer(pageIndex);
         swiperefresh.setRefreshing(false);
 
     }
+
 }

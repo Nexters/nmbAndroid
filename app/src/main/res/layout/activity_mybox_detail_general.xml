@@ -61,7 +61,7 @@
                 android:layout_marginTop="13dp"
                 android:background="@drawable/radius_rect_e13867_fill_white"
                 android:gravity="center"
-                android:text="메세지 전달하기"
+                android:text="서운한 티내기"
                 android:textColor="@color/darkish_pink"
                 android:textSize="14sp"
                 android:textStyle="bold" />

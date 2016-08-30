@@ -43,4 +43,14 @@ public class FriendListItem implements Serializable {
     public void setChecked(boolean checked) {
         isChecked = checked;
     }
+
+    @Override
+    public String toString() {
+        return "FriendListItem{" +
+                "img_profile_img='" + img_profile_img + '\'' +
+                ", txt_friends_name='" + txt_friends_name + '\'' +
+                ", friend_id='" + friend_id + '\'' +
+                ", isChecked=" + isChecked +
+                '}';
+    }
 }

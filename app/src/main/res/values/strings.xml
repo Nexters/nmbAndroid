@@ -41,6 +41,6 @@ limitations under the License.\n
         </p>
     </string>
     <string name="facebook_app_id">120079971771528</string>
-    <string name="dialog_msg">마음넓은 전한경님께 함께보기를 요청하고 서운함을 해결하세요!</string>
+    <string name="dialog_msg">함께보며 서운함을 해결해 보는건 어떨까요?</string>
     <string name="please_wait">해당 기능은 준비중입니다. 조금만 기다려주세요 ^^</string>
 </resources>

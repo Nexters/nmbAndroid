@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.listItem.FriendListItem;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
@@ -39,7 +40,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     private Dialog dialog_save_or_send;
     private EditText edit_content, edit_title;
     private ActionBar actionBar;
-    private ImageView btn_actionbar_goto_list, btn_actionbar_send, btn_actionbar_back;
+    private ImageView btn_actionbar_goto_list, btn_actionbar_send, btn_actionbar_back, img_add_friends, img_choice_date;
     private SPreference pref;
     private static final String TAG = WriteActivity.class.getSimpleName();
     String targetDate = "";
@@ -59,6 +60,9 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         btn_choice_date = (RelativeLayout) findViewById(R.id.btn_choice_date);
         edit_title = (EditText) findViewById(R.id.edit_title);
         edit_content = (EditText) findViewById(R.id.edit_content);
+
+        img_add_friends = (ImageView) findViewById(R.id.img_add_friends);
+        img_choice_date = (ImageView) findViewById(R.id.img_choice_date);
 
         //보내기 다이얼로그
         dialog_save_or_send = new Dialog(WriteActivity.this, R.style.dialogStyle);
@@ -139,11 +143,13 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            Log.d(TAG, "onActivityResult() called with: " + "requestCode = [" + requestCode + "], resultCode = [" + resultCode + "], data = [" + data + "]");
+            Log.e(TAG, "onActivityResult() called with: " + "requestCode = [" + requestCode + "], resultCode = [" + resultCode + "], data = [" + data + "]");
         }
         if (resultCode == RESULT_OK) {
             if (requestCode == Const.INTENT_FRIENDS_LIST_CODE) {
                 item = (FriendListItem) data.getSerializableExtra(Const.FRIENDS_DATA);
+                Log.e(TAG, "onActivityResult: item : " + item.toString());
+                Glide.with(WriteActivity.this).load(R.drawable.friends_icon_ex).into(img_add_friends);
             }
         }
     }
@@ -158,11 +164,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
             if (TextUtils.isEmpty(item.getFriend_id()) || TextUtils.isEmpty(item.getTxt_friends_name())) {
                 Toast.makeText(WriteActivity.this, "친구를 선택해주세요.", Toast.LENGTH_SHORT).show();
                 return;
-            }else{
-                params.put("shuserid", item.getFriend_id());//친구 아이디 넣어야행
-                params.put("label", item.getTxt_friends_name());//친구이름
             }
-
         } else {//서버에만 저장할때
             params.put("status", Const.GENERAL_BOX);
         }
@@ -177,7 +179,9 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         }
         params.put("content", edit_content.getText().toString());
         params.put("target", targetDate);
-        Log.e(TAG, "sendContent: " + params.toString());
+        params.put("shuserid", item.getFriend_id());//친구 아이디 넣어야행
+        params.put("label", item.getTxt_friends_name());//친구이름
+        Log.e(TAG, "updateContent: " + params.toString());
         postReq(URL_Define.WRITE, params, new ConnHttpResponseHandler() {
 
             @Override
@@ -187,7 +191,6 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
 
                 try {
                     if (statusCode == 200 && res.getString("result").equals("success")) {
-                        startActivity(new Intent(WriteActivity.this, MyboxActivity.class));
                         finish();
                     }
                 } catch (JSONException e) {
@@ -200,7 +203,6 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
                 super.onFailure(statusCode, headers, t, res);
                 try {
                     if (statusCode == 200 || res.getString("result").equals("success")) {
-                        startActivity(new Intent(WriteActivity.this, MyboxActivity.class));
                         finish();
                     }
                 } catch (JSONException e) {
@@ -246,6 +248,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
                 + day;
 
         dateTextView.setText(date);
+        Glide.with(WriteActivity.this).load(R.drawable.date_icon_ex).into(img_choice_date);
     }
 
 

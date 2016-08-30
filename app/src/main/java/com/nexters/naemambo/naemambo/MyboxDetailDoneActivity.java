@@ -22,7 +22,7 @@ public class MyboxDetailDoneActivity extends BaseActivity {
 
     private TextView text_done_subject, text_done_content, text_target_date;
     private static final String TAG = MyboxDetailDoneActivity.class.getSimpleName();
-    private String fromTo = "From ";
+    private String fromTo = "To ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,7 @@ public class MyboxDetailDoneActivity extends BaseActivity {
         } else {
             text_done_subject.setVisibility(View.GONE);
         }
-        if (intent.getBooleanExtra(Const.SEND_BY_ME, false)) {
-            fromTo = "To ";
-        } else {
-            fromTo = "From ";
-        }
+
         text_done_content.setText(item.content);
         text_target_date.setText(item.date);
         new GraphRequest(

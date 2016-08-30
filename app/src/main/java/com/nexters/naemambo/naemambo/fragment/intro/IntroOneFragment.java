@@ -28,7 +28,7 @@ public class IntroOneFragment extends Fragment {
         ImageView tutorial_intro_01 = (ImageView) rootView.findViewById(R.id.img_tutorial);
 //        TextView btn_tutorial_next = (TextView) rootView.findViewById(R.id.btn_tutorial_next);
 
-        Glide.with(getContext()).load(R.drawable.tutorial_1).into(tutorial_intro_01);
+        Glide.with(getContext()).load(R.drawable.tutorial_01).into(tutorial_intro_01);
 
 //        viewPager = (ViewPager) getActivity().findViewById(R.id.tutorial_pager);
 //        btn_tutorial_next.setOnClickListener(new View.OnClickListener() {

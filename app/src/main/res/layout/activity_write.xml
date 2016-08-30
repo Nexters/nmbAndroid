@@ -35,6 +35,7 @@
                     android:background="#ffffff">
 
                     <ImageView
+                        android:id="@+id/img_add_friends"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_centerHorizontal="true"
@@ -52,6 +53,7 @@
                     android:background="#ffffff">
 
                     <ImageView
+                        android:id="@+id/img_choice_date"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_centerHorizontal="true"

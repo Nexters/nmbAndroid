@@ -53,8 +53,7 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
         }
         listView = (ListView) findViewById(R.id.friends_listview);
         txt_count_friends = (TextView) findViewById(R.id.txt_count_friends);
-        adapter = new FriendsAdapter(FriendListActivity.this, R.layout.friend_list_item, true);
-        listView.setAdapter(adapter);
+
 
         action_bar_write_title.setText("친구 목록");
         new GraphRequest(
@@ -68,6 +67,8 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
                             Log.e(TAG, "facebook res tostring" + response.toString());
                             friendslist = response.getJSONObject().getJSONArray("data");
                             FriendListItem item;
+                            adapter = new FriendsAdapter(FriendListActivity.this, R.layout.friend_list_item, true, friendslist.length());
+                            listView.setAdapter(adapter);
                             for (int i = 0; i < friendslist.length(); i++) {
                                 JSONObject resJson = friendslist.getJSONObject(i);
                                 Log.e(TAG, "onCompleted: resJson  : " + resJson.toString());
@@ -78,7 +79,6 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
                                 adapter.add(item);
                             }
                             adapter.notifyDataSetChanged();
-
                             Log.e(TAG, "onCompleted: count : " + adapter.getCount());
                             txt_count_friends.setText(adapter.getCount() + "");
                         } catch (Exception e) {
@@ -102,7 +102,6 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
                 } else {
                     item.setChecked(false);
                     flag = true;
-
                 }
                 Log.e(TAG, "onItemClick: item : " + item.isChecked());
                 adapter.notifyDataSetChanged();
@@ -132,7 +131,7 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
         if (adapter.getCheckCount() == 0) {
             Toast.makeText(FriendListActivity.this, "친구를 선택해주세요.", Toast.LENGTH_SHORT).show();
             return;
-        } else if (adapter.getCheckCount() > 3) {
+        } else if (adapter.getCheckCount() != 0) {
             Toast.makeText(FriendListActivity.this, "친구를 한명만 선택해주세요.", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < adapter.getCount(); i++) {
                 adapter.getItem(i).setChecked(false);
@@ -140,7 +139,8 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
             adapter.notifyDataSetChanged();
             return;
         } else {
-            Log.e(TAG, "selectFriends: ok111111111111111" );
+            FriendListItem item = (FriendListItem) intent.getSerializableExtra(Const.FRIENDS_DATA);
+            Log.e(TAG, "selectFriends: ok111111111111111 : " + item.toString());
             setResult(RESULT_OK, intent);
             finish();
         }

@@ -75,13 +75,13 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int boxType = adapter.getItem(position).boxType;
                 if (boxType == Const.GENERAL_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)).putExtra(Const.SEND_BY_ME,true));
+                    startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
                 } else if (boxType == Const.LOCK_BOX) {
                     startActivity(new Intent(getContext(), MySentLockBoxDetailActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
                 } else if (boxType == Const.DONE_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)).putExtra(Const.SEND_BY_ME,true));
+                    startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)));
                 } else if (boxType == Const.SHARE_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailShareActivity.class).putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position)).putExtra(Const.SEND_BY_ME,true));
+                    startActivity(new Intent(getContext(), MyboxDetailShareActivity.class).putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position)));
                 }
             }
         });
@@ -115,6 +115,7 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
                 super.onSuccess(statusCode, headers, res);
                 Log.d(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
                 setListView(res);
+                my_send_swiperefresh.setRefreshing(false);
             }
 
             @Override
@@ -133,13 +134,11 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
     @Override
     public void onResume() {
         super.onResume();
-        Log.e(TAG, "onResume: 22222222" );
-        my_send_swiperefresh.post(new Runnable() {
-            @Override
-            public void run() {
-                my_send_swiperefresh.setRefreshing(true);
-            }
-        });
+        my_send_swiperefresh.setRefreshing(true);
+        adapter.clear();
+        pageIndex = 1;
+        LoadFromServer(pageIndex);
+        my_send_swiperefresh.setRefreshing(false);
     }
 
     private void setListView(JSONObject res) {
@@ -161,7 +160,8 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
                         , resJson.getString("content")
                         , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
                         , resJson.getString("shuserid")
-                        , resJson.isNull("label") ? "" : resJson.getString("label"));
+                        , resJson.isNull("label") ? "" : resJson.getString("label")
+                        , resJson.getString("target"));
             }
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {
@@ -172,6 +172,7 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
 
     @Override
     public void onRefresh() {
+        Log.e(TAG, "onRefresh: onRefreshonRefreshonRefresh onRefresh");
         adapter.clear();
         pageIndex = 1;
         LoadFromServer(pageIndex);

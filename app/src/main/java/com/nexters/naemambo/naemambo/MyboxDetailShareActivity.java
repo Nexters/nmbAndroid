@@ -25,7 +25,7 @@ public class MyboxDetailShareActivity extends BaseActivity implements View.OnCli
     private static final String TAG = MyboxDetailShareActivity.class.getSimpleName();
     private MessageItem item;
     private Dialog dialog;
-    private String fromTo = "From ";
+    private String fromTo = "To ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +51,6 @@ public class MyboxDetailShareActivity extends BaseActivity implements View.OnCli
             text_share_subject.setText(item.subject);
         } else {
             text_share_subject.setVisibility(View.GONE);
-        }
-
-        if (intent.getBooleanExtra(Const.SEND_BY_ME, false)) {
-            fromTo = "To ";
-        } else {
-            fromTo = "From ";
         }
 
         new GraphRequest(

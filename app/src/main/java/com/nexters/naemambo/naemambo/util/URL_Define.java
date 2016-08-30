@@ -15,5 +15,6 @@ public class URL_Define {
     public static final String SIGNUP = BASE_URL + "user/";
     public static final String UPDATE_BOX_STATUS = BASE_URL + "box/";
     public static final String DELETE_BOX = BASE_URL + "box/";
+    public static final String UPDATE_BOX = BASE_URL + "box/";
 
 }

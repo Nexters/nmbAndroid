@@ -28,14 +28,16 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
 
     private ActionBar actionBar;
     private ImageView btn_actionbar_back, btn_actionbar_delete;
-    private TextView action_bar_write_title, btn_delete_yes, btn_delete_no, text_target_date;
+    private TextView action_bar_write_title, btn_delete_yes, btn_delete_no, text_target_date, btn_detail_send_box;
     private Dialog deleteDialog;
     private MessageItem item;
     private static final String TAG = MyboxDetailGeneralActivity.class.getSimpleName();
     private long backKeyPressedTime = 0;
     private Toast toast;
     private EditText edit_share_content, edit_share_subject;
-    private String fromTo ="From ";
+    private String fromTo = "To ";
+    private Dialog dialog_hope_msg;
+    private TextView btn_hope_msg, txt_msg_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +48,6 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
 
         Log.e(TAG, "onCreate: kjdklfjdkl");
         initView(item);
-        if (intent.getBooleanExtra(Const.SEND_BY_ME, false)) {
-            fromTo = "To ";
-        } else {
-            fromTo = "From ";
-        }
     }
 
     private void initView(MessageItem item) {
@@ -71,14 +68,22 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
             btn_actionbar_delete.setOnClickListener(this);
         }
 
+        dialog_hope_msg = new Dialog(MyboxDetailGeneralActivity.this, R.style.dialogStyle);
+        dialog_hope_msg.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog_hope_msg.setContentView(R.layout.dialog_hope_msg);
+        txt_msg_content = (TextView) dialog_hope_msg.findViewById(R.id.txt_msg_content);
+        btn_hope_msg = (TextView) dialog_hope_msg.findViewById(R.id.btn_hope_msg);
 
         edit_share_subject = (EditText) findViewById(R.id.edit_share_subject);
         edit_share_content = (EditText) findViewById(R.id.edit_share_content);
         text_target_date = (TextView) findViewById(R.id.text_target_date);
+        btn_detail_send_box = (TextView) findViewById(R.id.btn_detail_send_box);
 
         edit_share_subject.setText(item.subject);
         edit_share_content.setText(item.content);
         text_target_date.setText(item.date);
+        txt_msg_content.setText("서운한 티내볼까요?");
+        btn_hope_msg.setText("네, 하고싶어요");
 
         deleteDialog = new Dialog(MyboxDetailGeneralActivity.this, R.style.dialogStyle);
         deleteDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -86,16 +91,16 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
         btn_delete_no = (TextView) deleteDialog.findViewById(R.id.btn_delete_no);
         btn_delete_yes = (TextView) deleteDialog.findViewById(R.id.btn_delete_yes);
 
-
-
         /*     dialog_save_or_send = new Dialog(WriteActivity.this, R.style.dialogStyle);
         dialog_save_or_send.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog_save_or_send.setContentView(R.layout.dialog_send_or_save);
         * */
-        btn_delete_yes.setOnClickListener(this);
+        btn_hope_msg.setOnClickListener(this);
         btn_delete_no.setOnClickListener(this);
+        btn_delete_yes.setOnClickListener(this);
         edit_share_subject.setOnClickListener(this);
         edit_share_content.setOnClickListener(this);
+        btn_detail_send_box.setOnClickListener(this);
     }
 
     @Override
@@ -122,8 +127,13 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
             case R.id.btn_delete_no:
                 deleteDialog.dismiss();
                 break;
-
-
+            case R.id.btn_detail_send_box:
+                dialog_hope_msg.show();
+                break;
+            case R.id.btn_hope_msg:
+                dialog_hope_msg.dismiss();
+                updateBoxStatus(1, item.boxNo);
+                break;
         }
     }
 
@@ -138,7 +148,6 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
             showGuide();
@@ -146,7 +155,7 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
         }
         if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
             //서버에 저장하며 종료
-            sendContent(edit_share_subject.getText().toString(), edit_share_content.getText().toString());
+            updateContent(edit_share_subject.getText().toString(), edit_share_content.getText().toString(), item.boxNo);
             toast.cancel();
         }
     }
@@ -157,7 +166,7 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
         toast.show();
     }
 
-    public void sendContent(String title, String content) {
+    public void updateContent(String title, String content, int boxId) {
         RequestParams params = new RequestParams();
         if (content.isEmpty()) {
             Toast.makeText(getApplicationContext(), "무엇이 서운했나요? 내용을 적어주세요.", Toast.LENGTH_SHORT).show();
@@ -165,19 +174,19 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
         }
         params.put("title", title);
         params.put("content", content);
-        Log.e(TAG, "sendContent: " + params.toString());
-        postReq(URL_Define.WRITE, params, new ConnHttpResponseHandler() {
+        params.put("boxno", boxId);
+        params.put("target", item.target);
+        params.put("shuserid", item.shuserid);//친구 아이디 넣어야행
+        params.put("label", item.name);//친구이름
+        Log.e(TAG, "updateContent: " + params.toString());
+        postReq(URL_Define.UPDATE_BOX, params, new ConnHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
                 Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "],  res = [" + res + "]");
-                try {
-                    if (statusCode == 200 && res.getString("result").equals("success")) {
-                        finish();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (statusCode == 200) {
+                    finish();
                 }
             }
 

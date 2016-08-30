@@ -15,6 +15,7 @@
             android:layout_height="73.3dp">
 
             <TextView
+                android:id="@+id/txt_msg_content"
                 android:layout_width="match_parent"
                 android:layout_height="73.3dp"
                 android:background="#FFFFFF"

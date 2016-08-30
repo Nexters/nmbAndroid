@@ -15,6 +15,8 @@ import com.nexters.naemambo.naemambo.R;
 import com.nexters.naemambo.naemambo.listItem.FriendListItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -24,7 +26,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
     private Context mContext = null;
     private LayoutInflater inflater = null;
-    private ArrayList<Integer> checkedList = new ArrayList<>();
+    private ArrayList<Integer> checkedList;
     private boolean chk_friends_visible;
 
     public FriendsAdapter(Context context, int resource, boolean chk_friends_visible) {
@@ -34,9 +36,16 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
         this.chk_friends_visible = chk_friends_visible;
     }
 
+    public FriendsAdapter(Context context, int resource, boolean chk_friends_visible, int list) {
+        super(context, resource);
+        this.mContext = context;
+        this.inflater = LayoutInflater.from(context);
+        this.chk_friends_visible = chk_friends_visible;
+        this.checkedList = new ArrayList<>();
+    }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         CustomViewHolder holder = null;
         if (convertView == null) {
             holder = new CustomViewHolder();
@@ -63,12 +72,11 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    checkedList.add(position, 1);
-                    item.setChecked(true);
+                    checkedList.add(position);
                 } else {
-                    checkedList.remove(position);
-                    item.setChecked(false);
+                    checkedList.clear();
                 }
+
             }
         });
         if (chk_friends_visible) {
@@ -76,6 +84,7 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
         } else {
             holder.chk_friends.setVisibility(View.INVISIBLE);
         }
+
         return convertView;
     }
 
@@ -88,13 +97,12 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
         public ImageView img_profile_img;
         public TextView txt_friends_name;
         public CheckBox chk_friends;
+
     }
 
     public int getCheckCount() {
         return checkedList.size();
     }
 
-    public ArrayList<Integer> getCheckedList() {
-        return checkedList;
-    }
+
 }
