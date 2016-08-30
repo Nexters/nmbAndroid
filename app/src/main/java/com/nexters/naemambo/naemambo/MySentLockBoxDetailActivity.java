@@ -42,7 +42,7 @@ public class MySentLockBoxDetailActivity extends BaseActivity {
                         Log.e(TAG, "onCompleted: " + response.toString());
                         JSONObject resJson = response.getJSONObject();
                         try {
-                            setActionBarConfig(resJson.isNull("name") ? "" :"With "+ resJson.getString("name"), 8);
+                            setActionBarConfig(resJson.isNull("name") ? "" :"To "+ resJson.getString("name"), 8);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

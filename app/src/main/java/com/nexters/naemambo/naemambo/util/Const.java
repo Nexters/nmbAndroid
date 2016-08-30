@@ -24,4 +24,6 @@ public class Const {
 
     public static final String JSESSIONID = "jsessonid";
     public static final String FRIENDS_DATA = "friends_data";
+
+    public static final String SEND_BY_ME = "send_by_me";
 }

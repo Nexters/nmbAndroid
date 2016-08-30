@@ -20,10 +20,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/text_target_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="2016.08.01"
+                android:textColor="#ec407a"
+                android:textSize="14sp" />
+
+            <TextView
                 android:id="@+id/text_done_subject"
                 android:layout_width="match_parent"
                 android:layout_height="36.7dp"
-                android:layout_marginTop="13.7dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
                 android:paddingLeft="22dp"

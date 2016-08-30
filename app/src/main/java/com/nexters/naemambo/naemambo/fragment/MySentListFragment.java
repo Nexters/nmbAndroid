@@ -13,10 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.MySentLockBoxDetailActivity;
 import com.nexters.naemambo.naemambo.MyboxDetailDoneActivity;
@@ -51,7 +47,7 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
     private static final String TAG = MySentListFragment.class.getSimpleName();
     private SimpleDateFormat sdfCurrent;
     private TextView txt_empty_box;
-    private SwipeRefreshLayout swiperefresh;
+    private SwipeRefreshLayout my_send_swiperefresh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
@@ -60,9 +56,9 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
         View view = inflater.inflate(R.layout.fragment_my_send, container, false);
         adapter = new MessageAdapter(getContext(), R.layout.message_list_item);
         mySendListView = (ListView) view.findViewById(R.id.my_send_listview);
-        swiperefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        my_send_swiperefresh = (SwipeRefreshLayout) view.findViewById(R.id.my_send_swiperefresh);
         mySendListView.setAdapter(adapter);
-        swiperefresh.setOnRefreshListener(this);
+        my_send_swiperefresh.setOnRefreshListener(this);
         LoadFromServer(pageIndex);
 
         txt_empty_box = (TextView) view.findViewById(R.id.txt_empty_box);
@@ -79,13 +75,13 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int boxType = adapter.getItem(position).boxType;
                 if (boxType == Const.GENERAL_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
+                    startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)).putExtra(Const.SEND_BY_ME,true));
                 } else if (boxType == Const.LOCK_BOX) {
                     startActivity(new Intent(getContext(), MySentLockBoxDetailActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
                 } else if (boxType == Const.DONE_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)));
+                    startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)).putExtra(Const.SEND_BY_ME,true));
                 } else if (boxType == Const.SHARE_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailShareActivity.class).putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position)));
+                    startActivity(new Intent(getContext(), MyboxDetailShareActivity.class).putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position)).putExtra(Const.SEND_BY_ME,true));
                 }
             }
         });
@@ -134,27 +130,16 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
 
     }
 
-    /**
-     * 서버 수정해야해...... 이름을 getView에서 요청하다니...
-     *
-     * @param json
-     * @throws JSONException
-     */
-    private void facebookNameReq(JSONObject json) throws JSONException {
-        GraphRequest request = new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/" + json.getString("shuserid"),
-                null,
-                HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
-                        Log.e(TAG, "onCompleted: " + response.toString());
-
-                    }
-                }
-        );
-        request.setGraphPath("/" + json.getString("shuserid"));
-        request.executeAsync();
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: 22222222" );
+        my_send_swiperefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                my_send_swiperefresh.setRefreshing(true);
+            }
+        });
     }
 
     private void setListView(JSONObject res) {
@@ -169,9 +154,9 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
             }
             for (int i = 0; i < array.length(); i++) {
                 JSONObject resJson = (JSONObject) array.get(i);
-                facebookNameReq(resJson);
                 addItem(adapter
                         , resJson.getInt("status")
+                        , resJson.getInt("boxno")
                         , resJson.getString("title")
                         , resJson.getString("content")
                         , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
@@ -190,6 +175,6 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
         adapter.clear();
         pageIndex = 1;
         LoadFromServer(pageIndex);
-        swiperefresh.setRefreshing(false);
+        my_send_swiperefresh.setRefreshing(false);
     }
 }

@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.nexters.naemambo.naemambo.adapter.MyPagerAdapter;
-import com.nexters.naemambo.naemambo.fragment.IntroFiveFragment;
-import com.nexters.naemambo.naemambo.fragment.IntroFourFragment;
-import com.nexters.naemambo.naemambo.fragment.IntroOneFragment;
-import com.nexters.naemambo.naemambo.fragment.IntroThreeFragment;
-import com.nexters.naemambo.naemambo.fragment.IntroTwoFragment;
+import com.nexters.naemambo.naemambo.fragment.intro.IntroFiveFragment;
+import com.nexters.naemambo.naemambo.fragment.intro.IntroFourFragment;
+import com.nexters.naemambo.naemambo.fragment.intro.IntroOneFragment;
+import com.nexters.naemambo.naemambo.fragment.intro.IntroThreeFragment;
+import com.nexters.naemambo.naemambo.fragment.intro.IntroTwoFragment;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
 
 /**

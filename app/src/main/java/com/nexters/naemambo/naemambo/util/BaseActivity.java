@@ -12,25 +12,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.login.LoginManager;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.LoginActivity;
+import com.nexters.naemambo.naemambo.MyboxActivity;
 import com.nexters.naemambo.naemambo.R;
+import com.nexters.naemambo.naemambo.listItem.FriendListItem;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.cookie.Cookie;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.util.TextUtils;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -81,11 +76,57 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void deleteBox() {
-//        deleteJson();
+    /**
+     * 박스 삭제
+     */
+    public void deleteBox(int id) {
+        deleteJson(URL_Define.DELETE_BOX + id, new ConnHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                super.onSuccess(statusCode, headers, res);
+                Log.d(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], res = [" + res + "]");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
+                super.onFailure(statusCode, headers, t, res);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
+                super.onFailure(statusCode, headers, responseString, t);
+            }
+        });
     }
+
+
+
+    public void updateBoxStatus(int status, int boxNo) {
+        RequestParams object = new RequestParams();
+        object.put("status", status);
+        postReq(URL_Define.UPDATE_BOX_STATUS + boxNo + "/status", object, new ConnHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                super.onSuccess(statusCode, headers, res);
+                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], res = [" + res + "]");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
+                super.onFailure(statusCode, headers, t, res);
+                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "]");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
+                super.onFailure(statusCode, headers, responseString, t);
+                Log.e(TAG, "onFailure: statusCode : " + statusCode);
+            }
+        });
+    }
+
     private void sessionExpire(String sessionId) {
-        if(TextUtils.isEmpty(sessionId)){
+        if (TextUtils.isEmpty(sessionId)) {
             new AlertDialog.Builder(BaseActivity.this)
                     .setMessage("세션이 만료 되었습니다. 로그인 화면으로 이동합니다.")
                     .setCancelable(false)
@@ -97,6 +138,7 @@ public class BaseActivity extends AppCompatActivity {
                     });
         }
     }
+
     public class ConnHttpResponseHandler extends JsonHttpResponseHandler {
         String sessionId = pref.getString(Const.JSESSIONID, "");
 
@@ -153,7 +195,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void postReq(String url, RequestParams params, ConnHttpResponseHandler responseHandler) {
         String sessionId = pref.getString(Const.JSESSIONID, "");
-        Log.e(TAG, "getReq: Seesion did  " + sessionId);
+        Log.e(TAG, "postReq: Seesion did  " + sessionId);
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);
@@ -196,6 +238,20 @@ public class BaseActivity extends AppCompatActivity {
             Log.e(TAG, "JSESSIONID is empty");
         }
         client.delete(getApplicationContext(), url, entity, "application/json", responseHandler);
+    }
+
+    public void deleteJson(String url, ConnHttpResponseHandler responseHandler) {
+        String string = pref.getString(Const.JSESSIONID, "");
+        client.setTimeout(20000);
+        client.setResponseTimeout(20000);
+        client.setConnectTimeout(20000);
+        client.setLoggingEnabled(true);
+        if (!TextUtils.isEmpty(string)) {
+            client.addHeader("cookie", string);
+        } else {
+            Log.e(TAG, "JSESSIONID is empty");
+        }
+        client.delete(getApplicationContext(), url, responseHandler);
     }
 
     public void putRequest(String url, JSONObject jsonObject, ConnHttpResponseHandler responseHandler) {

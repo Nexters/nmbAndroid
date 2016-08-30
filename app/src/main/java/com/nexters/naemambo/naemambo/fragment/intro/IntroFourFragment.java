@@ -1,14 +1,12 @@
-package com.nexters.naemambo.naemambo.fragment;
+package com.nexters.naemambo.naemambo.fragment.intro;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nexters.naemambo.naemambo.R;
@@ -17,10 +15,10 @@ import com.nexters.naemambo.naemambo.util.BaseFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class IntroTwoFragment extends BaseFragment {
+public class IntroFourFragment extends BaseFragment {
 
 
-    public IntroTwoFragment() {
+    public IntroFourFragment() {
         // Required empty public constructor
     }
 
@@ -32,7 +30,7 @@ public class IntroTwoFragment extends BaseFragment {
 
         ImageView tutorial_intro = (ImageView) rootView.findViewById(R.id.img_tutorial);
 
-        Glide.with(getContext()).load(R.drawable.tutorial_02).into(tutorial_intro);
+        Glide.with(getContext()).load(R.drawable.tutorial_04).into(tutorial_intro);
 
         return rootView;
     }
