@@ -4,16 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -21,13 +14,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.LoginActivity;
-import com.nexters.naemambo.naemambo.MyboxDetailDoneActivity;
-import com.nexters.naemambo.naemambo.MyboxDetailGeneralActivity;
-import com.nexters.naemambo.naemambo.MyboxDetailShareActivity;
-import com.nexters.naemambo.naemambo.R;
 import com.nexters.naemambo.naemambo.listItem.MessageItem;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -153,7 +141,7 @@ public class BaseFragment extends Fragment {
     public void updateBoxStatus(int status, int boxNo) {
         RequestParams params = new RequestParams();
         params.put("status", status);
-        postReq(URL_Define.MODIFY_BOX_STATUS + boxNo + "/status", params, new ConnHttpResponseHandler() {
+        postReq(URL_Define.UPDATE_BOX_STATUS + boxNo + "/status", params, new ConnHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);

@@ -13,6 +13,7 @@ public class URL_Define {
     public static final String LOGIN = BASE_URL + "auth/login";
     public static final String LOGOUT = BASE_URL + "auth/logout";
     public static final String SIGNUP = BASE_URL + "user/";
-    public static final String MODIFY_BOX_STATUS = BASE_URL + "box/";
+    public static final String UPDATE_BOX_STATUS = BASE_URL + "box/";
+    public static final String DELETE_BOX = BASE_URL + "box/";
 
 }

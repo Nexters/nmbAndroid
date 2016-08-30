@@ -134,6 +134,13 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: 22222222" );
+        swiperefresh.setRefreshing(true);
+    }
+
     private void setListView(JSONObject res) {
         Log.e(TAG, "setListView: ");
         try {

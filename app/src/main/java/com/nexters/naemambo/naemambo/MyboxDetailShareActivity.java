@@ -38,8 +38,8 @@ public class MyboxDetailShareActivity extends BaseActivity implements View.OnCli
         btn_really_solved = (TextView) dialog.findViewById(R.id.btn_really_solved);
 
         Intent intent = getIntent();
-        text_share_subject = (TextView) findViewById(R.id.text_share_subject);
-        text_share_content = (TextView) findViewById(R.id.text_share_content);
+        text_share_subject = (TextView) findViewById(R.id.edit_share_subject);
+        text_share_content = (TextView) findViewById(R.id.edit_share_content);
 
         item = (MessageItem) intent.getSerializableExtra(Const.BOX_DETAIL_SHARE);
         text_share_content.setText(item.content);
