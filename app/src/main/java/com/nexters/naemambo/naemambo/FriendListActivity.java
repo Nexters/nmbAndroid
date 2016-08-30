@@ -131,7 +131,7 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
         if (adapter.getCheckCount() == 0) {
             Toast.makeText(FriendListActivity.this, "친구를 선택해주세요.", Toast.LENGTH_SHORT).show();
             return;
-        } else if (adapter.getCheckCount() != 0) {
+        } else if (adapter.getCheckCount() > 1) {
             Toast.makeText(FriendListActivity.this, "친구를 한명만 선택해주세요.", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < adapter.getCount(); i++) {
                 adapter.getItem(i).setChecked(false);
