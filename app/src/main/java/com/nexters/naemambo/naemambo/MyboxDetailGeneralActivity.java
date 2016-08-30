@@ -28,24 +28,29 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
 
     private ActionBar actionBar;
     private ImageView btn_actionbar_back, btn_actionbar_delete;
-    private TextView action_bar_write_title, btn_delete_yes, btn_delete_no;
+    private TextView action_bar_write_title, btn_delete_yes, btn_delete_no, text_target_date;
     private Dialog deleteDialog;
     private MessageItem item;
     private static final String TAG = MyboxDetailGeneralActivity.class.getSimpleName();
     private long backKeyPressedTime = 0;
     private Toast toast;
     private EditText edit_share_content, edit_share_subject;
+    private String fromTo ="From ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mybox_detail_general);
-        Intent i = getIntent();
-        item = (MessageItem) i.getSerializableExtra(Const.BOX_DETAIL_GENERAL);
+        Intent intent = getIntent();
+        item = (MessageItem) intent.getSerializableExtra(Const.BOX_DETAIL_GENERAL);
 
         Log.e(TAG, "onCreate: kjdklfjdkl");
         initView(item);
-
+        if (intent.getBooleanExtra(Const.SEND_BY_ME, false)) {
+            fromTo = "To ";
+        } else {
+            fromTo = "From ";
+        }
     }
 
     private void initView(MessageItem item) {
@@ -61,7 +66,7 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
             action_bar_write_title = (TextView) actionBar.getCustomView().findViewById(R.id.action_bar_write_title);
             btn_actionbar_delete = (ImageView) actionBar.getCustomView().findViewById(R.id.btn_actionbar_delete);
 
-            action_bar_write_title.setText("To " + item.name);
+            action_bar_write_title.setText(fromTo + item.name);
             btn_actionbar_back.setOnClickListener(this);
             btn_actionbar_delete.setOnClickListener(this);
         }
@@ -69,8 +74,11 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
 
         edit_share_subject = (EditText) findViewById(R.id.edit_share_subject);
         edit_share_content = (EditText) findViewById(R.id.edit_share_content);
+        text_target_date = (TextView) findViewById(R.id.text_target_date);
+
         edit_share_subject.setText(item.subject);
         edit_share_content.setText(item.content);
+        text_target_date.setText(item.date);
 
         deleteDialog = new Dialog(MyboxDetailGeneralActivity.this, R.style.dialogStyle);
         deleteDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -163,7 +171,7 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
-                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "],  res = [" + res + "]");
                 try {
                     if (statusCode == 200 && res.getString("result").equals("success")) {
                         finish();
@@ -177,14 +185,14 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
             public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
                 super.onFailure(statusCode, headers, t, res);
                 finish();
-                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], t = [" + t + "], res = [" + res + "]");
+                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "],");
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
                 super.onFailure(statusCode, headers, responseString, t);
                 finish();
-                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], responseString = [" + responseString + "], t = [" + t + "]");
+                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "], ");
             }
         });
 

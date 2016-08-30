@@ -20,8 +20,9 @@ import org.json.JSONObject;
 
 public class MyboxDetailDoneActivity extends BaseActivity {
 
-    private TextView text_done_subject, text_done_content;
+    private TextView text_done_subject, text_done_content, text_target_date;
     private static final String TAG = MyboxDetailDoneActivity.class.getSimpleName();
+    private String fromTo = "From ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +31,21 @@ public class MyboxDetailDoneActivity extends BaseActivity {
         Intent intent = getIntent();
         text_done_subject = (TextView) findViewById(R.id.text_done_subject);
         text_done_content = (TextView) findViewById(R.id.text_done_content);
+        text_target_date = (TextView) findViewById(R.id.text_target_date);
 
         MessageItem item = (MessageItem) intent.getSerializableExtra(Const.BOX_DETAIL_DONE);
-        if(item.content!=null){
+        if (item.content != null) {
             text_done_subject.setText(item.subject);
-        }else {
+        } else {
             text_done_subject.setVisibility(View.GONE);
         }
-
+        if (intent.getBooleanExtra(Const.SEND_BY_ME, false)) {
+            fromTo = "To ";
+        } else {
+            fromTo = "From ";
+        }
         text_done_content.setText(item.content);
+        text_target_date.setText(item.date);
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 "/" + item.shuserid,
@@ -49,7 +56,7 @@ public class MyboxDetailDoneActivity extends BaseActivity {
                         Log.e(TAG, "onCompleted: " + response.toString());
                         JSONObject resJson = response.getJSONObject();
                         try {
-                            setActionBarConfig(resJson.isNull("name") ? "누군가로부터.." : resJson.getString("name") + "부터..", 8);
+                            setActionBarConfig(resJson.isNull("name") ? "누군가로부터.." : fromTo + resJson.getString("name"), 8);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

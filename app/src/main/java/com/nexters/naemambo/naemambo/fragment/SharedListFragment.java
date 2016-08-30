@@ -73,7 +73,11 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 int boxType = adapter.getItem(position).boxType;
                 if (boxType == Const.GENERAL_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
+
+                    startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class)
+                            .putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position))
+                            .putExtra(Const.SEND_BY_ME, false));
+
                 } else if (boxType == Const.LOCK_BOX) {
                     //잠금박스 같이보기 요청했을때 서버에 status(2) 변경 요청
                     dialog_hope_msg.show();
@@ -86,9 +90,15 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                         }
                     });
                 } else if (boxType == Const.DONE_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)));
+
+                    startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class)
+                            .putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position))
+                            .putExtra(Const.SEND_BY_ME, false));
                 } else if (boxType == Const.SHARE_BOX) {
-                    startActivity(new Intent(getContext(), MyboxDetailShareActivity.class).putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position)));
+
+                    startActivity(new Intent(getContext(), MyboxDetailShareActivity.class)
+                            .putExtra(Const.BOX_DETAIL_SHARE, adapter.getItem(position))
+                            .putExtra(Const.SEND_BY_ME, false));
                 }
             }
         });
@@ -139,6 +149,17 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        swiperefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                swiperefresh.setRefreshing(true);
+            }
+        });
     }
 
     private void setListView(JSONObject res) {

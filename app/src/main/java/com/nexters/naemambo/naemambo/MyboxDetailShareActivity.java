@@ -21,33 +21,44 @@ import org.json.JSONObject;
 
 public class MyboxDetailShareActivity extends BaseActivity implements View.OnClickListener {
 
-    private TextView btn_complete, text_share_subject, text_share_content, btn_really_solved;
+    private TextView btn_complete, text_share_subject, text_share_content, btn_really_solved, text_target_date;
     private static final String TAG = MyboxDetailShareActivity.class.getSimpleName();
     private MessageItem item;
     private Dialog dialog;
+    private String fromTo = "From ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mybox_detail_share);
-        btn_complete = (TextView) findViewById(R.id.btn_complete);
+        Intent intent = getIntent();
 
         dialog = new Dialog(MyboxDetailShareActivity.this);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.dialog_really_solved);
         btn_really_solved = (TextView) dialog.findViewById(R.id.btn_really_solved);
 
-        Intent intent = getIntent();
         text_share_subject = (TextView) findViewById(R.id.edit_share_subject);
         text_share_content = (TextView) findViewById(R.id.edit_share_content);
+        btn_complete = (TextView) findViewById(R.id.btn_complete);
+        text_target_date = (TextView) findViewById(R.id.text_target_date);
 
         item = (MessageItem) intent.getSerializableExtra(Const.BOX_DETAIL_SHARE);
+
         text_share_content.setText(item.content);
+        text_target_date.setText(item.date);
         if (item.content != null) {
             text_share_subject.setText(item.subject);
         } else {
             text_share_subject.setVisibility(View.GONE);
         }
+
+        if (intent.getBooleanExtra(Const.SEND_BY_ME, false)) {
+            fromTo = "To ";
+        } else {
+            fromTo = "From ";
+        }
+
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 "/" + item.shuserid,
@@ -58,7 +69,7 @@ public class MyboxDetailShareActivity extends BaseActivity implements View.OnCli
                         Log.e(TAG, "onCompleted: " + response.toString());
                         JSONObject resJson = response.getJSONObject();
                         try {
-                            setActionBarConfig(resJson.isNull("name") ? "누군가로부터.." : "From " + resJson.getString("name"), 8);
+                            setActionBarConfig(resJson.isNull("name") ? "누군가로부터.." : fromTo + resJson.getString("name"), 8);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

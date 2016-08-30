@@ -6,7 +6,7 @@
     tools:context=".fragment.MySentListFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefresh"
+        android:id="@+id/my_send_swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="13.3dp"
