@@ -39,9 +39,11 @@
         </RelativeLayout>
 
         <ImageView
+            android:id="@+id/img_new_message"
             android:layout_width="173.3dp"
             android:layout_height="42.5dp"
             android:layout_below="@+id/layout1"
+            android:visibility="gone"
             android:layout_centerHorizontal="true"
             android:src="@drawable/main_message" />
 

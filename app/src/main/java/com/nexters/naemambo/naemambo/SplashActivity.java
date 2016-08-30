@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.nexters.naemambo.naemambo.util.Const;
 import com.nexters.naemambo.naemambo.util.SPreference;
+
+import io.fabric.sdk.android.Fabric;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -20,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        Fabric.with(this, new Crashlytics());
         pref = new SPreference(SplashActivity.this);
 
         new Handler().postDelayed(new Runnable() {

@@ -8,42 +8,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.crashlytics.android.Crashlytics;
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.loopj.android.http.RequestParams;
 import com.nexters.naemambo.naemambo.util.BaseActivity;
-import com.nexters.naemambo.naemambo.util.Const;
 import com.nexters.naemambo.naemambo.util.URL_Define;
 
-import io.fabric.sdk.android.Fabric;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private ImageView img_main_box, btn_setting, btn_user, btn_write;
+    private ImageView img_main_box, btn_setting, btn_user, btn_write,img_new_message;
     private TextView txt_box_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //1. FriendListActivity에서 전역변수에 넣으면서 이것저것해봤는데 안되서 함수밖으로 나오질 않아서 ...
         requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         initView();
         LoadFromServer();
-        //2. 결국은 메인에서 intent로 넘겨서 FriendListActivity 왔더니 되가지고 버튼누르면 메인엑티비티에있는 값들 리스트에서 불러오게 했습니다.ㅠㅠㅠ
     }
 
     private void initView() {
@@ -57,10 +43,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_write = (ImageView) findViewById(R.id.btn_write);
         txt_box_count = (TextView) findViewById(R.id.txt_box_count);
         Glide.with(MainActivity.this)
-                .load(R.drawable.main_mybox)
-                .asGif()
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .load(R.drawable.box_count_zero)
+                .placeholder(R.drawable.box_count_zero)
+                .error(R.drawable.box_count_zero)
                 .into(img_main_box);
 
         btn_write.setOnClickListener(this);
@@ -83,7 +68,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 super.onSuccess(statusCode, headers, res);
                 Log.e(TAG, "onSuccess: res.toString : " + res.toString());
                 try {
-                    txt_box_count.setText(res.getJSONArray("resData").getJSONObject(0).getString("count"));
+                    int count = res.getJSONArray("resData").getJSONObject(0).getInt("count");
+                    txt_box_count.setText(count + "");
+                    if (count > 0) {
+                        Glide.with(MainActivity.this)
+                                .load(R.drawable.box_count_not_zero)
+                                .placeholder(R.drawable.box_count_not_zero)
+                                .error(R.drawable.box_count_not_zero)
+                                .into(img_main_box);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

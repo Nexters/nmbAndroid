@@ -1,4 +1,4 @@
-package com.nexters.naemambo.naemambo.fragment;
+package com.nexters.naemambo.naemambo.fragment.intro;
 
 
 import android.content.Intent;

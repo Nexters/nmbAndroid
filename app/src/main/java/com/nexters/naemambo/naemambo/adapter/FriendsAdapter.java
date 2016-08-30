@@ -1,7 +1,6 @@
 package com.nexters.naemambo.naemambo.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nexters.naemambo.naemambo.R;
 import com.nexters.naemambo.naemambo.listItem.FriendListItem;
-import com.nexters.naemambo.naemambo.util.SPreference;
 
 import java.util.ArrayList;
 
@@ -28,13 +25,13 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
     private Context mContext = null;
     private LayoutInflater inflater = null;
     private ArrayList<Integer> checkedList = new ArrayList<>();
-    private boolean chkVisibility;
+    private boolean chk_friends_visible;
 
-    public FriendsAdapter(Context context, int resource, boolean chkVisibility) {
+    public FriendsAdapter(Context context, int resource, boolean chk_friends_visible) {
         super(context, resource);
         this.mContext = context;
         this.inflater = LayoutInflater.from(context);
-        this.chkVisibility = chkVisibility;
+        this.chk_friends_visible = chk_friends_visible;
     }
 
 
@@ -55,11 +52,12 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
 
         Glide.with(getContext()).load(item.getImg_profile_img()).bitmapTransform(new CropCircleTransformation(mContext)).into(holder.img_profile_img);
         holder.txt_friends_name.setText(item.getTxt_friends_name());
-//        holder.chk_friends.setChecked(((ListView) parent).isItemChecked(position));
+
+        //리스트뷰에 있는 아이템클릭리스너 쓰려면 해줘야함
         holder.chk_friends.setClickable(false);
         holder.chk_friends.setFocusable(false);
-        holder.chk_friends.setChecked(item.isChecked());
 
+        holder.chk_friends.setChecked(item.isChecked());
 
         holder.chk_friends.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -73,7 +71,7 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
                 }
             }
         });
-        if (chkVisibility) {
+        if (chk_friends_visible) {
             holder.chk_friends.setVisibility(View.VISIBLE);
         } else {
             holder.chk_friends.setVisibility(View.INVISIBLE);

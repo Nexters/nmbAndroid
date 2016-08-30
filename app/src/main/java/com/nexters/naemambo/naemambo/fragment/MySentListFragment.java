@@ -134,29 +134,6 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
 
     }
 
-    /**
-     * 서버 수정해야해...... 이름을 getView에서 요청하다니...
-     *
-     * @param json
-     * @throws JSONException
-     */
-    private void facebookNameReq(JSONObject json) throws JSONException {
-        GraphRequest request = new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/" + json.getString("shuserid"),
-                null,
-                HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
-                        Log.e(TAG, "onCompleted: " + response.toString());
-
-                    }
-                }
-        );
-        request.setGraphPath("/" + json.getString("shuserid"));
-        request.executeAsync();
-    }
-
     private void setListView(JSONObject res) {
         Log.e(TAG, "setListView: ");
         try {
@@ -169,9 +146,9 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
             }
             for (int i = 0; i < array.length(); i++) {
                 JSONObject resJson = (JSONObject) array.get(i);
-                facebookNameReq(resJson);
                 addItem(adapter
                         , resJson.getInt("status")
+                        , resJson.getInt("boxno")
                         , resJson.getString("title")
                         , resJson.getString("content")
                         , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))

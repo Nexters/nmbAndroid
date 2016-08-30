@@ -84,8 +84,33 @@ public class BaseActivity extends AppCompatActivity {
     public void deleteBox() {
 //        deleteJson();
     }
+
+    public void updateBoxStatus(int status, int boxNo) {
+        RequestParams object = new RequestParams();
+        object.put("status", status);
+        postReq(URL_Define.MODIFY_BOX_STATUS + boxNo + "/status", object, new ConnHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                super.onSuccess(statusCode, headers, res);
+                Log.e(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], res = [" + res + "]");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject res) {
+                super.onFailure(statusCode, headers, t, res);
+                Log.d(TAG, "onFailure() called with: " + "statusCode = [" + statusCode + "]");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable t) {
+                super.onFailure(statusCode, headers, responseString, t);
+                Log.e(TAG, "onFailure: statusCode : " + statusCode);
+            }
+        });
+    }
+
     private void sessionExpire(String sessionId) {
-        if(TextUtils.isEmpty(sessionId)){
+        if (TextUtils.isEmpty(sessionId)) {
             new AlertDialog.Builder(BaseActivity.this)
                     .setMessage("세션이 만료 되었습니다. 로그인 화면으로 이동합니다.")
                     .setCancelable(false)
@@ -97,6 +122,7 @@ public class BaseActivity extends AppCompatActivity {
                     });
         }
     }
+
     public class ConnHttpResponseHandler extends JsonHttpResponseHandler {
         String sessionId = pref.getString(Const.JSESSIONID, "");
 
@@ -153,7 +179,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void postReq(String url, RequestParams params, ConnHttpResponseHandler responseHandler) {
         String sessionId = pref.getString(Const.JSESSIONID, "");
-        Log.e(TAG, "getReq: Seesion did  " + sessionId);
+        Log.e(TAG, "postReq: Seesion did  " + sessionId);
         client.setTimeout(20000);
         client.setResponseTimeout(20000);
         client.setConnectTimeout(20000);

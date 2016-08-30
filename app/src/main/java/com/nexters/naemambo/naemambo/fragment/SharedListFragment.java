@@ -1,6 +1,8 @@
 package com.nexters.naemambo.naemambo.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -41,8 +43,10 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
     int pageIndex = 1;
     private static final String TAG = SharedListFragment.class.getSimpleName();
     private SimpleDateFormat sdfCurrent;
-    private TextView txt_empty_box;
+    private TextView txt_empty_box, btn_hope_msg;
     private SwipeRefreshLayout swiperefresh;
+    private Dialog dialog_hope_msg;
+    private JSONObject jsonObject = new JSONObject();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,17 +62,29 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
         txt_empty_box = (TextView) view.findViewById(R.id.txt_empty_box);
         sdfCurrent = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
+        dialog_hope_msg = new Dialog(getContext(), R.style.dialogStyle);
+        dialog_hope_msg.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog_hope_msg.setContentView(R.layout.dialog_hope_msg);
+        btn_hope_msg = (TextView) dialog_hope_msg.findViewById(R.id.btn_hope_msg);
 
         LoadFromServer(pageIndex);
         receiveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 int boxType = adapter.getItem(position).boxType;
                 if (boxType == Const.GENERAL_BOX) {
                     startActivity(new Intent(getContext(), MyboxDetailGeneralActivity.class).putExtra(Const.BOX_DETAIL_GENERAL, adapter.getItem(position)));
                 } else if (boxType == Const.LOCK_BOX) {
-                    dialogInit();
-                    dialog_hope_msg_show();
+                    //잠금박스 같이보기 요청했을때 서버에 status(2) 변경 요청
+                    dialog_hope_msg.show();
+                    btn_hope_msg.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.e(TAG, "onClick:1111111111111 : " + adapter.getItem(position).boxNo);
+                            updateBoxStatus(2, adapter.getItem(position).boxNo);
+                            dialog_hope_msg.dismiss();
+                        }
+                    });
                 } else if (boxType == Const.DONE_BOX) {
                     startActivity(new Intent(getContext(), MyboxDetailDoneActivity.class).putExtra(Const.BOX_DETAIL_DONE, adapter.getItem(position)));
                 } else if (boxType == Const.SHARE_BOX) {
@@ -76,6 +92,7 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                 }
             }
         });
+        //스크롤 맨밑으로 내리면 서버에 pageIndex 증가시켜서 다시요청
         receiveList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -105,6 +122,7 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
                 Log.d(TAG, "onSuccess() called with: " + "statusCode = [" + statusCode + "], headers = [" + headers + "], res = [" + res + "]");
+                jsonObject = res;
                 setListView(res);
             }
 
@@ -138,6 +156,7 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                 JSONObject resJson = (JSONObject) array.get(i);
                 addItem(adapter
                         , resJson.getInt("status")
+                        , resJson.getInt("boxno")
                         , resJson.getString("title")
                         , resJson.getString("content")
                         , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
