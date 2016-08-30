@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\build\\intermediates\\res\\merged\\debug\\values-de\\values-de.xml",
+        "outputFile": "C:\\nmbAndroid\\library\\build\\intermediates\\res\\merged\\debug\\values-de\\values-de.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 161
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 30,
                         "startColumn": 4,
-                        "startOffset": 1984,
+                        "startOffset": 2014,
                         "endColumn": 60,
-                        "endOffset": 2040
+                        "endOffset": 2070
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 280
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
-                        "startOffset": 1336,
+                        "startOffset": 1360,
                         "endColumn": 118,
-                        "endOffset": 1450
+                        "endOffset": 1474
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 393
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
-                        "startOffset": 1867,
+                        "startOffset": 1896,
                         "endColumn": 116,
-                        "endOffset": 1979
+                        "endOffset": 2008
                     }
                 }
             },
@@ -68,13 +68,13 @@
                     "endOffset": 474
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 809,
+                        "startOffset": 828,
                         "endColumn": 80,
-                        "endOffset": 885
+                        "endOffset": 904
                     }
                 }
             },
@@ -87,13 +87,13 @@
                     "endOffset": 601
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 890,
+                        "startOffset": 910,
                         "endColumn": 126,
-                        "endOffset": 1012
+                        "endOffset": 1032
                     }
                 }
             },
@@ -106,13 +106,13 @@
                     "endOffset": 722
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 28,
                         "startColumn": 4,
-                        "startOffset": 1742,
+                        "startOffset": 1770,
                         "endColumn": 124,
-                        "endOffset": 1862
+                        "endOffset": 1890
                     }
                 }
             },
@@ -125,13 +125,13 @@
                     "endOffset": 851
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 1017,
+                        "startOffset": 1038,
                         "endColumn": 128,
-                        "endOffset": 1141
+                        "endOffset": 1162
                     }
                 }
             },
@@ -144,13 +144,13 @@
                     "endOffset": 949
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
-                        "startOffset": 1554,
+                        "startOffset": 1580,
                         "endColumn": 97,
-                        "endOffset": 1647
+                        "endOffset": 1673
                     }
                 }
             },
@@ -163,13 +163,13 @@
                     "endOffset": 1043
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
-                        "startOffset": 1146,
+                        "startOffset": 1168,
                         "endColumn": 93,
-                        "endOffset": 1235
+                        "endOffset": 1257
                     }
                 }
             },
@@ -182,13 +182,13 @@
                     "endOffset": 1139
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 4,
-                        "startOffset": 1240,
+                        "startOffset": 1263,
                         "endColumn": 95,
-                        "endOffset": 1331
+                        "endOffset": 1354
                     }
                 }
             },
@@ -201,13 +201,13 @@
                     "endOffset": 1229
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 27,
                         "startColumn": 4,
-                        "startOffset": 1652,
+                        "startOffset": 1679,
                         "endColumn": 89,
-                        "endOffset": 1737
+                        "endOffset": 1764
                     }
                 }
             },
@@ -220,246 +220,13 @@
                     "endOffset": 1328
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-de\\strings.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 4,
-                        "startOffset": 1455,
+                        "startOffset": 1480,
                         "endColumn": 98,
-                        "endOffset": 1549
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\build\\intermediates\\res\\merged\\debug\\values-de\\values-de.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 105,
-                    "endColumn": 60,
-                    "endOffset": 161
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 30,
-                        "startColumn": 4,
-                        "startOffset": 1984,
-                        "endColumn": 60,
-                        "endOffset": 2040
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 3,
-                    "startColumn": 4,
-                    "startOffset": 166,
-                    "endColumn": 118,
-                    "endOffset": 280
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 24,
-                        "startColumn": 4,
-                        "startOffset": 1336,
-                        "endColumn": 118,
-                        "endOffset": 1450
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 4,
-                    "startColumn": 4,
-                    "startOffset": 285,
-                    "endColumn": 112,
-                    "endOffset": 393
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 29,
-                        "startColumn": 4,
-                        "startOffset": 1867,
-                        "endColumn": 116,
-                        "endOffset": 1979
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 5,
-                    "startColumn": 4,
-                    "startOffset": 398,
-                    "endColumn": 80,
-                    "endOffset": 474
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 19,
-                        "startColumn": 4,
-                        "startOffset": 809,
-                        "endColumn": 80,
-                        "endOffset": 885
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 6,
-                    "startColumn": 4,
-                    "startOffset": 479,
-                    "endColumn": 126,
-                    "endOffset": 601
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 20,
-                        "startColumn": 4,
-                        "startOffset": 890,
-                        "endColumn": 126,
-                        "endOffset": 1012
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 7,
-                    "startColumn": 4,
-                    "startOffset": 606,
-                    "endColumn": 120,
-                    "endOffset": 722
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 28,
-                        "startColumn": 4,
-                        "startOffset": 1742,
-                        "endColumn": 124,
-                        "endOffset": 1862
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 8,
-                    "startColumn": 4,
-                    "startOffset": 727,
-                    "endColumn": 128,
-                    "endOffset": 851
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 21,
-                        "startColumn": 4,
-                        "startOffset": 1017,
-                        "endColumn": 128,
-                        "endOffset": 1141
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 9,
-                    "startColumn": 4,
-                    "startOffset": 856,
-                    "endColumn": 97,
-                    "endOffset": 949
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 26,
-                        "startColumn": 4,
-                        "startOffset": 1554,
-                        "endColumn": 97,
-                        "endOffset": 1647
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 10,
-                    "startColumn": 4,
-                    "startOffset": 954,
-                    "endColumn": 93,
-                    "endOffset": 1043
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 22,
-                        "startColumn": 4,
-                        "startOffset": 1146,
-                        "endColumn": 93,
-                        "endOffset": 1235
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 11,
-                    "startColumn": 4,
-                    "startOffset": 1048,
-                    "endColumn": 95,
-                    "endOffset": 1139
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 23,
-                        "startColumn": 4,
-                        "startOffset": 1240,
-                        "endColumn": 95,
-                        "endOffset": 1331
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 12,
-                    "startColumn": 4,
-                    "startOffset": 1144,
-                    "endColumn": 89,
-                    "endOffset": 1229
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 27,
-                        "startColumn": 4,
-                        "startOffset": 1652,
-                        "endColumn": 89,
-                        "endOffset": 1737
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 13,
-                    "startColumn": 4,
-                    "startOffset": 1234,
-                    "endColumn": 98,
-                    "endOffset": 1328
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-de\\strings.xml",
-                    "position": {
-                        "startLine": 25,
-                        "startColumn": 4,
-                        "startOffset": 1455,
-                        "endColumn": 98,
-                        "endOffset": 1549
+                        "endOffset": 1574
                     }
                 }
             }

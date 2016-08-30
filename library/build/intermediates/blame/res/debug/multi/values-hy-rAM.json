@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\build\\intermediates\\res\\merged\\debug\\values-hy-rAM\\values-hy-rAM.xml",
+        "outputFile": "C:\\nmbAndroid\\library\\build\\intermediates\\res\\merged\\debug\\values-hy-rAM\\values-hy-rAM.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 163
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 30,
                         "startColumn": 4,
-                        "startOffset": 1953,
+                        "startOffset": 1983,
                         "endColumn": 62,
-                        "endOffset": 2011
+                        "endOffset": 2041
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 277
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
-                        "startOffset": 1318,
+                        "startOffset": 1342,
                         "endColumn": 113,
-                        "endOffset": 1427
+                        "endOffset": 1451
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 388
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
-                        "startOffset": 1838,
+                        "startOffset": 1867,
                         "endColumn": 114,
-                        "endOffset": 1948
+                        "endOffset": 1977
                     }
                 }
             },
@@ -68,13 +68,13 @@
                     "endOffset": 473
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 809,
+                        "startOffset": 828,
                         "endColumn": 84,
-                        "endOffset": 889
+                        "endOffset": 908
                     }
                 }
             },
@@ -87,13 +87,13 @@
                     "endOffset": 591
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 894,
+                        "startOffset": 914,
                         "endColumn": 117,
-                        "endOffset": 1007
+                        "endOffset": 1027
                     }
                 }
             },
@@ -106,13 +106,13 @@
                     "endOffset": 709
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 28,
                         "startColumn": 4,
-                        "startOffset": 1716,
+                        "startOffset": 1744,
                         "endColumn": 121,
-                        "endOffset": 1833
+                        "endOffset": 1861
                     }
                 }
             },
@@ -125,13 +125,13 @@
                     "endOffset": 831
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 1012,
+                        "startOffset": 1033,
                         "endColumn": 121,
-                        "endOffset": 1129
+                        "endOffset": 1150
                     }
                 }
             },
@@ -144,13 +144,13 @@
                     "endOffset": 925
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
-                        "startOffset": 1534,
+                        "startOffset": 1560,
                         "endColumn": 93,
-                        "endOffset": 1623
+                        "endOffset": 1649
                     }
                 }
             },
@@ -163,13 +163,13 @@
                     "endOffset": 1015
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
-                        "startOffset": 1134,
+                        "startOffset": 1156,
                         "endColumn": 89,
-                        "endOffset": 1219
+                        "endOffset": 1241
                     }
                 }
             },
@@ -182,13 +182,13 @@
                     "endOffset": 1109
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 4,
-                        "startOffset": 1224,
+                        "startOffset": 1247,
                         "endColumn": 93,
-                        "endOffset": 1313
+                        "endOffset": 1336
                     }
                 }
             },
@@ -201,13 +201,13 @@
                     "endOffset": 1197
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 27,
                         "startColumn": 4,
-                        "startOffset": 1628,
+                        "startOffset": 1655,
                         "endColumn": 87,
-                        "endOffset": 1711
+                        "endOffset": 1738
                     }
                 }
             },
@@ -220,246 +220,13 @@
                     "endOffset": 1299
                 },
                 "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\Nexters\\NMBDevelop\\20160817\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
+                    "file": "C:\\nmbAndroid\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 4,
-                        "startOffset": 1432,
+                        "startOffset": 1457,
                         "endColumn": 101,
-                        "endOffset": 1529
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\build\\intermediates\\res\\merged\\debug\\values-hy-rAM\\values-hy-rAM.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 105,
-                    "endColumn": 62,
-                    "endOffset": 163
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 30,
-                        "startColumn": 4,
-                        "startOffset": 1953,
-                        "endColumn": 62,
-                        "endOffset": 2011
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 3,
-                    "startColumn": 4,
-                    "startOffset": 168,
-                    "endColumn": 113,
-                    "endOffset": 277
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 24,
-                        "startColumn": 4,
-                        "startOffset": 1318,
-                        "endColumn": 113,
-                        "endOffset": 1427
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 4,
-                    "startColumn": 4,
-                    "startOffset": 282,
-                    "endColumn": 110,
-                    "endOffset": 388
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 29,
-                        "startColumn": 4,
-                        "startOffset": 1838,
-                        "endColumn": 114,
-                        "endOffset": 1948
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 5,
-                    "startColumn": 4,
-                    "startOffset": 393,
-                    "endColumn": 84,
-                    "endOffset": 473
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 19,
-                        "startColumn": 4,
-                        "startOffset": 809,
-                        "endColumn": 84,
-                        "endOffset": 889
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 6,
-                    "startColumn": 4,
-                    "startOffset": 478,
-                    "endColumn": 117,
-                    "endOffset": 591
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 20,
-                        "startColumn": 4,
-                        "startOffset": 894,
-                        "endColumn": 117,
-                        "endOffset": 1007
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 7,
-                    "startColumn": 4,
-                    "startOffset": 596,
-                    "endColumn": 117,
-                    "endOffset": 709
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 28,
-                        "startColumn": 4,
-                        "startOffset": 1716,
-                        "endColumn": 121,
-                        "endOffset": 1833
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 8,
-                    "startColumn": 4,
-                    "startOffset": 714,
-                    "endColumn": 121,
-                    "endOffset": 831
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 21,
-                        "startColumn": 4,
-                        "startOffset": 1012,
-                        "endColumn": 121,
-                        "endOffset": 1129
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 9,
-                    "startColumn": 4,
-                    "startOffset": 836,
-                    "endColumn": 93,
-                    "endOffset": 925
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 26,
-                        "startColumn": 4,
-                        "startOffset": 1534,
-                        "endColumn": 93,
-                        "endOffset": 1623
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 10,
-                    "startColumn": 4,
-                    "startOffset": 930,
-                    "endColumn": 89,
-                    "endOffset": 1015
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 22,
-                        "startColumn": 4,
-                        "startOffset": 1134,
-                        "endColumn": 89,
-                        "endOffset": 1219
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 11,
-                    "startColumn": 4,
-                    "startOffset": 1020,
-                    "endColumn": 93,
-                    "endOffset": 1109
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 23,
-                        "startColumn": 4,
-                        "startOffset": 1224,
-                        "endColumn": 93,
-                        "endOffset": 1313
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 12,
-                    "startColumn": 4,
-                    "startOffset": 1114,
-                    "endColumn": 87,
-                    "endOffset": 1197
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 27,
-                        "startColumn": 4,
-                        "startOffset": 1628,
-                        "endColumn": 87,
-                        "endOffset": 1711
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 13,
-                    "startColumn": 4,
-                    "startOffset": 1202,
-                    "endColumn": 101,
-                    "endOffset": 1299
-                },
-                "from": {
-                    "file": "C:\\Users\\Jeon\\Desktop\\MaterialDateTimePicker-master\\MaterialDateTimePicker-master\\library\\src\\main\\res\\values-hy-rAM\\strings.xml",
-                    "position": {
-                        "startLine": 25,
-                        "startColumn": 4,
-                        "startOffset": 1432,
-                        "endColumn": 101,
-                        "endOffset": 1529
+                        "endOffset": 1554
                     }
                 }
             }
