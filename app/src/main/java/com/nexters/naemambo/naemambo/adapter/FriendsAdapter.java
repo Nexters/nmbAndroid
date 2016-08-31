@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -63,10 +64,8 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
         holder.txt_friends_name.setText(item.getTxt_friends_name());
 
         //리스트뷰에 있는 아이템클릭리스너 쓰려면 해줘야함
-        holder.chk_friends.setClickable(false);
-        holder.chk_friends.setFocusable(false);
 
-        holder.chk_friends.setChecked(item.isChecked());
+        holder.chk_friends.setChecked(((ListView)parent).isItemChecked(position));
 
         holder.chk_friends.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -98,6 +97,10 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
         public TextView txt_friends_name;
         public CheckBox chk_friends;
 
+    }
+
+    public void clearCheckList() {
+        checkedList.clear();
     }
 
     public int getCheckCount() {

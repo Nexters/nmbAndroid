@@ -68,6 +68,7 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
                             friendslist = response.getJSONObject().getJSONArray("data");
                             FriendListItem item;
                             adapter = new FriendsAdapter(FriendListActivity.this, R.layout.friend_list_item, true, friendslist.length());
+                            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                             listView.setAdapter(adapter);
                             for (int i = 0; i < friendslist.length(); i++) {
                                 JSONObject resJson = friendslist.getJSONObject(i);
@@ -96,13 +97,6 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FriendListItem item = adapter.getItem(position);
                 Log.e(TAG, "onItemClick: 1111111111111111111111111111111111111");
-                if (flag) {
-                    item.setChecked(true);
-                    flag = false;
-                } else {
-                    item.setChecked(false);
-                    flag = true;
-                }
                 Log.e(TAG, "onItemClick: item : " + item.isChecked());
                 adapter.notifyDataSetChanged();
                 intent.putExtra(Const.FRIENDS_DATA, item);
@@ -131,11 +125,13 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
         if (adapter.getCheckCount() == 0) {
             Toast.makeText(FriendListActivity.this, "친구를 선택해주세요.", Toast.LENGTH_SHORT).show();
             return;
+
         } else if (adapter.getCheckCount() > 1) {
             Toast.makeText(FriendListActivity.this, "친구를 한명만 선택해주세요.", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < adapter.getCount(); i++) {
                 adapter.getItem(i).setChecked(false);
             }
+            adapter.clearCheckList();
             adapter.notifyDataSetChanged();
             return;
         } else {
