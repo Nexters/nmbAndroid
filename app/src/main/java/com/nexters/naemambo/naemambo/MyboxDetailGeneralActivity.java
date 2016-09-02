@@ -81,7 +81,7 @@ public class MyboxDetailGeneralActivity extends BaseActivity implements View.OnC
 
         edit_share_subject.setText(item.subject);
         edit_share_content.setText(item.content);
-        text_target_date.setText(item.date);
+        text_target_date.setText(item.target);
         txt_msg_content.setText("서운한 티내볼까요?");
         btn_hope_msg.setText("네, 하고싶어요");
 

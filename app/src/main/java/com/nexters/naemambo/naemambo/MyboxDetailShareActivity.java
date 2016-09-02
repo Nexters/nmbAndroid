@@ -46,7 +46,7 @@ public class MyboxDetailShareActivity extends BaseActivity implements View.OnCli
         item = (MessageItem) intent.getSerializableExtra(Const.BOX_DETAIL_SHARE);
 
         text_share_content.setText(item.content);
-        text_target_date.setText(item.date);
+        text_target_date.setText(item.target);
         if (item.content != null) {
             text_share_subject.setText(item.subject);
         } else {
@@ -84,6 +84,7 @@ public class MyboxDetailShareActivity extends BaseActivity implements View.OnCli
                 Log.e(TAG, "onClick: item boxNo : " + item.boxNo);
                 updateBoxStatus(3, item.boxNo);
                 dialog.dismiss();
+                finish();
                 break;
             case R.id.btn_complete:
                 Log.e(TAG, "onClick: item.ToString " + item.toString());

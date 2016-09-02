@@ -41,7 +41,7 @@ public class MyboxDetailDoneActivity extends BaseActivity {
         }
 
         text_done_content.setText(item.content);
-        text_target_date.setText(item.date);
+        text_target_date.setText(item.target);
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 "/" + item.shuserid,

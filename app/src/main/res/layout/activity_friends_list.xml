@@ -7,15 +7,17 @@
     android:orientation="vertical"
     tools:context="com.nexters.naemambo.naemambo.FriendListActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="39.7dp"
         android:background="#eef0f3"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginStart="19.7dp"
             android:layout_marginTop="14dp"
             android:text="친구목록"
@@ -25,21 +27,33 @@
         <TextView
             android:id="@+id/txt_count_friends"
             android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_height="wrap_content"
             android:layout_marginStart="11.3dp"
             android:layout_marginTop="14dp"
+            android:layout_toRightOf="@+id/text1"
             android:text="0"
             android:textColor="@color/darkish_pink"
             android:textSize="12sp"
             android:textStyle="bold" />
-    </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="19.7dp"
+            android:gravity="center_vertical"
+            android:textSize="12sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="한 명만 선택해주세요." />
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/friends_listview"
         android:layout_width="wrap_content"
-        android:focusable="false"
+        android:layout_height="wrap_content"
         android:clickable="false"
-        android:layout_height="wrap_content" />
+        android:focusable="false" />
 
 
 </LinearLayout>
