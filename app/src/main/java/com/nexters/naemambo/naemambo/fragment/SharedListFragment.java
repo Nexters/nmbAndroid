@@ -189,7 +189,7 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                         , resJson.getString("content")
                         , sdfCurrent.format(new Timestamp(Long.parseLong(resJson.getString("date"))))
                         , resJson.getString("shuserid")
-                        , resJson.isNull("label") ? "" : resJson.getString("label")
+                        , resJson.isNull("sendname") ? "" : resJson.getString("sendname")
                         , resJson.getString("target"));
 
             }

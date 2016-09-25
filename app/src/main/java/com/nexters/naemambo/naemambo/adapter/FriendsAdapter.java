@@ -1,6 +1,7 @@
 package com.nexters.naemambo.naemambo.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,7 @@ public class FriendsAdapter extends ArrayAdapter<FriendListItem> {
                 } else {
                     checkedList.clear();
                 }
-
+                Log.e("checkedList size", "onCheckedChanged: " + checkedList.size());
             }
         });
         if (chk_friends_visible) {

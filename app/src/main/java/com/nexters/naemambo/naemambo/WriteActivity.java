@@ -161,7 +161,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         RequestParams params = new RequestParams();
         if (isDirect) {//친구한테 바로 보낼때
             params.put("status", Const.LOCK_BOX);
-            if (TextUtils.isEmpty(item.getFriend_id()) || TextUtils.isEmpty(item.getTxt_friends_name())) {
+            if (item == null || TextUtils.isEmpty(item.getFriend_id()) || TextUtils.isEmpty(item.getTxt_friends_name())) {
                 Toast.makeText(WriteActivity.this, "친구를 선택해주세요.", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -181,6 +181,7 @@ public class WriteActivity extends BaseActivity implements View.OnClickListener,
         params.put("target", targetDate);
         params.put("shuserid", item.getFriend_id());//친구 아이디 넣어야행
         params.put("label", item.getTxt_friends_name());//친구이름
+        params.put("sendname", pref.getString(Const.USER_NAME, ""));//친구이름
         Log.e(TAG, "updateContent: " + params.toString());
         postReq(URL_Define.WRITE, params, new ConnHttpResponseHandler() {
 

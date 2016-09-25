@@ -98,6 +98,7 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
                 FriendListItem item = adapter.getItem(position);
                 Log.e(TAG, "onItemClick: 1111111111111111111111111111111111111");
                 Log.e(TAG, "onItemClick: item : " + item.isChecked());
+                Log.e(TAG, "selectFriends: adapter.getCheckCount() : " + adapter.getCheckCount());
                 adapter.notifyDataSetChanged();
                 intent.putExtra(Const.FRIENDS_DATA, item);
             }
@@ -131,7 +132,6 @@ public class FriendListActivity extends BaseActivity implements View.OnClickList
             for (int i = 0; i < adapter.getCount(); i++) {
                 adapter.getItem(i).setChecked(false);
             }
-            adapter.clearCheckList();
             adapter.notifyDataSetChanged();
             return;
         } else {

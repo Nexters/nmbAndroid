@@ -72,7 +72,7 @@ public class MessageAdapter extends ArrayAdapter<MessageItem> {
             case Const.LOCK_BOX:
                 Glide.with(getContext()).load(R.drawable.list_lock).into(holder.msgBox);
                 holder.msgBox.setBackgroundResource(R.drawable.msg_box_rect_lock);
-                holder.msgContent.setText("메세지가 잠겨있어요.\n상대박에게 메세지 확인 요청을 보내세요!");
+                holder.msgContent.setText("메세지가 잠겨있어요.\n상대방에게 메세지 확인 요청을 보내세요!");
                 break;
             case Const.DONE_BOX:
                 Glide.with(getContext()).load(R.drawable.list_done).into(holder.msgBox);
