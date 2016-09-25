@@ -118,6 +118,16 @@ public class SharedListFragment extends BaseFragment implements SwipeRefreshLayo
                 } else {
                     lastItemVisibleFlag = false;
                 }
+                boolean enable = false;
+                if(receiveList != null && receiveList.getChildCount() > 0){
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = receiveList.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = receiveList.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                swiperefresh.setEnabled(enable);
             }
         });
         return view;

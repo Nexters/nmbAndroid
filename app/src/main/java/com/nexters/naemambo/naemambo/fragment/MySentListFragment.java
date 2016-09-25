@@ -103,6 +103,16 @@ public class MySentListFragment extends BaseFragment implements SwipeRefreshLayo
                 } else {
                     lastItemVisibleFlag = false;
                 }
+                boolean enable = false;
+                if(mySendListView != null && mySendListView.getChildCount() > 0){
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = mySendListView.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = mySendListView.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                my_send_swiperefresh.setEnabled(enable);
             }
         });
         return view;
